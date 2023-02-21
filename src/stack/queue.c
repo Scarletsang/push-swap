@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 23:57:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/20 23:57:31 by htsang           ###   ########.fr       */
+/*   Updated: 2023/02/21 11:41:03 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 
 void	enqueue(t_push_swap_stack *stack, int element)
 {
-	move_stack_bound_backwards(&stack->front, stack->size);
+	if (stack->size > 0)
+	{
+		move_stack_bound_backwards(&stack->front, stack->max_size);
+	}
 	stack->elements[stack->front] = element;
+	stack->size++;
 }
 
-void	enqueue_from_back(t_push_swap_stack *stack, int element)
+void	enqueue_to_back(t_push_swap_stack *stack, int element)
 {
-	move_stack_bound_forwards(&stack->rear, stack->size);
+	if (stack->size > 0)
+	{
+		move_stack_bound_forwards(&stack->rear, stack->max_size);
+	}
 	stack->elements[stack->rear] = element;
+	stack->size++;
 }
 
 int	dequeue(t_push_swap_stack *stack)
@@ -29,7 +37,8 @@ int	dequeue(t_push_swap_stack *stack)
 	int	first_element;
 
 	first_element = stack->elements[stack->front];
-	move_stack_bound_forwards(&stack->front, stack->size);
+	move_stack_bound_forwards(&stack->front, stack->max_size);
+	stack->size--;
 	return (first_element);
 }
 
@@ -38,6 +47,7 @@ int	dequeue_from_back(t_push_swap_stack *stack)
 	int	last_element;
 
 	last_element = stack->elements[stack->rear];
-	move_stack_bound_backwards(&stack->rear, stack->size);
+	move_stack_bound_backwards(&stack->rear, stack->max_size);
+	stack->size--;
 	return (last_element);	
 }

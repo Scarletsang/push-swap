@@ -1,6 +1,12 @@
 NAME:=push_swap
-SRC:= 
-OBJS:=${SRC:.c=.o}
+
+STACK_SRC:= \
+	stack/stack.c \
+	stack/queue.c \
+	stack/operations.c
+SRC:= \
+	main.c
+OBJS:=${addprefix src/,${STACK_SRC:.c=.o} ${SRC:.c=.o}}
 CC:=cc
 CFLAGS:= -Wall -Wextra -Werror
 INCLUDE:= include
