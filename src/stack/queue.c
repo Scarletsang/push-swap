@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 23:57:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/21 11:41:03 by htsang           ###   ########.fr       */
+/*   Updated: 2023/02/21 12:52:39 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ int	dequeue_from_back(t_push_swap_stack *stack)
 	last_element = stack->elements[stack->rear];
 	move_stack_bound_backwards(&stack->rear, stack->max_size);
 	stack->size--;
-	return (last_element);	
+	return (last_element);
 }
