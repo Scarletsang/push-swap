@@ -6,33 +6,38 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/21 12:50:39 by htsang           ###   ########.fr       */
+/*   Updated: 2023/02/21 13:26:08 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PUSH_SWAP/stack.h"
+#include "PUSH_SWAP/sorter.h"
 
 int	main(void)
 {
-	t_push_swap_stack	stack;
+	t_push_swap_sorter	sorter;
 	int					element;
 
-	init_stack(&stack, 10);
+	init_sorter(&sorter, 10);
 	element = 0;
 	while (element < 10)
 	{
-		enqueue(&stack, element);
+		enqueue(&sorter.stack_a, element);
 		element++;
 	}
-	print_stack_elements(&stack);
-	rotate(&stack);
-	print_stack_elements(&stack);
-	rotate(&stack);
-	print_stack_elements(&stack);
-	swap(&stack);
-	print_stack_elements(&stack);
-	reverse_rotate(&stack);
-	print_stack_elements(&stack);
-	free(stack.elements);
+	print_stacks(&sorter);
+	rotate(&sorter.stack_a);
+	print_stacks(&sorter);
+	rotate(&sorter.stack_a);
+	print_stacks(&sorter);
+	swap(&sorter.stack_a);
+	print_stacks(&sorter);
+	reverse_rotate(&sorter.stack_a);
+	print_stacks(&sorter);
+	push(&sorter.stack_b, &sorter.stack_a);
+	print_stacks(&sorter);
+	push(&sorter.stack_b, &sorter.stack_a);
+	print_stacks(&sorter);
+	free(sorter.stack_a.elements);
+	free(sorter.stack_b.elements);
 	return (EXIT_SUCCESS);
 }

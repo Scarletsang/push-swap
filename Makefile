@@ -8,9 +8,12 @@ STACK_SRC:= \
 	stack/queue.c \
 	stack/operations.c \
 	stack/printer.c
+SORTER_SRC:= \
+	sorter/sorter.c \
+	sorter/printer.c
 SRC:= \
 	main.c
-OBJS:=${addprefix src/,${STACK_SRC:.c=.o} ${SRC:.c=.o}}
+OBJS:=${addprefix src/,${STACK_SRC:.c=.o} ${SORTER_SRC:.c=.o} ${SRC:.c=.o}}
 PRINTF:=lib/ft_printf/libftprintf.a
 INCLUDE:= include
 
