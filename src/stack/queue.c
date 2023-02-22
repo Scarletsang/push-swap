@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 23:57:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/21 12:52:39 by htsang           ###   ########.fr       */
+/*   Updated: 2023/02/22 21:43:57 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ int	dequeue(t_push_swap_stack *stack)
 	int	first_element;
 
 	first_element = stack->elements[stack->front];
-	move_stack_bound_forwards(&stack->front, stack->max_size);
+	if (stack->size > 1)
+	{
+		move_stack_bound_forwards(&stack->front, stack->max_size);
+	}
 	stack->size--;
 	return (first_element);
 }
@@ -47,7 +50,10 @@ int	dequeue_from_back(t_push_swap_stack *stack)
 	int	last_element;
 
 	last_element = stack->elements[stack->rear];
-	move_stack_bound_backwards(&stack->rear, stack->max_size);
+	if (stack->size > 1)
+	{
+		move_stack_bound_backwards(&stack->rear, stack->max_size);
+	}
 	stack->size--;
 	return (last_element);
 }
