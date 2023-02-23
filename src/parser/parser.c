@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorter.c                                           :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 13:16:10 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/23 22:38:54 by htsang           ###   ########.fr       */
+/*   Created: 2023/02/21 15:35:59 by htsang            #+#    #+#             */
+/*   Updated: 2023/02/23 22:49:58 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PUSH_SWAP/sorter.h"
+#include "PUSH_SWAP/parser.h"
 
-int	init_sorter(t_push_swap_sorter *sorter, size_t elements_size, \
-int *stack_a_elements)
+int	add_collector(t_push_swap_parser *parser, int value)
 {
-	init_stack_from_array(&sorter->stack_a, elements_size, stack_a_elements);
-	if (init_empty_stack(&sorter->stack_b, elements_size))
+	parser->last->next = new_collector(value);
+	if (!parser->last->next)
 	{
 		return (EXIT_FAILURE);
 	}
+	parser->last = parser->last->next;
+	parser->length->value++;
+	return (EXIT_SUCCESS);
+}
+
+int	init_push_swap_parser(t_push_swap_parser *parser)
+{
+	parser->length = new_collector(0);
+	if (!parser->length)
+	{
+		return (EXIT_FAILURE);
+	}
+	parser->last = parser->length;
 	return (EXIT_SUCCESS);
 }

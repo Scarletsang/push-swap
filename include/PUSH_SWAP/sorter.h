@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:08:45 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/21 13:21:59 by htsang           ###   ########.fr       */
+/*   Updated: 2023/02/23 23:39:29 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 
 typedef struct s_push_swap_sorter
 {
-    t_push_swap_stack   stack_a;
-    t_push_swap_stack   stack_b;
-}               t_push_swap_sorter;
+	t_push_swap_stack	stack_a;
+	t_push_swap_stack	stack_b;
+}				t_push_swap_sorter;
 
-int		init_sorter(t_push_swap_sorter *sorter, size_t elements_size);
+int		init_sorter(t_push_swap_sorter *sorter, size_t elements_size, \
+int *stack_a_elements);
 
 void	print_stacks(t_push_swap_sorter *sorter);
 
