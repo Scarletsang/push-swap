@@ -1,3 +1,7 @@
+################################
+######     Push swap     #######
+################################
+
 NAME:=push_swap
 
 CC:=cc
@@ -29,7 +33,7 @@ INCLUDE:= include
 all: ${NAME}
 
 ${NAME}: ${PRINTF} ${OBJS}
-	@${CC} ${PRINTF} ${OBJS} -o ${NAME} ${LDFLAGS} && echo "Compilation successful"
+	@${CC} ${PRINTF} ${OBJS} -o ${NAME} ${LDFLAGS} && echo "Compilation of ${NAME} successful"
 
 %.o: %.c
 	@${CC} ${CFLAGS} ${addprefix -I ,${INCLUDE}} -c $< -o $@
@@ -37,16 +41,35 @@ ${NAME}: ${PRINTF} ${OBJS}
 ${PRINTF}:
 	@make ${if ${FSANITIZE},FSANITIZE=yes,} -C lib/ft_printf/
 
+##############################
+######     Checker     #######
+##############################
+
+CHECKER_NAME:=checker
+GET_NEXT_LINE:=lib/get_next_line/get_next_line.a
+CHECKER_SRC:=
+CHECKER_OBJS:=${addprefix checker_src/,${CHECKER_SRC:.c=.o}}
+
+bonus: clean ${PRINTF} ${GET_NEXT_LINE} ${CHECKER_OBJS}
+	@${CC} ${PRINTF} ${GET_NEXT_LINE} ${CHECKER_OBJS} -o ${CHECKER_OBJS} ${LDFLAGS} && echo "Compilation of ${CHECKER_NAME} successful"
+
+${GET_NEXT_LINE}:
+	@make ${if ${FSANITIZE},FSANITIZE=yes,} -C lib/get_next_line/
+
+###############################
+######     Cleaning     #######
+###############################
+
 clean:
 	@make clean -C lib/ft_printf/
+	@make clean -C lib/get_next_line/
 	@rm -f ${OBJS}
 
 fclean: clean
 	@rm -f ${PRINTF}
+	@rm -f ${GET_NEXT_LINE}
 	@rm -f ${NAME}
 
 re: fclean all
-
-bonus: re
 
 .PHONY: clean fclean re bonus
