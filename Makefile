@@ -18,17 +18,17 @@ PARSER_SRC:= \
 	parser/parse_number.c
 STACK_SRC:= \
 	stack/stack.c \
+	stack/two_stacks.c \
 	stack/queue.c \
 	stack/operations.c \
 	stack/printer.c
-SORTER_SRC:= \
-	sorter/sorter.c \
-	sorter/printer.c
 SRC:= \
 	main.c
-OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${SORTER_SRC:.c=.o} ${SRC:.c=.o}}
+OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${SRC:.c=.o}}
 PRINTF:=lib/ft_printf/libftprintf.a
-INCLUDE:= include
+INCLUDE:= \
+	include \
+	lib/ft_printf/include
 
 all: ${NAME}
 

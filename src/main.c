@@ -6,24 +6,28 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/23 23:37:16 by htsang           ###   ########.fr       */
+/*   Updated: 2023/02/26 00:19:05 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PUSH_SWAP/sorter.h"
-#include "PUSH_SWAP/parser.h"
+#include "PUSH_SWAP/push_swap.h"
 
-void	test(t_push_swap_sorter *sorter)
+void	test(t_push_swap_2stacks *two_stacks)
 {
+	// print_stack_info(&two_stacks->stack_a);
+	// print_stack_elements(&two_stacks->stack_a);
 	// rotate(&sorter.stack_a);
-	print_stack_info(&sorter->stack_a);
-	print_stack_elements(&sorter->stack_a);
-	// print_stacks(&sorter);
-	// rotate(&sorter.stack_a);
-	// print_stacks(&sorter);
-	swap(&sorter->stack_a);
-	print_stack_info(&sorter->stack_a);
-	print_stack_elements(&sorter->stack_a);
+	print_two_stacks(two_stacks);
+	rotate(&two_stacks->stack_a);
+	print_two_stacks(two_stacks);
+	reverse_rotate(&two_stacks->stack_a);
+	print_two_stacks(two_stacks);
+	swap(&two_stacks->stack_a);
+	print_two_stacks(two_stacks);
+	push(&two_stacks->stack_a, &two_stacks->stack_b);
+	print_two_stacks(two_stacks);
+	// print_stack_info(&sorter->stack_a);
+	// print_stack_elements(&sorter->stack_a);
 	// print_stacks(&sorter);
 	// reverse_rotate(&sorter.stack_a);
 	// print_stacks(&sorter);
@@ -31,23 +35,34 @@ void	test(t_push_swap_sorter *sorter)
 	// print_stacks(&sorter);
 	// push(&sorter.stack_b, &sorter.stack_a);
 	// print_stacks(&sorter);
-	free(sorter->stack_a.elements);
-	free(sorter->stack_b.elements);
+	free(two_stacks->stack_a.elements);
+	free(two_stacks->stack_b.elements);
 }
 
-int	main(int argc, const char **argv)
+int	init_program(t_push_swap_2stacks *two_stacks, int argc, \
+const char **argv)
 {
-	t_push_swap_sorter	sorter;
 	t_push_swap_parser	parser;
 	size_t				size;
 	int					*elements;
 
 	elements = to_array(parse_from_cli(&parser, argc, argv), &size);
-	if (!elements || init_sorter(&sorter, size, elements))
+	return (!elements || init_two_stacks(two_stacks, size, elements));
+}
+
+int	main(int argc, const char **argv)
+{
+	t_push_swap_2stacks	two_stacks;
+
+	if (argc < 2)
 	{
-		ft_printf("Error\n");
 		return (EXIT_FAILURE);
 	}
-	test(&sorter);
+	if (init_program(&two_stacks, argc, argv))
+	{
+		write(STDERR_FILENO, "Error\n", 7);
+		return (EXIT_FAILURE);
+	}
+	test(&two_stacks);
 	return (EXIT_SUCCESS);
 }

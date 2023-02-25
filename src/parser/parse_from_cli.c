@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 22:30:05 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/23 23:36:08 by htsang           ###   ########.fr       */
+/*   Updated: 2023/02/25 19:59:45 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@ static void	ignore_space(const char **str)
 	}
 }
 
+static int	has_duplicates(t_push_swap_parser *parser, int value)
+{
+	t_push_swap_parser_collector	*collector;
+
+	collector = parser->length->next;
+	while (collector)
+	{
+		if (collector->value == value)
+		{
+			return (1);
+		}
+		collector = collector->next;
+	}
+	return (0);
+}
+
 static int	parse_numbers(const char *str, t_push_swap_parser *parser)
 {
 	int	value;
@@ -27,7 +43,7 @@ static int	parse_numbers(const char *str, t_push_swap_parser *parser)
 	while (*str)
 	{
 		ignore_space(&str);
-		if (parse_number(&str, &value))
+		if (parse_number(&str, &value) || has_duplicates(parser, value))
 		{
 			return (EXIT_FAILURE);
 		}

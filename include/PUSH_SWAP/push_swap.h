@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorter.h                                           :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 13:08:45 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/23 23:39:29 by htsang           ###   ########.fr       */
+/*   Created: 2023/02/25 20:08:19 by htsang            #+#    #+#             */
+/*   Updated: 2023/02/26 00:18:36 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SORTER_H
-# define SORTER_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
+# include "PUSH_SWAP/parser.h"
 # include "PUSH_SWAP/stack.h"
-
-typedef struct s_push_swap_sorter
-{
-	t_push_swap_stack	stack_a;
-	t_push_swap_stack	stack_b;
-}				t_push_swap_sorter;
-
-int		init_sorter(t_push_swap_sorter *sorter, size_t elements_size, \
-int *stack_a_elements);
-
-void	print_stacks(t_push_swap_sorter *sorter);
+# include <unistd.h>
 
 #endif
