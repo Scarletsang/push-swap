@@ -5,7 +5,7 @@
 NAME:=push_swap
 
 CC:=cc
-CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra
 ifdef FSANITIZE
 	CFLAGS+= -g3 -fsanitize=address
 	LDFLAGS+= -g3 -fsanitize=address
@@ -47,11 +47,16 @@ ${PRINTF}:
 
 CHECKER_NAME:=checker
 GET_NEXT_LINE:=lib/get_next_line/get_next_line.a
-CHECKER_SRC:=
-CHECKER_OBJS:=${addprefix checker_src/,${CHECKER_SRC:.c=.o}}
+CHECKER_SRC:= \
+	checker_main.c \
+	checker/parse_operation.c \
+	checker/is_sorted.c \
+	checker/stack_manipulator.c
+CHECKER_OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${CHECKER_SRC:.c=.o}}
 
+bonus: INCLUDE+= lib/get_next_line/include
 bonus: clean ${PRINTF} ${GET_NEXT_LINE} ${CHECKER_OBJS}
-	@${CC} ${PRINTF} ${GET_NEXT_LINE} ${CHECKER_OBJS} -o ${CHECKER_OBJS} ${LDFLAGS} && echo "Compilation of ${CHECKER_NAME} successful"
+	@${CC} ${PRINTF} ${GET_NEXT_LINE} ${CHECKER_OBJS} -o ${CHECKER_NAME} ${LDFLAGS} && echo "Compilation of ${CHECKER_NAME} successful"
 
 ${GET_NEXT_LINE}:
 	@make ${if ${FSANITIZE},FSANITIZE=yes,} -C lib/get_next_line/
@@ -64,11 +69,13 @@ clean:
 	@make clean -C lib/ft_printf/
 	@make clean -C lib/get_next_line/
 	@rm -f ${OBJS}
+	@rm -f ${CHECKER_OBJS}
 
 fclean: clean
 	@rm -f ${PRINTF}
 	@rm -f ${GET_NEXT_LINE}
 	@rm -f ${NAME}
+	@rm -f ${CHECKER_NAME}
 
 re: fclean all
 
