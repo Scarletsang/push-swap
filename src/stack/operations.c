@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:09:01 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/25 23:20:32 by htsang           ###   ########.fr       */
+/*   Updated: 2023/02/28 15:02:09 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	swap(t_push_swap_stack *stack)
 	int	first_element;
 	int	second_element;
 
-	if (stack->max_size < 2)
+	if (stack->size < 2)
 	{
 		return (EXIT_SUCCESS);
 	}
@@ -40,7 +40,7 @@ int	push(t_push_swap_stack *dest, t_push_swap_stack *src)
 
 int	rotate(t_push_swap_stack *stack)
 {
-	if (stack->max_size < 2)
+	if (stack->size < 2)
 	{
 		return (EXIT_SUCCESS);
 	}
@@ -50,7 +50,7 @@ int	rotate(t_push_swap_stack *stack)
 
 int	reverse_rotate(t_push_swap_stack *stack)
 {
-	if (stack->max_size < 2)
+	if (stack->size < 2)
 	{
 		return (EXIT_SUCCESS);
 	}
