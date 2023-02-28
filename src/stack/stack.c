@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:36:17 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/23 22:54:29 by htsang           ###   ########.fr       */
+/*   Updated: 2023/02/28 00:23:57 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,14 @@ size_t	max_stack_size)
 	}
 }
 
-int	get_front_element(t_push_swap_stack *stack)
+int	get_element_by_index(t_push_swap_stack *stack, int index)
 {
-	return (stack->elements[stack->front]);
+	if (index < 0)
+	{
+		return (stack->elements[(stack->rear + stack->max_size + \
+			(index % stack->max_size)) % stack->max_size]);
+	}
+	return (stack->elements[(stack->front + index) % stack->max_size]);
 }
 
 void	init_stack_from_array(t_push_swap_stack *stack, size_t elements_size, \
