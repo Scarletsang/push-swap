@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:30:33 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/27 22:11:49 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/02 21:45:31 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,27 @@
 ////////     stack interface     ////////
 /////////////////////////////////////////
 
-typedef size_t	t_push_swap_stack_bound;
+typedef unsigned int	t_push_swap_stack_bound;
 
 typedef struct s_push_swap_stack
 {
 	int						*elements;
 	t_push_swap_stack_bound	front;
 	t_push_swap_stack_bound	rear;
-	size_t					max_size;
-	size_t					size;
+	unsigned int			max_size;
+	unsigned int			size;
 }				t_push_swap_stack;
 
-void	init_stack_from_array(t_push_swap_stack *stack, size_t max_stack_size, \
-int *elements);
+void	init_stack_from_array(t_push_swap_stack *stack, \
+unsigned int max_stack_size, int *elements);
 
-int		init_empty_stack(t_push_swap_stack *stack, size_t max_stack_size);
+int		init_empty_stack(t_push_swap_stack *stack, unsigned int max_stack_size);
 
 void	move_stack_bound_forwards(t_push_swap_stack_bound *bound, \
-size_t	max_stack_size);
+unsigned int	max_stack_size);
 
 void	move_stack_bound_backwards(t_push_swap_stack_bound *bound, \
-size_t	max_stack_size);
+unsigned int	max_stack_size);
 
 int		get_element_by_index(t_push_swap_stack *stack, int index);
 
@@ -54,8 +54,8 @@ typedef struct s_push_swap_2stacks
 	t_push_swap_stack	stack_b;
 }				t_push_swap_2stacks;
 
-int		init_two_stacks(t_push_swap_2stacks *two_stacks, size_t elements_size, \
-int *stack_a_elements);
+int		init_two_stacks(t_push_swap_2stacks *two_stacks, \
+unsigned int elements_size, int *stack_a_elements);
 
 void	print_two_stacks(t_push_swap_2stacks *sorter);
 
