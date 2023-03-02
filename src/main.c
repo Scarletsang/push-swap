@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/26 00:19:05 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/02 21:47:06 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	main(int argc, const char **argv)
 		write(STDERR_FILENO, "Error\n", 7);
 		return (EXIT_FAILURE);
 	}
+	print_triangle_shapes(\
+		get_triangle_dimension(two_stacks.stack_a.size));
 	test(&two_stacks);
 	return (EXIT_SUCCESS);
 }
