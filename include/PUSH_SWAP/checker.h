@@ -6,12 +6,12 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 20:08:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/26 00:18:45 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/02 21:54:29 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef CHECKER_H
+# define CHECKER_H
 
 # include <unistd.h>
 # include "PUSH_SWAP/parser.h"

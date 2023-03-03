@@ -6,14 +6,14 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:36:17 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/02 21:46:00 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/02 21:53:14 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/stack.h"
 
 void	move_stack_bound_forwards(t_push_swap_stack_bound *bound, \
-unsigned int	max_stack_size)
+unsigned int max_stack_size)
 {
 	if ((*bound + 1) == max_stack_size)
 	{
@@ -26,7 +26,7 @@ unsigned int	max_stack_size)
 }
 
 void	move_stack_bound_backwards(t_push_swap_stack_bound *bound, \
-unsigned int	max_stack_size)
+unsigned int max_stack_size)
 {
 	if (*bound == 0)
 	{

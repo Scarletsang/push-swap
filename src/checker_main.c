@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 20:05:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/26 00:19:32 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/02 21:54:08 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, const char **argv)
 		write(STDERR_FILENO, "Error\n", 7);
 		return (EXIT_FAILURE);
 	}
-	if(is_sorted(&two_stacks))
+	if (is_sorted(&two_stacks))
 	{
 		write(STDOUT_FILENO, "OK\n", 4);
 	}
