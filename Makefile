@@ -24,6 +24,7 @@ STACK_SRC:= \
 	stack/printer.c
 SORTER_SRC:= \
 	sorter/triangle.c \
+	sorter/triangles_maker.c \
 	sorter/printer.c
 SRC:= \
 	main.c
