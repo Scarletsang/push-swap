@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 20:08:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/03 03:53:15 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/03 23:52:42 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ unsigned int stack_size);
 
 unsigned int				get_triangle_size(unsigned int index, \
 t_push_swap_triangles_maker *triangles);
+
+void						merge_triangles(\
+t_push_swap_triangles_maker *maker, unsigned int stack_size);
 
 void						init_triangles_maker(\
 t_push_swap_triangles_maker *triangles, unsigned int stack_size);
