@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:28:17 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/08 02:34:56 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/08 04:40:44 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	print_triangle_shapes(unsigned int stack_size)
 				ft_printf("D");
 			else
 				ft_printf("A");
-			ft_printf("(%u) ", get_triangle_size(index, &maker, &filler));
+			ft_printf("(%2u) ", get_triangle_size(index, &maker, &filler));
 			if ((index + 1) % 3 == 0)
 				ft_printf("  ");
 			if ((index + 1) % 9 == 0)
@@ -41,4 +41,5 @@ void	print_triangle_shapes(unsigned int stack_size)
 		}
 		merge_triangles(&maker, &filler);
 	}
+	ft_printf("\n===========================\n");
 }

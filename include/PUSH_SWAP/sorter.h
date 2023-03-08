@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 20:08:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/08 02:15:58 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/08 12:49:47 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ unsigned int total_elements);
 t_push_swap_triangle_shape	get_triangle_shape(\
 unsigned int triangle_index, unsigned int total_triangles);
 
-unsigned int				get_triangle_order(\
-unsigned int triangle_index, unsigned int dimension);
+unsigned int				get_triangle_order(unsigned int triangle_index, \
+unsigned int dimension);
 
 unsigned int				get_triangle_size(unsigned int triangle_index, \
 t_push_swap_triangles_maker *maker, t_push_swap_triangles_filler *filler);

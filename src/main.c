@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/08 02:35:43 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/08 03:02:29 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,19 @@ const char **argv)
 
 int	main(int argc, const char **argv)
 {
-	t_push_swap_2stacks	two_stacks;
+	// t_push_swap_2stacks	two_stacks;
 
-	if (argc < 2)
-	{
-		return (EXIT_FAILURE);
-	}
-	if (init_program(&two_stacks, argc, argv))
-	{
-		write(STDERR_FILENO, "Error\n", 7);
-		return (EXIT_FAILURE);
-	}
-	print_triangle_shapes(17);
+	// if (argc < 2)
+	// {
+	// 	return (EXIT_FAILURE);
+	// }
+	// if (init_program(&two_stacks, argc, argv))
+	// {
+	// 	write(STDERR_FILENO, "Error\n", 7);
+	// 	return (EXIT_FAILURE);
+	// }
+	(void) argc;
+	print_triangle_shapes(atoi(argv[1]));
 	// test(&two_stacks);
 	return (EXIT_SUCCESS);
 }
