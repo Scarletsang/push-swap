@@ -5,7 +5,7 @@
 NAME:=push_swap
 
 CC:=cc
-CFLAGS= -Wall -Wextra
+CFLAGS= -Wall -Wextra -Werror
 ifdef FSANITIZE
 	CFLAGS+= -g3 -fsanitize=address
 	LDFLAGS+= -g3 -fsanitize=address
@@ -24,6 +24,7 @@ STACK_SRC:= \
 	stack/printer.c
 SORTER_SRC:= \
 	sorter/triangle.c \
+	sorter/triangles_getter.c \
 	sorter/triangles_maker.c \
 	sorter/printer.c
 SRC:= \
