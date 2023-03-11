@@ -28,9 +28,14 @@ TRIANGLE_PLANNER_SRC:= \
 	sorter/triangle_planner/triangle_shaper.c \
 	sorter/triangle_planner/triangles_calculator.c \
 	sorter/triangle_planner/printer.c
+SORTER_SRC:=\
+	sorter/sorter.c \
+	sorter/sorter_manipulator.c \
+	sorter/triangle_maker.c \
+	sorter/printer.c
 SRC:= \
 	main.c
-OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${TRIANGLE_PLANNER_SRC:.c=.o} ${SRC:.c=.o}}
+OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${TRIANGLE_PLANNER_SRC:.c=.o} ${SORTER_SRC:.c=.o} ${SRC:.c=.o}}
 PRINTF:=lib/ft_printf/libftprintf.a
 INCLUDE:= \
 	include \

@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/08 18:35:22 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/11 23:36:05 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,24 @@ const char **argv)
 
 int	main(int argc, const char **argv)
 {
-	// t_push_swap_2stacks	two_stacks;
+	t_push_swap_2stacks	two_stacks;
+	t_push_swap_sorter	sorter;
 
-	// if (argc < 2)
-	// {
-	// 	return (EXIT_FAILURE);
-	// }
-	// if (init_program(&two_stacks, argc, argv))
-	// {
-	// 	write(STDERR_FILENO, "Error\n", 7);
-	// 	return (EXIT_FAILURE);
-	// }
-	(void) argc;
-	print_all_triangles_merge(atoi(argv[1]));
+	if (argc < 2)
+	{
+		return (EXIT_FAILURE);
+	}
+	if (init_program(&two_stacks, argc, argv) || init_sorter(&sorter))
+	{
+		write(STDERR_FILENO, "Error\n", 7);
+		return (EXIT_FAILURE);
+	}
+	ft_printf("-----------\n");
+	sort_size_of(&sorter, &two_stacks, two_stacks.stack_a.size);
+	print_instructions(&sorter);
+	clean_sorter(&sorter);
+	print_two_stacks(&two_stacks);
+	// print_all_triangles_merge(atoi(argv[1]));
 	// test(&two_stacks);
 	return (EXIT_SUCCESS);
 }
