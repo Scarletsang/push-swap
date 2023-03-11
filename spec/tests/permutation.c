@@ -14,9 +14,10 @@ void permute(int n) {
 
     for (i = 0; i < n; i++) arr[i] = i + 1;
     while (1) {
-        for (i = 0; i < n; i++) {
+        for (i = 0; i < (n - 1); i++) {
             printf("%d ", arr[i]);
         }
+		printf("%d", arr[i++]);
         printf("\n");
         i = n - 2;
         while (i >= 0 && arr[i] > arr[i+1]) {
