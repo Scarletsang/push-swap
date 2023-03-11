@@ -22,15 +22,15 @@ STACK_SRC:= \
 	stack/queue.c \
 	stack/operations.c \
 	stack/printer.c
-TRIANGLE_MAKER_SRC:= \
-	sorter/triangle_maker/triangle_shaper.c \
-	sorter/triangle_maker/triangles_getter.c \
-	sorter/triangle_maker/triangles_maker.c \
-	sorter/triangle_maker/triangles_filler.c \
-	sorter/triangle_maker/printer.c
+TRIANGLE_PLANNER_SRC:= \
+	sorter/triangle_planner/triangles_planner.c \
+	sorter/triangle_planner/triangles_getter.c \
+	sorter/triangle_planner/triangle_shaper.c \
+	sorter/triangle_planner/triangles_calculator.c \
+	sorter/triangle_planner/printer.c
 SRC:= \
 	main.c
-OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${TRIANGLE_MAKER_SRC:.c=.o} ${SRC:.c=.o}}
+OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${TRIANGLE_PLANNER_SRC:.c=.o} ${SRC:.c=.o}}
 PRINTF:=lib/ft_printf/libftprintf.a
 INCLUDE:= \
 	include \

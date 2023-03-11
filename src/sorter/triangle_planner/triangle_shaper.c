@@ -6,11 +6,11 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 21:06:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/08 19:29:59 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/11 19:20:30 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PUSH_SWAP/sorter/triangle_maker.h"
+#include "PUSH_SWAP/sorter/triangle_planner.h"
 
 static t_push_swap_triangle_shape	switch_triangle_shape(\
 t_push_swap_triangle_shape triangle_shape)

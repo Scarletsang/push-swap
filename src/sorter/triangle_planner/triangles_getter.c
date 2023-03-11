@@ -6,11 +6,11 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 00:39:44 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/08 19:30:05 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/11 19:20:41 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PUSH_SWAP/sorter/triangle_maker.h"
+#include "PUSH_SWAP/sorter/triangle_planner.h"
 
 unsigned int	get_important_triangles_before(\
 unsigned int triangle_index, unsigned int layer)

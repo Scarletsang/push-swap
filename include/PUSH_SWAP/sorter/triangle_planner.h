@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   triangle_maker.h                                   :+:      :+:    :+:   */
+/*   triangle_planner.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/08 19:28:06 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/11 19:30:43 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TRIANGLE_MAKER_H
-# define TRIANGLE_MAKER_H
+#ifndef TRIANGLE_PLANNER_H
+# define TRIANGLE_PLANNER_H
 
 # include "PUSH_SWAP/stack.h"
 # include <unistd.h>
@@ -29,15 +29,15 @@ typedef enum e_push_swap_triangle_fill_mode
 	FILL_UNIMPORTANT_EVENLY
 }			t_push_swap_triangle_fill_mode;
 
-typedef struct s_push_swap_triangles_filler
+typedef struct s_push_swap_triangles_calculator
 {
 	unsigned int					total_important_triangles;
 	t_push_swap_triangle_fill_mode	fill_mode;
 	unsigned int					target_triangle_size;
 	unsigned int					first_partially_filled_triangle;
-}				t_push_swap_triangles_filler;
+}				t_push_swap_triangles_calculator;
 
-typedef struct s_push_swap_triangles_maker
+typedef struct s_push_swap_triangles_planner
 {
 	unsigned int		*triangles;
 	const unsigned int	total_elements;
@@ -45,28 +45,28 @@ typedef struct s_push_swap_triangles_maker
 	unsigned int		triangle_dimension;
 	unsigned int		mininum_triangle_size;
 	unsigned int		triangles_size_delta;
-}				t_push_swap_triangles_maker;
+}				t_push_swap_triangles_planner;
 
 unsigned int				get_total_triangles(\
 unsigned int total_elements);
 
-unsigned int	            get_triangle_dimension(\
+unsigned int				get_triangle_dimension(\
 unsigned int total_triangles);
 
 unsigned int				get_important_triangles_before(\
 unsigned int triangle_index, unsigned int layer);
 
-int							init_triangles_maker(\
-t_push_swap_triangles_maker *maker, unsigned int total_elements);
+int							init_triangles_planner(\
+t_push_swap_triangles_planner *maker, unsigned int total_elements);
 
 int							init_triangles_filler(\
-t_push_swap_triangles_maker *maker, t_push_swap_triangles_filler *filler);
+t_push_swap_triangles_planner *maker, t_push_swap_triangles_calculator *filler);
 
 void						fill_triangles(\
-t_push_swap_triangles_maker *maker);
+t_push_swap_triangles_planner *maker);
 
 void						merge_triangles(\
-t_push_swap_triangles_maker *maker);
+t_push_swap_triangles_planner *maker);
 
 t_push_swap_triangle_shape	get_triangle_shape(\
 unsigned int triangle_index, unsigned int total_triangles);
