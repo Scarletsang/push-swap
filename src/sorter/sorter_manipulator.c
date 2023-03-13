@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:53:40 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/11 23:30:34 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/13 20:29:40 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_push_swap_instruction instruction)
 
 	new_instruction = malloc(sizeof(t_push_swap_instruction_list));
 	if (!new_instruction)
-		return (MALLOC_FAILS);
+		return (FAILURE);
 	increase_cost_by(sorter, 1);
 	new_instruction->instruction = instruction;
 	new_instruction->next = NULL;
@@ -34,7 +34,7 @@ t_push_swap_instruction *instruction_arr, unsigned int amount)
 	while (amount > 0)
 	{
 		if (add_instruction(sorter, *instruction_arr))
-			return (MALLOC_FAILS);
+			return (FAILURE);
 		instruction_arr++;
 		amount--;
 	}

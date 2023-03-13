@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:34:18 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/11 23:32:24 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/13 20:29:40 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_push_swap_instruction *instructions, unsigned int amount_of_instructions)
 {
 	if (add_multiple_instructions(sorter, instructions, \
 		amount_of_instructions))
-		return (MALLOC_FAILS);
+		return (FAILURE);
 	execute_instructions(sorter, two_stacks, amount_of_instructions);
 	return (SUCCESS);
 }
@@ -80,7 +80,7 @@ t_push_swap_2stacks *two_stacks, unsigned int triangle_size)
 	{
 		if (push_biggest_element_to_b(sorter, two_stacks, \
 			(int [6]){0, 1, 2, 3, 4, 5}, triangle_size))
-			return (MALLOC_FAILS);
+			return (FAILURE);
 		triangle_size--;
 	}
 	return (SUCCESS);

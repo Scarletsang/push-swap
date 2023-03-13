@@ -31,6 +31,7 @@ TRIANGLE_PLANNER_SRC:= \
 SORTER_SRC:=\
 	sorter/sorter.c \
 	sorter/sorter_manipulator.c \
+	sorter/emulation.c \
 	sorter/triangle_maker.c \
 	sorter/printer.c
 SRC:= \

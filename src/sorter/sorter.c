@@ -46,7 +46,10 @@ t_push_swap_error_code	init_sorter(t_push_swap_sorter *sorter)
 {
 	sorter->cost = malloc(sizeof(t_push_swap_instruction_list));
 	if (!sorter->cost)
-		return (MALLOC_FAILS);
+		return (FAILURE);
+	if (init_empty_stack(&sorter->emulation.stack_a, EMULATION_STACK_SIZE) || \
+		init_empty_stack(&sorter->emulation.stack_b, EMULATION_STACK_SIZE))
+		return (FAILURE);
 	sorter->cost->instruction = 0;
 	sorter->cost->next = NULL;
 	sorter->last_instruction = sorter->cost;
