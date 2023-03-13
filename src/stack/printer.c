@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:33:21 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/28 00:25:20 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/13 21:44:05 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_stack_elements(t_push_swap_stack *stack)
 {
-	size_t	i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < stack->size)
@@ -27,7 +27,7 @@ void	print_stack_elements(t_push_swap_stack *stack)
 
 void	print_stack_info(t_push_swap_stack *stack)
 {
-	size_t	i;
+	unsigned int	i;
 
 	ft_printf("%-10s: %d\n", "front", stack->front);
 	ft_printf("%-10s: %d\n", "rear", stack->rear);
