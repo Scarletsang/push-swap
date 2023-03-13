@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:02:07 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/13 23:31:42 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/13 23:54:29 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ static void	index_emulation_stack_a(t_push_swap_sorter *sorter)
 		sorter->emulation.stack_a.elements[i] = indexed_stack[i];
 		i++;
 	}
+}
+
+t_push_swap_emulation_group	get_emulation_group(int index)
+{
+	return (index / 2);
 }
 
 void	emulate_two_stacks(t_push_swap_sorter *sorter, \
