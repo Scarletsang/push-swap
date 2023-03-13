@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:30:33 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/02 21:54:49 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/13 20:53:50 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_push_swap_2stacks
 
 int		init_two_stacks(t_push_swap_2stacks *two_stacks, \
 unsigned int elements_size, int *stack_a_elements);
+
+void	free_two_stacks(t_push_swap_2stacks *two_stacks);
 
 void	print_two_stacks(t_push_swap_2stacks *sorter);
 

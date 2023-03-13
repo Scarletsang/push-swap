@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:29:44 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/11 23:29:59 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/13 23:13:21 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	concat_sorter(t_push_swap_sorter *to, t_push_swap_sorter *from)
 	to->last_instruction = from->last_instruction;
 }
 
-void	clean_sorter(t_push_swap_sorter *sorter)
+void	free_sorter_internals(t_push_swap_sorter *sorter)
 {
 	t_push_swap_instruction_list	*tmp;
 
@@ -29,6 +29,7 @@ void	clean_sorter(t_push_swap_sorter *sorter)
 		sorter->cost = sorter->cost->next;
 		free(tmp);
 	}
+	free_two_stacks(&sorter->emulation);
 }
 
 void	increase_cost_by(t_push_swap_sorter *sorter, int cost)

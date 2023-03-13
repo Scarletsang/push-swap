@@ -6,11 +6,17 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:16:10 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/02 21:46:15 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/13 21:02:14 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/stack.h"
+
+void	free_two_stacks(t_push_swap_2stacks *two_stacks)
+{
+	free(two_stacks->stack_a.elements);
+	free(two_stacks->stack_b.elements);
+}
 
 int	init_two_stacks(t_push_swap_2stacks *two_stacks, \
 unsigned int elements_size, int *stack_a_elements)
