@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:02:07 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/13 23:54:29 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/15 09:08:21 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,18 @@ static void	index_emulation_stack_a(t_push_swap_sorter *sorter)
 	}
 }
 
-t_push_swap_emulation_group	get_emulation_group(int index)
+t_push_swap_emulation_group	get_emulation_group(int index, \
+t_push_swap_triangle_size triangle_size, t_push_swap_triangle_shape shape)
 {
+	if (((triangle_size % 2) == 1) && (shape == ASCENDING_TRIANGLE))
+	{
+		return ((index + 1) / 2);
+	}
 	return (index / 2);
 }
 
 void	emulate_two_stacks(t_push_swap_sorter *sorter, \
-t_push_swap_2stacks *two_stacks, t_push_swap_emulation_stack_rear_size from, \
+t_push_swap_2stacks *two_stacks, t_push_swap_emulation_range_from from, \
 t_push_swap_triangle_size triangle_size)
 {
 	int	to;
@@ -66,7 +71,7 @@ t_push_swap_triangle_size triangle_size)
 	sorter->emulation.stack_b.size = 0;
 	sorter->emulation.stack_b.front = 0;
 	sorter->emulation.stack_b.rear = 0;
-	sorter->emulation_stack_rear_size = from * -1;
+	sorter->emulation_range_from = from;
 	to = from + triangle_size - 1;
 	while (from < 0)
 	{

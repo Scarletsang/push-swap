@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 20:08:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/13 23:47:30 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/15 09:06:16 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ typedef enum e_push_swap_instruction
 
 # define EMULATION_STACK_SIZE 6
 
-typedef enum e_push_swap_emulation_stack_rear_size
+typedef enum e_push_swap_emulation_range_from
 {
 	RANGE_FROM_0 = 0,
 	RANGE_FROM_MINUS_1 = -1,
 	RANGE_FROM_MINUS_2 = -2,
 	RANGE_FROM_MINUS_3 = -3
-}				t_push_swap_emulation_stack_rear_size;
+}				t_push_swap_emulation_range_from;
 
 typedef enum e_push_swap_emulation_group
 {
@@ -70,11 +70,11 @@ typedef struct s_push_swap_instruction_list
 
 typedef struct s_push_swap_sorter
 {
-	t_push_swap_instruction_list			*cost;
-	t_push_swap_instruction_list			*last_instruction;
-	t_push_swap_instruction_list			*last_executed_instruction;
-	t_push_swap_2stacks						emulation;
-	t_push_swap_emulation_stack_rear_size	emulation_stack_rear_size;
+	t_push_swap_instruction_list		*cost;
+	t_push_swap_instruction_list		*last_instruction;
+	t_push_swap_instruction_list		*last_executed_instruction;
+	t_push_swap_2stacks					emulation;
+	t_push_swap_emulation_range_from	emulation_range_from;
 }				t_push_swap_sorter;
 
 ////////////////////////////////////////////
@@ -112,7 +112,7 @@ t_push_swap_error_code		init_sorter(t_push_swap_sorter *sorter);
 //////////////////////////////////
 
 void						emulate_two_stacks(t_push_swap_sorter *sorter, \
-t_push_swap_2stacks *two_stacks, t_push_swap_emulation_stack_rear_size from, \
+t_push_swap_2stacks *two_stacks, t_push_swap_emulation_range_from from, \
 t_push_swap_triangle_size triangle_size);
 
 t_push_swap_emulation_group	get_emulation_group(int index);
