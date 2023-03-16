@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorter_manipulator.c                               :+:      :+:    :+:   */
+/*   instructions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:53:40 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/13 20:29:40 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/16 21:10:06 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_push_swap_instruction instruction)
 	}
 }
 
-static void	execute_instruction(t_push_swap_2stacks *two_stacks, \
+void	execute_instruction(t_push_swap_2stacks *two_stacks, \
 t_push_swap_instruction instruction)
 {
 	if (instruction == SA)

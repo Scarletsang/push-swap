@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/13 23:15:30 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/16 23:02:41 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,11 @@ int	main(int argc, const char **argv)
 	}
 	ft_printf("-----------\n");
 	// test_naive_triangle_creation(&two_stacks, &sorter);
-	test_emulation_indexing(&two_stacks, &sorter);
-	// print_all_triangles_merge(atoi(argv[1]));
+	// test_emulation_indexing(&two_stacks, &sorter);
+	print_all_triangles_merge(atoi(argv[1]));
 	// test_stack_operations(&two_stacks);
-	free_sorter_internals(&sorter);
+	free_instructions_list(&sorter.cost);
+	free_two_stacks(&sorter.emulation);
 	free_two_stacks(&two_stacks);
 	return (EXIT_SUCCESS);
 }

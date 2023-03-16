@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 20:08:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/15 09:06:16 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/16 21:10:22 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ t_push_swap_error_code		add_multiple_instructions(\
 t_push_swap_sorter *sorter, t_push_swap_instruction *instruction_arr, \
 unsigned int amount);
 
+void						execute_instruction(t_push_swap_2stacks *two_stacks, \
+t_push_swap_instruction instruction);
+
 void						execute_instructions(t_push_swap_sorter *sorter, \
 t_push_swap_2stacks *two_stacks, unsigned int amount);
 
@@ -95,7 +98,8 @@ t_push_swap_2stacks *two_stacks, unsigned int amount);
 ////////     sorter     ////////
 ////////////////////////////////
 
-void						free_sorter_internals(t_push_swap_sorter *sorter);
+void						free_instruction_list(\
+t_push_swap_instruction_list *instruction);
 
 void						increase_cost_by(t_push_swap_sorter *sorter, \
 int cost);
@@ -115,7 +119,8 @@ void						emulate_two_stacks(t_push_swap_sorter *sorter, \
 t_push_swap_2stacks *two_stacks, t_push_swap_emulation_range_from from, \
 t_push_swap_triangle_size triangle_size);
 
-t_push_swap_emulation_group	get_emulation_group(int index);
+t_push_swap_emulation_group	get_emulation_group(int index, \
+t_push_swap_triangle_size triangle_size, t_push_swap_triangle_shape shape);
 
 ////////////////////////////////////////
 ////////     triangle maker     ////////
