@@ -40,17 +40,6 @@ a a b b
 
 ```ruby
 
-def get_biggest_element stack, indexes, length
-    biggest_index = *indexes
-    biggest_val = stack[index]
-    indexes++
-    while length-- > 0
-        if stack[*indexes] > biggest_val
-            biggest_index = *indexes
-            biggest_val = stack[biggest_index]
-        indexes++
-    return biggest_index
-
 # Cost: 2 - 3
 def front2 stackA
     if stackA[0] < stackA[1] :
@@ -90,28 +79,6 @@ def size2_size2 stackA, stackB
     if stackB[0] > stackB[1]
         add_cmd(SB)
 
-def move_biggest_group stackA, stackB
-    i = 0
-    while i < 6
-        if get_group(stackA[i++]) == BIGGEST_GROUP
-            add_cmd(PB)
-            break
-        add_cmd(RA)
-    j = i
-    while j < 6 && get_group(stackA[j]) != BIGGEST_GROUP
-        j++
-    d = j - i
-    while d > 2
-        add_cmd(RA)
-        d--
-    if d == 2
-        add_cmd(SA)
-    add(PB)
-
-def sort_biggest_group stackA, stackB
-    if stackB[0] > stackB[1] :
-        add_cmd(SB) 
-
 # Cost: 3 - 6
 def size3 stackA, stackB
     if get_biggest_element(stackA, [0, 1, 2], 3) == 2
@@ -129,21 +96,105 @@ def size3 stackA, stackB
     if stackB[0] > stackB[1]
         add_cmd(SB)
 
-def size4 stackA, stackB
-    if get_group_size(stackA[0]) == BIGGEST
-        add_cmd(PB)
-        if get_group_size(stackA[0]) == BIGGEST
-            add_cmd(PB)
-        else
-
 ```
 
 Optimization:
 
 front2 front2 = PB PB size2_size2
+rear1 rear1 = rear2
 
 1. check 0 and -1
-2. see if rear2 is possible
-3. find first priority in top
+2. see if front1rear1 is possible
+3. see if rear2 is possible
 4. find first priority in top
-4. find first priority in rear
+5. find first priority in top
+6. find first priority in rear
+
+```ruby
+
+def add_n_cmd cmd, amount
+    while amount > 0
+        add_cmd(cmd)
+        amount--
+
+def move_biggest_from_rear stackA, stackB, rear_size, priority_group
+    i = -1
+    while i >= rear_size
+        if get_group(stackA[i]) == priority_group
+            add_n_cmd(RRA, (i - 1) * -1)
+            rear1(stackA, stackB)
+            return true
+        i--
+    return false
+
+def priority_group_is_decreasing_after stackA, index, target_priority_group, front_size
+    while index < front_size
+        group = get_group(stackA[index])
+        if group > target_priority_group
+            return false
+        if group < target_priority_group
+            target_priority_group = group
+        index++
+
+def move_biggest_from_front stackA, stackB, front_size, priority_group
+    i = 0
+    while i < front_size
+        if get_group(stackA[i]) == priority_group
+            if i > 0
+                add_n_cmd(RA, i - 1)
+                if priority_group_is_decreasing_after(stackA, i, get_group(stackA[i - 1]), front_size)
+                    add_cmd(SA)
+                else
+                    add_cmd(RA)
+            add(PB)
+            return true
+        i++
+    return false
+
+def sort_biggest_group stackA, stackB
+    if stackB[0] > stackB[1]
+        add_cmd(SB) 
+
+def move_one_biggest_element stackA, stackB, front_size, rear_size, priority_group
+    if move_biggest_from_front(stackA, stackB, front_size, priority_group)
+        return FRONT
+    else
+        move_biggest_from_rear(stackA, stackB, rear_size, priority_group)
+        return REAR
+
+def move_biggest_group stackA, stackB, front_size, rear_size, priority_group
+    if get_group(stackA[-1]) == priority_group
+        if get_group(stackA[-2]) == priority_group
+            rear2(stackA, stackB)
+            return
+        if get_group(stackA[0]) == priority_group
+            front1rear1(stackA, stackB)
+            return
+        rear1(stackA, stackB)
+        move_one_biggest_element(stackA, stackB, front_size, rear_size)
+        return
+    if move_one_biggest_element(stackA, stackB, front_size, rear_size) == FRONT
+        move_one_biggest_element(stackA, stackB, front_size, rear_size)
+    else
+        move_biggest_from_rear(stackA, stackB, rear_size)
+
+# The variables stackA, stackB, front_size and rear_size are always passed by reference and not by value.
+# However, priority is passed by value
+def create_triangle stackA, stackB, front_size, rear_size, triangle_size
+    priority_group = get_group(triangle_size - 1)
+    while priority_group > 0
+        move_biggest_group(stackA, stackB, front_size, rear_size, priority_group)
+        priority_group--
+    if triangle_size % 2 == 0
+        if rear_size == 0
+            size2size2(stackA)
+        elsif rear_size == -1
+            front1rear1(stackA, stackB)
+        else
+            rear2(stackA, stackB)
+    else
+        if rear_size == 0
+            add_cmd(PB)
+        else
+            rear1(stackA, stackB)
+```
