@@ -52,16 +52,65 @@ def get_biggest_element stack, indexes, length
     return biggest_index
 
 # Cost: 2 - 3
-def size2 stackA
+def front2 stackA
     if stackA[0] < stackA[1] :
         add_cmd(SA)
     add_cmd(PB, PB)
 
 # Cost: 2 - 3
-def size2_sb stackB
+def front2_sb stackB
     add_cmd(PB, PB)
     if stackA[0] > stackA[1] :
         add_cmd(SB)
+
+# Cost: 4
+def rear2 stackA, stackB
+    add_cmd(RRA)
+    front1rear1(stackA, stackB)
+
+# Cost: 3
+def front1rear1 stackA, stackB
+    if stackA[0] > stackA[-1]
+        add_cmd(PB, RRA)
+    else
+        add_cmd(RRA, PB)
+    add_cmd(PB)
+
+def rear1 stackA
+    add_cmd(RRA, PB)
+
+# Cost: 2 - 3
+def size2_size2 stackA, stackB
+    if stackB[0] > stackB[1]
+        if stackA[1] > stackA[0]
+            add_cmd(SS)
+        else
+            add_cmd(SB)
+    add_cmd(PB, PB)
+    if stackB[0] > stackB[1]
+        add_cmd(SB)
+
+def move_biggest_group stackA, stackB
+    i = 0
+    while i < 6
+        if get_group(stackA[i++]) == BIGGEST_GROUP
+            add_cmd(PB)
+            break
+        add_cmd(RA)
+    j = i
+    while j < 6 && get_group(stackA[j]) != BIGGEST_GROUP
+        j++
+    d = j - i
+    while d > 2
+        add_cmd(RA)
+        d--
+    if d == 2
+        add_cmd(SA)
+    add(PB)
+
+def sort_biggest_group stackA, stackB
+    if stackB[0] > stackB[1] :
+        add_cmd(SB) 
 
 # Cost: 3 - 6
 def size3 stackA, stackB
@@ -80,19 +129,21 @@ def size3 stackA, stackB
     if stackB[0] > stackB[1]
         add_cmd(SB)
 
-# Cost: 2 - 3
-def size2_size2 stackA, stackB
-    if stackB[0] > stackB[1]
-        if stackA[1] > stackA[0]
-            add_cmd(SS)
-        else
-            add_cmd(SB)
-    add_cmd(PB, PB)
-    if stackB[0] > stackB[1]
-        add_cmd(SB)
-
-
 def size4 stackA, stackB
+    if get_group_size(stackA[0]) == BIGGEST
+        add_cmd(PB)
+        if get_group_size(stackA[0]) == BIGGEST
+            add_cmd(PB)
+        else
 
 ```
 
+Optimization:
+
+front2 front2 = PB PB size2_size2
+
+1. check 0 and -1
+2. see if rear2 is possible
+3. find first priority in top
+4. find first priority in top
+4. find first priority in rear
