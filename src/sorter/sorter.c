@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:29:44 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/16 20:08:53 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/20 20:29:50 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,17 @@ int	get_cost(t_push_swap_sorter *sorter)
 	return (sorter->cost->instruction);
 }
 
-t_push_swap_error_code	init_sorter(t_push_swap_sorter *sorter)
+t_push_swap_error_code	init_sorter(t_push_swap_sorter *sorter, \
+t_push_swap_2stacks *two_stacks)
 {
 	sorter->cost = malloc(sizeof(t_push_swap_instruction_list));
 	if (!sorter->cost)
-		return (FAILURE);
-	if (init_empty_stack(&sorter->emulation.stack_a, EMULATION_STACK_SIZE) || \
-		init_empty_stack(&sorter->emulation.stack_b, EMULATION_STACK_SIZE))
 		return (FAILURE);
 	sorter->cost->instruction = 0;
 	sorter->cost->next = NULL;
 	sorter->last_instruction = sorter->cost;
 	sorter->last_executed_instruction = sorter->cost;
+	sorter->two_stacks = two_stacks;
+	sorter->automatic_execute = 0;
 	return (SUCCESS);
 }

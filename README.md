@@ -36,6 +36,20 @@ a a b b
 4 3 1 2 
 4 3 2 1
 
+pb
+pb
+sb
+sa
+pb
+pb
+rra
+rra
+pa
+rrb
+pa
+pa
+pa
+
 ## Creating Ascending triangles
 
 ```ruby
@@ -49,7 +63,7 @@ def front2 stackA
 # Cost: 2 - 3
 def front2_sb stackB
     add_cmd(PB, PB)
-    if stackA[0] > stackA[1] :
+    if stackA[0] < stackA[1] :
         add_cmd(SB)
 
 # Cost: 4
@@ -135,6 +149,7 @@ def priority_group_is_decreasing_after stackA, index, target_priority_group, fro
         if group < target_priority_group
             target_priority_group = group
         index++
+    return true
 
 def move_biggest_from_front stackA, stackB, front_size, priority_group
     i = 0
@@ -180,6 +195,7 @@ def move_biggest_group stackA, stackB, front_size, rear_size, priority_group
 
 # The variables stackA, stackB, front_size and rear_size are always passed by reference and not by value.
 # However, priority is passed by value
+# For future me, note that in the C code, move_biggest_group actually change the triangle_size, so keep in mind that the original value of the triangle_size has to be saved in the C code.
 def create_triangle stackA, stackB, front_size, rear_size, triangle_size
     priority_group = get_group(triangle_size - 1)
     while priority_group > 0
