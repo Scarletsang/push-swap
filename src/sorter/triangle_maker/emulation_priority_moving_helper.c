@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   emulation_priority_mover copy.c                    :+:      :+:    :+:   */
+/*   emulation_priority_moving_helper.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:34:35 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/21 20:56:37 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 00:15:27 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@ t_push_swap_emulation_priority_location	get_priority_location(\
 t_push_swap_triangle_maker *triangle_maker, \
 t_push_swap_emulation_priority highest_priority)
 {
-	unsigned int	front_size;
 	unsigned int	i;
 
-	front_size = triangle_maker->triangle_size - \
-		triangle_maker->emulated_stack_a_rear_size;
 	i = 0;
-	while (i < front_size)
+	while (i < triangle_maker->emulated_stack_a_front_size)
 	{
 		if (get_emulation_priority_by_index(i, triangle_maker, STACK_A) == \
 				highest_priority)
@@ -32,7 +29,9 @@ t_push_swap_emulation_priority highest_priority)
 	return (PRIORITY_AT_REAR);
 }
 
-int	priority_decreases_after_index_2(t_push_swap_triangle_maker *triangle_maker)
+int	priority_decreases_after_index_2(\
+t_push_swap_triangle_maker *triangle_maker, \
+t_push_swap_emulation_priority target_priority)
 {
 	t_push_swap_emulation_priority	priority;
 	unsigned int					i;
@@ -41,9 +40,8 @@ int	priority_decreases_after_index_2(t_push_swap_triangle_maker *triangle_maker)
 	while (i < triangle_maker->emulated_stack_a_front_size)
 	{
 		priority = get_emulation_priority_by_index(i, triangle_maker, STACK_A);
-		if (priority > triangle_maker->highest_priority)
+		if (priority > target_priority)
 			return (0);
-		
 		i++;
 	}
 	return (1);

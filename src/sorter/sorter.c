@@ -5,53 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 20:29:44 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/20 20:29:50 by htsang           ###   ########.fr       */
+/*   Created: 2023/03/21 21:38:05 by htsang            #+#    #+#             */
+/*   Updated: 2023/03/22 00:03:45 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter.h"
 
-void	concat_sorter(t_push_swap_sorter *to, t_push_swap_sorter *from)
+t_push_swap_error_code	create_all_triangles(\
+t_push_swap_2stacks *two_stacks, \
+t_push_swap_triangles_planner *planner, t_push_swap_instructor *instructor)
 {
-	increase_cost_by(to, get_cost(from));
-	to->last_instruction->next = from->cost->next;
-	to->last_instruction = from->last_instruction;
-}
+	t_push_swap_instructor		emulation_instructor;
+	t_push_swap_triangle_maker	triangle_maker;
+	unsigned int				triangle_index;
 
-void	free_instruction_list(t_push_swap_instruction_list *instruction)
-{
-	t_push_swap_instruction_list	*tmp;
-
-	while (instruction)
-	{
-		tmp = instruction;
-		instruction = instruction->next;
-		free(tmp);
-	}
-}
-
-void	increase_cost_by(t_push_swap_sorter *sorter, int cost)
-{
-	sorter->cost->instruction += cost;
-}
-
-int	get_cost(t_push_swap_sorter *sorter)
-{
-	return (sorter->cost->instruction);
-}
-
-t_push_swap_error_code	init_sorter(t_push_swap_sorter *sorter, \
-t_push_swap_2stacks *two_stacks)
-{
-	sorter->cost = malloc(sizeof(t_push_swap_instruction_list));
-	if (!sorter->cost)
+	if (init_triangle_maker(&emulation_instructor, &triangle_maker))
 		return (FAILURE);
-	sorter->cost->instruction = 0;
-	sorter->cost->next = NULL;
-	sorter->last_instruction = sorter->cost;
-	sorter->last_executed_instruction = sorter->cost;
-	sorter->two_stacks = two_stacks;
-	sorter->automatic_execute = 0;
+	triangle_index = 0;
+	while (triangle_index < planner->total_triangles)
+	{
+		prepare_emulation(&triangle_maker, \
+			planner->triangles[triangle_index], \
+			get_triangle_shape(planner->total_triangles - 1 - triangle_index, \
+				planner->total_triangles));
+		emulate_two_stacks(&triangle_maker, two_stacks);
+		print_instructions(&emulation_instructor);
+		print_two_stacks(&triangle_maker.emulation);
+		if (create_triangle(&emulation_instructor, &triangle_maker))
+		{
+			free_instruction_list(emulation_instructor.cost);
+			free_two_stacks(&triangle_maker.emulation);
+			return (FAILURE);
+		}
+		print_instructions(&emulation_instructor);
+		print_two_stacks(&triangle_maker.emulation);
+		concat_instructor(instructor, &emulation_instructor);
+		execute_unexecuted_instructions(instructor);
+		triangle_index++;
+	}
+	free_two_stacks(&triangle_maker.emulation);
 	return (SUCCESS);
 }

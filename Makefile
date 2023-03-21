@@ -22,21 +22,29 @@ STACK_SRC:= \
 	stack/queue.c \
 	stack/operations.c \
 	stack/printer.c
+INSTRUCTOR_SRC:=\
+	sorter/instructor/instructor.c \
+	sorter/instructor/instruction_adder.c \
+	sorter/instructor/instruction_executor.c \
+	sorter/instructor/printer.c
 TRIANGLE_PLANNER_SRC:= \
 	sorter/triangle_planner/triangles_planner.c \
 	sorter/triangle_planner/triangles_getter.c \
 	sorter/triangle_planner/triangle_shaper.c \
 	sorter/triangle_planner/triangles_calculator.c \
 	sorter/triangle_planner/printer.c
-SORTER_SRC:=\
-	sorter/sorter.c \
-	sorter/instructions.c \
-	sorter/emulation.c \
-	sorter/triangle_maker.c \
-	sorter/printer.c
+TRIANGLE_MAKER_SRC:= \
+	sorter/triangle_maker/triangle_maker.c \
+	sorter/triangle_maker/formula.c \
+	sorter/triangle_maker/emulation.c \
+	sorter/triangle_maker/emulated_instruction_executor.c \
+	sorter/triangle_maker/emulation_priority_mover.c \
+	sorter/triangle_maker/emulation_priority_moving_helper.c
+SORTER_SRC:= \
+	sorter/sorter.c
 SRC:= \
 	main.c
-OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${TRIANGLE_PLANNER_SRC:.c=.o} ${SORTER_SRC:.c=.o} ${SRC:.c=.o}}
+OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${INSTRUCTOR_SRC:.c=.o} ${TRIANGLE_PLANNER_SRC:.c=.o} ${TRIANGLE_MAKER_SRC:.c=.o} ${SORTER_SRC:.c=.o} ${SRC:.c=.o}}
 PRINTF:=lib/ft_printf/libftprintf.a
 INCLUDE:= \
 	include \

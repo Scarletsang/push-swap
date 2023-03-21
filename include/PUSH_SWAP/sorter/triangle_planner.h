@@ -6,14 +6,14 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/20 14:26:05 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/21 21:46:04 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TRIANGLE_PLANNER_H
 # define TRIANGLE_PLANNER_H
 
-# include "PUSH_SWAP/sorter.h"
+# include "PUSH_SWAP/sorter/instructor.h"
 
 typedef enum e_push_swap_triangle_fill_mode
 {

@@ -126,6 +126,48 @@ rear1 rear1 = rear2
 
 ```ruby
 
+def has_priority_in_front index, front_size, priority_group
+    if index >= front_size
+        return BACK
+    if get_group(stackA[index]) == priority_group
+        return FRONT
+    return has_priority_in_front(index + 1, front_size, priority_group)
+
+def move_priority front_size, rear_size, priority_group, group_size, forced_lookup, last_instruction
+    if group_size == 0
+        return
+    # Checks if rear has priority
+    if get_group(stackA[-1]) == priority_group
+        if get_group(stackA[0]) == priority_group
+            front1rear1(stackA, stackB)
+            return 
+        rear1(stackA, stackB)
+        return move_priority(front_size, rear_size - 1, priority_group, group_size - 1, UNDEFINED, &rear1)
+    # Checks if the front has priority
+    if get_group(stackA[0]) == priority_group
+        if get_group(stackA[1]) == priority_group
+            front2(stackA, stackB)
+            return
+        add_cmd(PB)
+        return move_priority(front_size - 1, rear_size, priority_group, group_size - 1, UNDEFINED, last_instruction)
+    # Front lookup
+    if forced_lookup == FRONT
+        if get_group(stackA[1]) == priority_group && \
+           priority_group_is_decreasing_after(stackA, 2, get_group(stackA[0]), front_size - 2)
+                add_cmd(SA)
+                return move_priority(front_size, rear_size, priority_group, group_size, FRONT, last_instruction)
+        add_cmd(RA)
+        return move_priority(front_size - 1, rear_size + 1, priroity_group, group_size, FRONT, last_instruction)
+    # Back lookup
+    if forced_lookup == BACK
+        add_cmd(RRA)
+        return move_priority(front_size + 1, rear_size - 1, priority_group, group_size, BACK, last_instruction)
+    return move_priority(front_size, rear_size, priority_group, group_size, \
+        has_priority_in_front(0, front_size, priority_group), last_instruction)
+```
+
+```ruby
+
 def add_n_cmd cmd, amount
     while amount > 0
         add_cmd(cmd)

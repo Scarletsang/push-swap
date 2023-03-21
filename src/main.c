@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/16 23:02:41 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/21 23:30:54 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,6 @@ void	test_stack_operations(t_push_swap_2stacks *two_stacks)
 	print_two_stacks(two_stacks);
 }
 
-void	test_emulation_indexing(t_push_swap_2stacks *two_stacks, \
-t_push_swap_sorter *sorter)
-{
-	emulate_two_stacks(sorter, two_stacks, RANGE_FROM_MINUS_1, TRIANGLE_SIZE_5);
-	print_stack_elements(&sorter->emulation.stack_a);
-	print_stack_elements(&two_stacks->stack_a);
-}
-
-void	test_naive_triangle_creation(t_push_swap_2stacks *two_stacks, \
-t_push_swap_sorter *sorter)
-{
-	sort_size_of(sorter, two_stacks, two_stacks->stack_a.size);
-	print_instructions(sorter);
-	print_two_stacks(two_stacks);
-}
-
 int	init_program(t_push_swap_2stacks *two_stacks, int argc, \
 const char **argv)
 {
@@ -54,25 +38,31 @@ const char **argv)
 
 int	main(int argc, const char **argv)
 {
-	t_push_swap_2stacks	two_stacks;
-	t_push_swap_sorter	sorter;
+	t_push_swap_2stacks				two_stacks;
+	t_push_swap_triangles_planner	planner;
+	t_push_swap_instructor			instructor;
 
 	if (argc < 2)
 	{
 		return (EXIT_FAILURE);
 	}
-	if (init_program(&two_stacks, argc, argv) || init_sorter(&sorter))
+	if (init_program(&two_stacks, argc, argv) || \
+		init_instructor(&instructor, &two_stacks) || \
+		init_triangles_planner(&planner, two_stacks.stack_a.size))
 	{
 		write(STDERR_FILENO, "Error\n", 7);
 		return (EXIT_FAILURE);
 	}
-	ft_printf("-----------\n");
-	// test_naive_triangle_creation(&two_stacks, &sorter);
-	// test_emulation_indexing(&two_stacks, &sorter);
-	print_all_triangles_merge(atoi(argv[1]));
+	fill_triangles(&planner);
+	// test_naive_triangle_creation(&two_stacks, &instructor);
+	// test_emulation_indexing(&two_stacks, &instructor);
+	// print_all_triangles_merge(atoi(argv[1]));
 	// test_stack_operations(&two_stacks);
-	free_instructions_list(&sorter.cost);
-	free_two_stacks(&sorter.emulation);
+	// free_two_stacks(&instructor.emulation);
+	create_all_triangles(&two_stacks, &planner, &instructor);
+	// print_instructions(&instructor);
+	// print_two_stacks(&two_stacks);
+	free_instruction_list(instructor.cost);
 	free_two_stacks(&two_stacks);
 	return (EXIT_SUCCESS);
 }

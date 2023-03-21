@@ -6,11 +6,11 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:53:40 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/21 20:24:09 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/21 23:15:44 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PUSH_SWAP/sorter.h"
+#include "PUSH_SWAP/sorter/instructor.h"
 
 static void	execute_rotate_instruction(t_push_swap_2stacks *two_stacks, \
 t_push_swap_instruction instruction)
@@ -63,32 +63,30 @@ t_push_swap_instruction instruction)
 	return (PB - instruction);
 }
 
-void	edit_last_instruction(t_push_swap_sorter *sorter, \
+void	edit_last_instruction(t_push_swap_instructor *instructor, \
 t_push_swap_instruction instruction)
 {
-	if (sorter->last_instruction == sorter->last_executed_instruction)
+	if (instructor->last_instruction == instructor->last_executed_instruction)
 	{
-		execute_instruction(sorter->two_stacks, \
-			get_inverse_instruction(instruction));
-		sorter->last_instruction->instruction = instruction;
-		execute_instruction(sorter->two_stacks, instruction);
+		execute_instruction(instructor->two_stacks, \
+			get_inverse_instruction(instructor->last_instruction->instruction));
+		instructor->last_instruction->instruction = instruction;
+		execute_instruction(instructor->two_stacks, instruction);
 		return ;
 	}
-	sorter->last_instruction->instruction = instruction;
+	instructor->last_instruction->instruction = instruction;
 }
 
-void	execute_instruction_from_sorter(t_push_swap_sorter *sorter, \
-unsigned int amount)
+void	execute_unexecuted_instructions(t_push_swap_instructor *instructor)
 {
 	t_push_swap_instruction_list	*instruction_node;
 
-	instruction_node = sorter->last_executed_instruction->next;
-	while (instruction_node && (amount > 0))
+	instruction_node = instructor->last_executed_instruction->next;
+	while (instruction_node)
 	{
-		execute_instruction(&sorter->two_stacks, \
+		execute_instruction(instructor->two_stacks, \
 			instruction_node->instruction);
-		sorter->last_executed_instruction = instruction_node;
-		instruction_node = sorter->last_executed_instruction->next;
-		amount--;
+		instructor->last_executed_instruction = instruction_node;
+		instruction_node = instructor->last_executed_instruction->next;
 	}
 }
