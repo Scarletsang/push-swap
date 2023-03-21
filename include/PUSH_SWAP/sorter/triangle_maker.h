@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/20 22:12:03 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/21 21:30:45 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,31 @@ typedef struct s_push_swap_triangle_maker
 	t_push_swap_triangle_size				triangle_size;
 	t_push_swap_2stacks						emulation;
 	unsigned int							emulated_stack_a_rear_size;
+	unsigned int							emulated_stack_a_front_size;
 	t_push_swap_emulation_priority_location	priority_location;
+	t_push_swap_emulation_priority			highest_priority;
 	t_push_swap_formula						last_formula_executed;
 }				t_push_swap_triangle_maker;
 
-void							set_triangle_size_and_shape(\
+t_push_swap_error_code			create_triangle(t_push_swap_sorter *sorter, \
 t_push_swap_triangle_maker *triangle_maker, \
 t_push_swap_triangle_size triangle_size, \
 t_push_swap_triangle_shape triangle_shape);
 
-t_push_swap_error_code			init_triangle_maker(\
-t_push_swap_triangle_maker *triangle_maker, t_push_swap_sorter *sorter);
+void							prepare_emulation(\
+t_push_swap_triangle_maker *triangle_maker, \
+t_push_swap_triangle_size triangle_size, \
+t_push_swap_triangle_shape triangle_shape);
+
+t_push_swap_error_code			init_triangle_maker(t_push_swap_sorter *sorter, \
+t_push_swap_triangle_maker *triangle_maker);
 
 ///////////////////////////////////
 ////////     emulation     ////////
 ///////////////////////////////////
 
 void							emulate_two_stacks(\
-t_push_swap_triangle_maker *triangle_maker, t_push_swap_2stacks *two_stacks, \
-unsigned int stackA_rear_size);
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_2stacks *two_stacks);
 
 t_push_swap_emulation_priority	get_emulation_priority_by_value(\
 int indexed_value, t_push_swap_triangle_maker *triangle_maker);
@@ -85,15 +91,35 @@ t_push_swap_triangle_maker *triangle_maker);
 t_push_swap_error_code			rear1(t_push_swap_sorter *sorter, \
 t_push_swap_triangle_maker *triangle_maker);
 
-t_push_swap_error_code			rear2(t_push_swap_sorter *sorter, \
+t_push_swap_error_code			last2(t_push_swap_sorter *sorter, \
+t_push_swap_triangle_maker *triangle_maker);
+
+t_push_swap_error_code			last1(t_push_swap_sorter *sorter, \
 t_push_swap_triangle_maker *triangle_maker);
 
 ////////////////////////////////////////////////
 ////////     push priority elements     ////////
 ////////////////////////////////////////////////
 
-t_push_swap_error_code			push_priority_from_rear(\
+t_push_swap_error_code			emulate_instruction(\
 t_push_swap_sorter *sorter, t_push_swap_triangle_maker *triangle_maker, \
-t_push_swap_emulation_priority highest_priority);
+t_push_swap_instruction instruction);
+
+t_push_swap_error_code			emulate_formula_instructions(\
+t_push_swap_sorter *sorter, t_push_swap_triangle_maker *triangle_maker, \
+t_push_swap_instruction *instruction_arr);
+
+t_push_swap_error_code			emulate_multiple_instructions(\
+t_push_swap_sorter *sorter, t_push_swap_triangle_maker *triangle_maker, \
+t_push_swap_instruction *instruction_arr);
+
+void							edit_last_emulated_instruction(\
+t_push_swap_sorter *sorter, t_push_swap_triangle_maker *triangle_maker, \
+t_push_swap_instruction instruction);
+
+t_push_swap_error_code			move_priority_elements(\
+t_push_swap_sorter *sorter, t_push_swap_triangle_maker *triangle_maker, \
+unsigned int priority_amount, \
+t_push_swap_emulation_priority_location forced_search);
 
 #endif

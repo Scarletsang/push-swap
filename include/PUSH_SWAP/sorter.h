@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 20:08:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/20 22:10:56 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/21 20:24:09 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ unsigned int amount);
 
 t_push_swap_error_code	add_instructions_n_times(t_push_swap_sorter *sorter, \
 t_push_swap_instruction instruction, unsigned int amount);
+
+t_push_swap_instruction	get_inverse_instruction(\
+t_push_swap_instruction instruction);
 
 void					edit_last_instruction(t_push_swap_sorter *sorter, \
 t_push_swap_instruction instruction);

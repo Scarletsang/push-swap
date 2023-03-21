@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instructions_executor.c                            :+:      :+:    :+:   */
+/*   instruction_executor.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:53:40 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/20 20:59:45 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/21 20:24:09 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,12 @@ t_push_swap_instruction instruction)
 		execute_rotate_instruction(two_stacks, instruction);
 }
 
-static void	undo_instruction(t_push_swap_2stacks *two_stacks, \
+t_push_swap_instruction	get_inverse_instruction(\
 t_push_swap_instruction instruction)
 {
 	if (instruction < 0)
-		execute_instruction(two_stacks, instruction);
-	else
-		execute_instruction(two_stacks, PB - instruction);
+		return (instruction);
+	return (PB - instruction);
 }
 
 void	edit_last_instruction(t_push_swap_sorter *sorter, \
@@ -69,8 +68,8 @@ t_push_swap_instruction instruction)
 {
 	if (sorter->last_instruction == sorter->last_executed_instruction)
 	{
-		undo_instruction(sorter->two_stacks, \
-			sorter->last_instruction->instruction);
+		execute_instruction(sorter->two_stacks, \
+			get_inverse_instruction(instruction));
 		sorter->last_instruction->instruction = instruction;
 		execute_instruction(sorter->two_stacks, instruction);
 		return ;

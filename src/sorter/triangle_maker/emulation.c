@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:02:07 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/20 22:11:51 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/21 21:11:59 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,31 +84,26 @@ t_push_swap_triangle_maker *triangle_maker, t_push_swap_stack_indicator stack)
 }
 
 void	emulate_two_stacks(t_push_swap_triangle_maker *triangle_maker, \
-t_push_swap_2stacks *two_stacks, unsigned int stackA_rear_size)
+t_push_swap_2stacks *two_stacks)
 {
-	int	to;
+	unsigned int	stack_a_rear_size;
+	unsigned int	stack_a_front_size;
 
-	triangle_maker->emulation.stack_a.size = 0;
-	triangle_maker->emulation.stack_a.front = 0;
-	triangle_maker->emulation.stack_a.rear = 0;
-	triangle_maker->emulation.stack_b.size = 0;
-	triangle_maker->emulation.stack_b.front = 0;
-	triangle_maker->emulation.stack_b.rear = 0;
-	triangle_maker->emulated_stack_a_rear_size = stackA_rear_size;
-	triangle_maker->priority_location = UNKNOWN_PRIORITY_LOCATION;
-	triangle_maker->last_formula_executed = NULL;
-	to = (stackA_rear_size * -1) + triangle_maker->triangle_size - 1;
-	while (stackA_rear_size > 0)
+	stack_a_rear_size = triangle_maker->emulated_stack_a_rear_size;
+	while (stack_a_rear_size > 0)
 	{
 		enqueue_to_back(&triangle_maker->emulation.stack_a, \
 			get_element_by_index(&two_stacks->stack_a, \
-				stackA_rear_size * -1));
-		stackA_rear_size--;
+				stack_a_rear_size * -1));
+		stack_a_rear_size--;
 	}
-	while (to >= 0)
+	stack_a_front_size = triangle_maker->emulated_stack_a_front_size;
+	while (stack_a_front_size > 0)
 	{
 		enqueue(&triangle_maker->emulation.stack_a, \
-			get_element_by_index(&two_stacks->stack_a, to--));
+			get_element_by_index(&two_stacks->stack_a, \
+				stack_a_front_size * -1));
+		stack_a_front_size--;
 	}
 	index_emulation_stack_a(triangle_maker);
 }
