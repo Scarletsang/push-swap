@@ -39,7 +39,6 @@ void generateGroups(int groups[][2], int numGroups, int numbers[], const int amo
     int i, j;
     for (i = 0; i < amount; i++) {
         if (!used[i]) {
-			printf("hi%d %d\n", numGroups, i);
             for (j = i + 1; j < amount; j++) {
                 if (!used[j]) {
                     groups[numGroups][0] = numbers[i];
