@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:58:36 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/21 23:34:28 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 02:53:29 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,13 @@ t_push_swap_instruction *instruction_arr)
 {
 	unsigned int	i;
 
-	i = 1;
+	i = 0;
 	while (i < (unsigned int) instruction_arr[0])
 	{
-		emulate_instruction(instructor, triangle_maker, instruction_arr[i]);
+		update_emulation_stack_front_and_rear_size(triangle_maker, \
+			instruction_arr[i + 1]);
+		if (add_instruction(instructor, instruction_arr[i + 1]))
+			return (FAILURE);
 		i++;
 	}
 	return (SUCCESS);
