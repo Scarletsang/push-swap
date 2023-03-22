@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:02:07 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 04:31:07 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:20:12 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ static void	index_emulation_stack_a(t_push_swap_triangle_maker *triangle_maker)
 t_push_swap_emulation_priority	get_emulation_priority_by_value(\
 int indexed_value, t_push_swap_triangle_maker *triangle_maker)
 {
-	if (((triangle_maker->triangle_size % 2) == 1) && \
-		(triangle_maker->triangle_shape == ASCENDING_TRIANGLE))
+	if ((triangle_maker->triangle_size % 2) == 1)
 	{
 		return ((indexed_value + 1) / 2);
 	}
