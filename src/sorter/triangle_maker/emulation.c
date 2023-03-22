@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:02:07 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 00:02:48 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 04:31:07 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int indexed_stack[EMULATION_STACK_SIZE], t_push_swap_stack_bound index)
 	current = triangle_maker->emulation.stack_a.elements[index];
 	i = 0;
 	indexed_stack[index] = 0;
-	if (triangle_maker->triangle_shape == ASCENDING_TRIANGLE)
+	if (triangle_maker->triangle_shape == DESCENDING_TRIANGLE)
 	{
 		while (i < triangle_maker->emulation.stack_a.size)
 		{
@@ -74,9 +74,11 @@ int indexed_value, t_push_swap_triangle_maker *triangle_maker)
 t_push_swap_emulation_priority	get_emulation_priority_by_index(int index, \
 t_push_swap_triangle_maker *triangle_maker, t_push_swap_stack_indicator stack)
 {
-	if ((index < 0) && (-index > (int) triangle_maker->emulated_stack_a_rear_size))
+	if ((index < 0) && \
+		(-index > (int) triangle_maker->emulated_stack_a_rear_size))
 		return (UNKNOWN_PRIORITY);
-	if ((index >= 0) && (index >= (int) triangle_maker->emulated_stack_a_front_size))
+	if ((index >= 0) && \
+		(index >= (int) triangle_maker->emulated_stack_a_front_size))
 		return (UNKNOWN_PRIORITY);
 	if (stack == STACK_A)
 		return (get_emulation_priority_by_value(\
@@ -106,7 +108,7 @@ t_push_swap_2stacks *two_stacks)
 	{
 		enqueue(&triangle_maker->emulation.stack_a, \
 			get_element_by_index(&two_stacks->stack_a, \
-				stack_a_front_size * -1));
+				stack_a_front_size - 1));
 		stack_a_front_size--;
 	}
 	index_emulation_stack_a(triangle_maker);
