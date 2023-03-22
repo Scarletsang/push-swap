@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:53:40 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/21 22:58:41 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 04:34:12 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ t_push_swap_instruction instruction)
 	return (SUCCESS);
 }
 
-t_push_swap_error_code	add_multiple_instructions(t_push_swap_instructor *instructor, \
+t_push_swap_error_code	add_multiple_instructions(\
+t_push_swap_instructor *instructor, \
 t_push_swap_instruction *instruction_arr, unsigned int amount)
 {
 	while (amount > 0)
@@ -43,7 +44,8 @@ t_push_swap_instruction *instruction_arr, unsigned int amount)
 	return (SUCCESS);
 }
 
-t_push_swap_error_code	add_instructions_n_times(t_push_swap_instructor *instructor, \
+t_push_swap_error_code	add_instructions_n_times(\
+t_push_swap_instructor *instructor, \
 t_push_swap_instruction instruction, unsigned int amount)
 {
 	while (amount > 0)

@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 21:06:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/11 19:20:30 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 04:29:47 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ unsigned int triangle_index, unsigned int total_triangles)
 
 	triangles_amount = 1;
 	triangle_shape = ASCENDING_TRIANGLE;
+	triangle_index = total_triangles - 1 - triangle_index;
 	while (triangles_amount < total_triangles)
 	{
 		determinant = (triangle_index / triangles_amount) % 3;

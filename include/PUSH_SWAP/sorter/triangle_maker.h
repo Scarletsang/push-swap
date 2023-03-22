@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/21 23:40:00 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 04:36:27 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 # define EMULATION_STACK_SIZE 6
 
-typedef struct s_push_swap_triangle_maker t_push_swap_triangle_maker;
+typedef struct s_push_swap_triangle_maker	t_push_swap_triangle_maker;
 
-typedef t_push_swap_error_code	(*t_push_swap_formula)(\
+typedef t_push_swap_error_code				(*t_push_swap_formula)(\
 t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker);
 
 typedef enum e_push_swap_stack_indicator
@@ -55,16 +55,16 @@ struct s_push_swap_triangle_maker
 	t_push_swap_formula						last_formula_executed;
 };
 
-t_push_swap_error_code			create_triangle(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_error_code			create_triangle(\
+t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker);
 
 void							prepare_emulation(\
 t_push_swap_triangle_maker *triangle_maker, \
 t_push_swap_triangle_size triangle_size, \
 t_push_swap_triangle_shape triangle_shape);
 
-t_push_swap_error_code			init_triangle_maker(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_error_code			init_triangle_maker(\
+t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker);
 
 ///////////////////////////////////
 ////////     emulation     ////////

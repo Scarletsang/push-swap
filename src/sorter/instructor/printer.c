@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 22:14:16 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/21 21:46:36 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 03:53:31 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,11 @@ void	print_instructions(t_push_swap_instructor *instructor)
 {
 	t_push_swap_instruction_list	*instructions;
 
-	ft_printf("Cost: %d\nInstructions: ", get_cost(instructor));
 	instructions = instructor->cost->next;
 	while (instructions)
 	{
 		print_instruction(instructions->instruction);
-		ft_printf("  ");
+		ft_printf("\n");
 		instructions = instructions->next;
 	}
-	ft_printf("\n");
 }

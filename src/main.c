@@ -6,24 +6,11 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 02:57:52 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 04:40:48 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/push_swap.h"
-
-void	test_stack_operations(t_push_swap_2stacks *two_stacks)
-{
-	print_two_stacks(two_stacks);
-	rotate(&two_stacks->stack_a);
-	print_two_stacks(two_stacks);
-	reverse_rotate(&two_stacks->stack_a);
-	print_two_stacks(two_stacks);
-	swap(&two_stacks->stack_a);
-	print_two_stacks(two_stacks);
-	push(&two_stacks->stack_a, &two_stacks->stack_b);
-	print_two_stacks(two_stacks);
-}
 
 int	init_program(t_push_swap_2stacks *two_stacks, int argc, \
 const char **argv)
@@ -54,15 +41,10 @@ int	main(int argc, const char **argv)
 		return (EXIT_FAILURE);
 	}
 	fill_triangles(&planner);
-	ft_printf("---------------");
-	// test_naive_triangle_creation(&two_stacks, &instructor);
-	// test_emulation_indexing(&two_stacks, &instructor);
-	// print_all_triangles_merge(atoi(argv[1]));
-	// test_stack_operations(&two_stacks);
-	// free_two_stacks(&instructor.emulation);
 	create_all_triangles(&two_stacks, &planner, &instructor);
-	// print_instructions(&instructor);
-	// print_two_stacks(&two_stacks);
+	print_triangles(&planner);
+	print_instructions(&instructor);
+	print_two_stacks(&two_stacks);
 	free_instruction_list(instructor.cost);
 	free_two_stacks(&two_stacks);
 	return (EXIT_SUCCESS);

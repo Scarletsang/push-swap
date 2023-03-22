@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/21 21:46:04 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 04:00:58 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,8 @@ unsigned int triangle_index, unsigned int total_triangles);
 
 int							print_all_triangles_merge(\
 unsigned int total_elements);
+
+void						print_triangles(\
+t_push_swap_triangles_planner *planner);
 
 #endif
