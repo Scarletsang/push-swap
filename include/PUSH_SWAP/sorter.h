@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:47:26 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/21 22:33:00 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 15:14:09 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,13 @@
 # include "PUSH_SWAP/sorter/triangle_planner.h"
 # include "PUSH_SWAP/sorter/triangle_maker.h"
 
-t_push_swap_error_code	create_all_triangles(\
-t_push_swap_2stacks *two_stacks, \
-t_push_swap_triangles_planner *planner, t_push_swap_instructor *instructor);
+typedef struct s_push_swap_sorter
+{
+	t_push_swap_2stacks				two_stacks;
+	t_push_swap_triangles_planner	planner;
+	t_push_swap_instructor			instructor;
+}               t_push_swap_sorter;
+
+t_push_swap_error_code	create_all_triangles(t_push_swap_sorter *sorter);
 
 #endif

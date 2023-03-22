@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 13:42:31 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 15:14:27 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,25 @@ const char **argv)
 
 int	main(int argc, const char **argv)
 {
-	t_push_swap_2stacks				two_stacks;
-	t_push_swap_triangles_planner	planner;
-	t_push_swap_instructor			instructor;
+	t_push_swap_sorter	sorter;
 
 	if (argc < 2)
 	{
 		return (EXIT_FAILURE);
 	}
-	if (init_program(&two_stacks, argc, argv) || \
-		init_instructor(&instructor, &two_stacks) || \
-		init_triangles_planner(&planner, two_stacks.stack_a.size))
+	if (init_program(&sorter.two_stacks, argc, argv) || \
+		init_instructor(&sorter.instructor, &sorter.two_stacks) || \
+		init_triangles_planner(&sorter.planner, sorter.two_stacks.stack_a.size))
 	{
 		write(STDERR_FILENO, "Error\n", 7);
 		return (EXIT_FAILURE);
 	}
-	precalculate_all_triangles_size(&planner);
-	print_triangles(&planner);
-	create_all_triangles(&two_stacks, &planner, &instructor);
-	print_instructions(&instructor);
-	print_two_stacks(&two_stacks);
-	free_instruction_list(instructor.cost);
-	free_two_stacks(&two_stacks);
+	precalculate_all_triangles_size(&sorter.planner);
+	print_triangles(&sorter.planner);
+	create_all_triangles(&sorter);
+	print_instructions(&sorter.instructor);
+	print_two_stacks(&sorter.two_stacks);
+	free_instruction_list(sorter.instructor.cost);
+	free_two_stacks(&sorter.two_stacks);
 	return (EXIT_SUCCESS);
 }
