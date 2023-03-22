@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:56:33 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 02:51:27 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:31:20 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,4 @@ t_push_swap_triangle_maker *triangle_maker)
 	triangle_maker->last_formula_executed = &rear1;
 	return (emulate_formula_instructions(instructor, triangle_maker, \
 		(t_push_swap_instruction[3]){2, RRA, PB}));
-}
-
-t_push_swap_error_code	last2(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker)
-{
-	if (triangle_maker->emulated_stack_a_rear_size == 0)
-		return (front2(instructor, triangle_maker));
-	if (triangle_maker->emulated_stack_a_rear_size == 1)
-		return (front1rear1(instructor, triangle_maker));
-	if (rear1(instructor, triangle_maker))
-		return (FAILURE);
-	return (rear1(instructor, triangle_maker));
-}
-
-t_push_swap_error_code	last1(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker)
-{
-	if (triangle_maker->emulated_stack_a_rear_size == 0)
-		return (emulate_instruction(instructor, triangle_maker, PB));
-	return (rear1(instructor, triangle_maker));
 }

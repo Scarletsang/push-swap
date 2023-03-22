@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 04:36:27 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:31:50 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ struct s_push_swap_triangle_maker
 };
 
 t_push_swap_error_code			create_triangle(\
-t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_instructor *instructor, \
+t_push_swap_triangle_maker *triangle_maker, int is_last_triangle);
 
 void							prepare_emulation(\
 t_push_swap_triangle_maker *triangle_maker, \
@@ -96,6 +97,10 @@ t_push_swap_error_code			last2(t_push_swap_instructor *instructor, \
 t_push_swap_triangle_maker *triangle_maker);
 
 t_push_swap_error_code			last1(t_push_swap_instructor *instructor, \
+t_push_swap_triangle_maker *triangle_maker);
+
+t_push_swap_error_code			last2_of_last_triangle(\
+t_push_swap_instructor *instructor, \
 t_push_swap_triangle_maker *triangle_maker);
 
 ////////////////////////////////////////////////

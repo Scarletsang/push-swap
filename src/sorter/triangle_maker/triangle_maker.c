@@ -6,14 +6,14 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:09:35 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 04:35:35 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:31:30 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/triangle_maker.h"
 
 t_push_swap_error_code	create_triangle(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker)
+t_push_swap_triangle_maker *triangle_maker, int is_last_triangle)
 {
 	while (triangle_maker->highest_priority > 0)
 	{
@@ -21,6 +21,10 @@ t_push_swap_triangle_maker *triangle_maker)
 			UNKNOWN_PRIORITY_LOCATION))
 			return (FAILURE);
 		triangle_maker->highest_priority--;
+	}
+	if (is_last_triangle)
+	{
+		return (last2_of_last_triangle(instructor, triangle_maker));
 	}
 	if ((triangle_maker->triangle_size % 2) == 0)
 	{

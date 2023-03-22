@@ -36,6 +36,7 @@ TRIANGLE_PLANNER_SRC:= \
 TRIANGLE_MAKER_SRC:= \
 	sorter/triangle_maker/triangle_maker.c \
 	sorter/triangle_maker/formula.c \
+	sorter/triangle_maker/formula_for_least_priority.c \
 	sorter/triangle_maker/emulation.c \
 	sorter/triangle_maker/emulated_instruction_executor.c \
 	sorter/triangle_maker/emulation_priority_mover.c \

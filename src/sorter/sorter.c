@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:38:05 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 04:30:02 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:23:11 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,16 @@ t_push_swap_triangles_planner *planner, t_push_swap_instructor *instructor)
 		prepare_emulation(&triangle_maker, planner->triangles[triangle_index], \
 			get_triangle_shape(triangle_index, planner->total_triangles));
 		emulate_two_stacks(&triangle_maker, two_stacks);
-		if (create_triangle(&emulation_instructor, &triangle_maker))
+		if (create_triangle(&emulation_instructor, &triangle_maker, \
+			triangle_index == (planner->total_triangles - 1)))
 		{
 			free_instruction_list(emulation_instructor.cost);
-			free_two_stacks(&triangle_maker.emulation);
-			return (FAILURE);
+			return (free_two_stacks(&triangle_maker.emulation), FAILURE);
 		}
 		concat_instructor(instructor, &emulation_instructor);
 		execute_unexecuted_instructions(instructor);
 		triangle_index++;
 	}
 	free(emulation_instructor.cost);
-	free_two_stacks(&triangle_maker.emulation);
-	return (SUCCESS);
+	return (free_two_stacks(&triangle_maker.emulation), SUCCESS);
 }
