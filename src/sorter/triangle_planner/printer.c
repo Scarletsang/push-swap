@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:28:17 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/11 23:25:51 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:27:04 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	print_all_triangles_merge(unsigned int total_elements)
 	{
 		return (EXIT_FAILURE);
 	}
-	fill_triangles(&planner);
+	precalculate_all_triangles_size(&planner);
 	triangle_dimension = planner.triangle_dimension;
 	while (triangle_dimension > 0)
 	{
 		print_triangles(&planner);
-		merge_triangles(&planner);
+		merge_triangles_planner(&planner);
 		triangle_dimension--;
 	}
 	print_triangles(&planner);

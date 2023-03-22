@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 04:40:48 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 13:42:31 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int	main(int argc, const char **argv)
 		write(STDERR_FILENO, "Error\n", 7);
 		return (EXIT_FAILURE);
 	}
-	fill_triangles(&planner);
-	create_all_triangles(&two_stacks, &planner, &instructor);
+	precalculate_all_triangles_size(&planner);
 	print_triangles(&planner);
+	create_all_triangles(&two_stacks, &planner, &instructor);
 	print_instructions(&instructor);
 	print_two_stacks(&two_stacks);
 	free_instruction_list(instructor.cost);

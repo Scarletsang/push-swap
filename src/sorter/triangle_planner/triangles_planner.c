@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 03:50:53 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/11 19:29:58 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:27:05 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_push_swap_triangles_calculator *calculator)
 	return (calculator->target_triangle_size);
 }
 
-void	merge_triangles(t_push_swap_triangles_planner *planner)
+void	merge_triangles_planner(t_push_swap_triangles_planner *planner)
 {
 	unsigned int	new_total_triangles;
 	unsigned int	triangle_index;
@@ -90,7 +90,7 @@ void	merge_triangles(t_push_swap_triangles_planner *planner)
 	planner->triangles_size_delta *= 3;
 }
 
-void	fill_triangles(t_push_swap_triangles_planner *planner)
+void	precalculate_all_triangles_size(t_push_swap_triangles_planner *planner)
 {
 	unsigned int						triangle_index;
 	unsigned int						last_triangle_index;
