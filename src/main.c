@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 15:14:27 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/22 15:33:36 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ int	main(int argc, const char **argv)
 	print_triangles(&sorter.planner);
 	create_all_triangles(&sorter);
 	print_instructions(&sorter.instructor);
+	ft_printf("Cost: %d\n", get_cost(&sorter.instructor));
 	print_two_stacks(&sorter.two_stacks);
-	free_instruction_list(sorter.instructor.cost);
 	free_two_stacks(&sorter.two_stacks);
+	free(sorter.planner.triangles);
+	free_instruction_list(sorter.instructor.cost);
 	return (EXIT_SUCCESS);
 }
