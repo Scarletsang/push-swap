@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 13:04:42 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 16:04:40 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,12 @@ t_push_swap_triangle_maker *triangle_maker);
 
 typedef enum e_push_swap_size4_formula_hash
 {
-	HASH_0123 = 8,
-	HASH_1023 = 4,
-	HASH_2130 = 10,
-	HASH_2031 = 11,
-	HASH_3201 = 9,
-	HASH_3210 = 7
+	HASH_0123 = 12,
+	HASH_1023 = 11,
+	HASH_2130 = 3,
+	HASH_2031 = -3,
+	HASH_3201 = -7,
+	HASH_3210 = 0
 }				t_push_swap_size4_formula_hash;
 
 typedef enum e_push_swap_size4_formula_indicator

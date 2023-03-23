@@ -45,7 +45,8 @@ TRIANGLE_MAKER_SRC:= \
 SORTER_SRC:= \
 	sorter/sorter.c
 SRC:= \
-	main.c
+	main.c \
+	is_sorted.c
 OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${INSTRUCTOR_SRC:.c=.o} ${TRIANGLE_PLANNER_SRC:.c=.o} ${TRIANGLE_MAKER_SRC:.c=.o} ${SORTER_SRC:.c=.o} ${SRC:.c=.o}}
 PRINTF:=lib/ft_printf/libftprintf.a
 INCLUDE:= \
@@ -71,8 +72,8 @@ CHECKER_NAME:=checker
 GET_NEXT_LINE:=lib/get_next_line/get_next_line.a
 CHECKER_SRC:= \
 	checker_main.c \
+	is_sorted.c \
 	checker/parse_operation.c \
-	checker/is_sorted.c \
 	checker/stack_manipulator.c
 CHECKER_OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${CHECKER_SRC:.c=.o}}
 

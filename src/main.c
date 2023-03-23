@@ -6,11 +6,13 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 13:07:51 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 16:25:04 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/push_swap.h"
+
+
 
 int	init_program(t_push_swap_2stacks *two_stacks, int argc, \
 const char **argv)
@@ -38,9 +40,11 @@ int	main(int argc, const char **argv)
 		write(STDERR_FILENO, "Error\n", 7);
 		return (EXIT_FAILURE);
 	}
+	if (is_sorted(&sorter.two_stacks))
+		return (EXIT_SUCCESS);
 	precalculate_all_triangles_size(&sorter.planner);
 	print_triangles(&sorter.planner);
-	create_all_triangles_on_stack_b(&sorter);
+	create_all_triangles(&sorter);
 	print_instructions(&sorter.instructor);
 	ft_printf("Cost: %d\n", get_cost(&sorter.instructor));
 	print_two_stacks(&sorter.two_stacks);

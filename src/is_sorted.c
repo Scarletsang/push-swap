@@ -6,11 +6,11 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 23:21:33 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/27 22:51:47 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 16:26:35 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PUSH_SWAP/checker.h"
+#include "PUSH_SWAP/stack.h"
 
 int	is_sorted(t_push_swap_2stacks *two_stacks)
 {

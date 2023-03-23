@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:38:20 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 15:22:05 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 16:45:18 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@ t_push_swap_stack_indicator to)
 	unsigned int			amount_of_elements_to_push;
 	unsigned int			index;
 
-	index = (sorter->planner.total_triangles / 3) - 1;
+	index = (sorter->planner.total_triangles / 3) - 2;
 	amount_of_elements_to_push = 0;
 	while (index > 0)
 	{
 		amount_of_elements_to_push += sorter->planner.triangles[index--];
 	}
 	amount_of_elements_to_push += sorter->planner.triangles[index];
-	amount_of_elements_to_push -= 2;
 	if (to == STACK_A)
 		return (add_instructions_n_times(&sorter->instructor, PA, \
 			amount_of_elements_to_push));
