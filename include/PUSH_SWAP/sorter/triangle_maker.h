@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 16:04:40 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 18:59:09 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@ typedef struct s_push_swap_triangle_maker	t_push_swap_triangle_maker;
 
 typedef t_push_swap_error_code				(*t_push_swap_formula)(\
 t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker);
-
-typedef enum e_push_swap_stack_indicator
-{
-	STACK_A,
-	STACK_B
-}				t_push_swap_stack_indicator;
 
 typedef enum e_push_swap_emulation_priority_location
 {
@@ -82,7 +76,7 @@ t_push_swap_emulation_priority	get_emulation_priority_by_value(\
 int indexed_value, t_push_swap_triangle_maker *triangle_maker);
 
 t_push_swap_emulation_priority	get_emulation_priority_by_index(int index, \
-t_push_swap_triangle_maker *triangle_maker, t_push_swap_stack_indicator stack);
+t_push_swap_triangle_maker *triangle_maker);
 
 /////////////////////////////////////////
 ////////     stack_b formula     ////////

@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:02:07 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 14:20:12 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 18:58:53 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int indexed_value, t_push_swap_triangle_maker *triangle_maker)
 }
 
 t_push_swap_emulation_priority	get_emulation_priority_by_index(int index, \
-t_push_swap_triangle_maker *triangle_maker, t_push_swap_stack_indicator stack)
+t_push_swap_triangle_maker *triangle_maker)
 {
 	if ((index < 0) && \
 		(-index > (int) triangle_maker->emulated_stack_a_rear_size))
@@ -79,12 +79,8 @@ t_push_swap_triangle_maker *triangle_maker, t_push_swap_stack_indicator stack)
 	if ((index >= 0) && \
 		(index >= (int) triangle_maker->emulated_stack_a_front_size))
 		return (UNKNOWN_PRIORITY);
-	if (stack == STACK_A)
-		return (get_emulation_priority_by_value(\
-			get_element_by_index(&triangle_maker->emulation.stack_a, \
-				index), triangle_maker));
 	return (get_emulation_priority_by_value(\
-		get_element_by_index(&triangle_maker->emulation.stack_b, \
+		get_element_by_index(&triangle_maker->emulation.stack_a, \
 			index), triangle_maker));
 }
 

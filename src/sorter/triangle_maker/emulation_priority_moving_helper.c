@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:34:35 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 00:15:27 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 18:59:48 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_push_swap_emulation_priority highest_priority)
 	i = 0;
 	while (i < triangle_maker->emulated_stack_a_front_size)
 	{
-		if (get_emulation_priority_by_index(i, triangle_maker, STACK_A) == \
+		if (get_emulation_priority_by_index(i, triangle_maker) == \
 				highest_priority)
 			return (PRIORITY_AT_FRONT);
 		i++;
@@ -39,7 +39,7 @@ t_push_swap_emulation_priority target_priority)
 	i = 2;
 	while (i < triangle_maker->emulated_stack_a_front_size)
 	{
-		priority = get_emulation_priority_by_index(i, triangle_maker, STACK_A);
+		priority = get_emulation_priority_by_index(i, triangle_maker);
 		if (priority > target_priority)
 			return (0);
 		i++;

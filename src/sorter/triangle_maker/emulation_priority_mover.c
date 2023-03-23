@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:34:35 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 04:33:24 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 18:59:38 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_push_swap_instructor *instructor, \
 t_push_swap_triangle_maker *triangle_maker, unsigned int priority_amount, \
 t_push_swap_emulation_priority_location forced_search)
 {
-	if (get_emulation_priority_by_index(0, triangle_maker, STACK_A) == \
+	if (get_emulation_priority_by_index(0, triangle_maker) == \
 		triangle_maker->highest_priority)
 		return (front1rear1(instructor, triangle_maker));
 	if (rear1(instructor, triangle_maker))
@@ -39,7 +39,7 @@ t_push_swap_instructor *instructor, \
 t_push_swap_triangle_maker *triangle_maker, unsigned int priority_amount, \
 t_push_swap_emulation_priority_location forced_search)
 {
-	if (get_emulation_priority_by_index(1, triangle_maker, STACK_A) == \
+	if (get_emulation_priority_by_index(1, triangle_maker) == \
 		triangle_maker->highest_priority)
 		return (front2(instructor, triangle_maker));
 	if (emulate_instruction(instructor, triangle_maker, PB))
@@ -52,10 +52,10 @@ static t_push_swap_error_code	forced_search_at_front(\
 t_push_swap_instructor *instructor, \
 t_push_swap_triangle_maker *triangle_maker, unsigned int priority_amount)
 {
-	if ((get_emulation_priority_by_index(1, triangle_maker, STACK_A) == \
+	if ((get_emulation_priority_by_index(1, triangle_maker) == \
 		triangle_maker->highest_priority) && \
 		priority_decreases_after_index_2(triangle_maker, \
-			get_emulation_priority_by_index(0, triangle_maker, STACK_A)))
+			get_emulation_priority_by_index(0, triangle_maker)))
 	{
 		if (emulate_instruction(instructor, triangle_maker, SA))
 			return (FAILURE);
@@ -90,11 +90,11 @@ t_push_swap_emulation_priority_location forced_search)
 			return (emulate_instruction(instructor, triangle_maker, SB));
 		return (SUCCESS);
 	}
-	if (get_emulation_priority_by_index(-1, triangle_maker, STACK_A) == \
+	if (get_emulation_priority_by_index(-1, triangle_maker) == \
 		triangle_maker->highest_priority)
 		return (priority_at_rear(instructor, triangle_maker, priority_amount, \
 			forced_search));
-	if (get_emulation_priority_by_index(0, triangle_maker, STACK_A) == \
+	if (get_emulation_priority_by_index(0, triangle_maker) == \
 		triangle_maker->highest_priority)
 		return (priority_at_front(instructor, triangle_maker, priority_amount, \
 			forced_search));
