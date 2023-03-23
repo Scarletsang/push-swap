@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 14:31:50 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 13:04:42 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,13 @@ struct s_push_swap_triangle_maker
 	t_push_swap_formula						last_formula_executed;
 };
 
-t_push_swap_error_code			create_triangle(\
+t_push_swap_error_code			create_triangle_on_stack_a(\
 t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker, int is_last_triangle);
+t_push_swap_triangle_maker *triangle_maker);
+
+t_push_swap_error_code			create_triangle_on_stack_b(\
+t_push_swap_instructor *instructor, \
+t_push_swap_triangle_maker *triangle_maker);
 
 void							prepare_emulation(\
 t_push_swap_triangle_maker *triangle_maker, \
@@ -80,9 +84,9 @@ int indexed_value, t_push_swap_triangle_maker *triangle_maker);
 t_push_swap_emulation_priority	get_emulation_priority_by_index(int index, \
 t_push_swap_triangle_maker *triangle_maker, t_push_swap_stack_indicator stack);
 
-/////////////////////////////////
-////////     formula     ////////
-/////////////////////////////////
+/////////////////////////////////////////
+////////     stack_b formula     ////////
+/////////////////////////////////////////
 
 t_push_swap_error_code			front2(t_push_swap_instructor *instructor, \
 t_push_swap_triangle_maker *triangle_maker);
@@ -99,8 +103,38 @@ t_push_swap_triangle_maker *triangle_maker);
 t_push_swap_error_code			last1(t_push_swap_instructor *instructor, \
 t_push_swap_triangle_maker *triangle_maker);
 
-t_push_swap_error_code			last2_of_last_triangle(\
-t_push_swap_instructor *instructor, \
+/////////////////////////////////////////
+////////     stack_a formula     ////////
+/////////////////////////////////////////
+
+typedef enum e_push_swap_size4_formula_hash
+{
+	HASH_0123 = 8,
+	HASH_1023 = 4,
+	HASH_2130 = 10,
+	HASH_2031 = 11,
+	HASH_3201 = 9,
+	HASH_3210 = 7
+}				t_push_swap_size4_formula_hash;
+
+typedef enum e_push_swap_size4_formula_indicator
+{
+	STARTS_WITH_0 = 0,
+	STARTS_WITH_1,
+	STARTS_WITH_2,
+	STARTS_WITH_3,
+}				t_push_swap_size4_formula_indicator;
+
+t_push_swap_error_code			size2(t_push_swap_instructor *instructor, \
+t_push_swap_triangle_maker *triangle_maker);
+
+t_push_swap_error_code			size3(t_push_swap_instructor *instructor, \
+t_push_swap_triangle_maker *triangle_maker);
+
+t_push_swap_error_code			size4(t_push_swap_instructor *instructor, \
+t_push_swap_triangle_maker *triangle_maker);
+
+t_push_swap_error_code			size5_or_6(t_push_swap_instructor *instructor, \
 t_push_swap_triangle_maker *triangle_maker);
 
 ////////////////////////////////////////////////

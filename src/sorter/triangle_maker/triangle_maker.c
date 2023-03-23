@@ -6,14 +6,28 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:09:35 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 14:31:30 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 13:04:19 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/triangle_maker.h"
 
-t_push_swap_error_code	create_triangle(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker, int is_last_triangle)
+t_push_swap_error_code	create_triangle_on_stack_a(\
+t_push_swap_instructor *instructor, \
+t_push_swap_triangle_maker *triangle_maker)
+{
+	if (triangle_maker->triangle_size == TRIANGLE_SIZE_2)
+		return (size2(instructor, triangle_maker));
+	if (triangle_maker->triangle_size == TRIANGLE_SIZE_3)
+		return (size3(instructor, triangle_maker));
+	if (triangle_maker->triangle_size == TRIANGLE_SIZE_4)
+		return (size4(instructor, triangle_maker));
+	return (size5_or_6(instructor, triangle_maker));
+}
+
+t_push_swap_error_code	create_triangle_on_stack_b(\
+t_push_swap_instructor *instructor, \
+t_push_swap_triangle_maker *triangle_maker)
 {
 	while (triangle_maker->highest_priority > 0)
 	{
@@ -21,10 +35,6 @@ t_push_swap_triangle_maker *triangle_maker, int is_last_triangle)
 			UNKNOWN_PRIORITY_LOCATION))
 			return (FAILURE);
 		triangle_maker->highest_priority--;
-	}
-	if (is_last_triangle)
-	{
-		return (last2_of_last_triangle(instructor, triangle_maker));
 	}
 	if ((triangle_maker->triangle_size % 2) == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:47:26 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 15:14:09 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 13:07:51 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ typedef struct s_push_swap_sorter
 	t_push_swap_instructor			instructor;
 }               t_push_swap_sorter;
 
-t_push_swap_error_code	create_all_triangles(t_push_swap_sorter *sorter);
+t_push_swap_error_code	create_all_triangles_on_stack_b(t_push_swap_sorter *sorter);
 
 #endif
