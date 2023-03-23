@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 14:27:04 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 18:12:59 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_push_swap_triangles_planner
 	unsigned int		*triangles;
 	const unsigned int	total_elements;
 	unsigned int		total_triangles;
-	unsigned int		triangle_dimension;
+	const unsigned int	triangle_dimension;
 	unsigned int		mininum_triangle_size;
 	unsigned int		triangles_size_delta;
 }				t_push_swap_triangles_planner;
