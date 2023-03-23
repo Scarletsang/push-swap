@@ -6,52 +6,52 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 10:05:38 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 13:25:12 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 16:21:07 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/triangle_maker.h"
 
 static t_push_swap_size4_formula_hash	hash_size4_triangle(\
-t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker)
+t_push_swap_triangle_maker *triangle_maker)
 {
 	t_push_swap_size4_formula_hash	hash;
 	unsigned int					i;
-	int								last;
 	int								current;
+	int								next;
 
 	i = 0;
-	last = get_element_by_index(&triangle_maker->emulation.stack_a, i);
+	current = get_element_by_index(&triangle_maker->emulation.stack_a, i) - \
+		(triangle_maker->triangle_size - TRIANGLE_SIZE_4);
 	hash = 0;
 	while (i < 4)
 	{
-		current = get_element_by_index(&triangle_maker->emulation.stack_a, \
-			(i + 1) % 4);
-		if (last == 2)
-			hash += (last * (last - current));
+		next = get_element_by_index(&triangle_maker->emulation.stack_a, \
+			(i + 1) % 4) - (triangle_maker->triangle_size - TRIANGLE_SIZE_4);
+		if (current == 2)
+			hash += ((current - 6) * (current - next));
 		else
-			hash += ((last + 1) * (last - current));
-		last = current;
+			hash += (current * (current - next));
+		current = next;
 		i++;
 	}
 	return (hash);
 }
 
 static t_push_swap_size4_formula_indicator	get_indicator_from_hash(\
-t_push_swap_size4_formula_hash hash)
+t_push_swap_size4_formula_hash hash, t_push_swap_triangle_size triangle_size)
 {
-	if (hash >= 10)
-		return (STARTS_WITH_2);
-	if ((hash % 2) % 1)
-		return (STARTS_WITH_3);
 	if (hash == HASH_0123)
-		return (STARTS_WITH_0);
-	return (STARTS_WITH_1);
+		return (STARTS_WITH_0 + (triangle_size - TRIANGLE_SIZE_4));
+	if (hash == HASH_1023)
+		return (STARTS_WITH_1 + (triangle_size - TRIANGLE_SIZE_4));
+	if (((hash % 3) == 0) && (hash != 0))
+		return (STARTS_WITH_2 + (triangle_size - TRIANGLE_SIZE_4));
+	return (STARTS_WITH_3 + (triangle_size - TRIANGLE_SIZE_4));
 }
 
 static t_push_swap_error_code	size4_from_hash(\
-t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker, \
-t_push_swap_size4_formula_hash hash)
+t_push_swap_instructor *instructor, t_push_swap_size4_formula_hash hash)
 {
 	if (hash == HASH_0123)
 		return (SUCCESS);
@@ -77,9 +77,9 @@ t_push_swap_size4_formula_hash hash)
 	t_push_swap_size4_formula_indicator	indicator;
 	unsigned int						indicator_location;
 
-	indicator = get_indicator_from_hash(hash);
+	indicator = get_indicator_from_hash(hash, triangle_maker->triangle_size);
 	indicator_location = 0;
-	while ((indicator_location < 4) && (get_element_by_index(\
+	while ((indicator_location < 4) && ((unsigned int) get_element_by_index(\
 		&triangle_maker->emulation.stack_a, indicator_location) != indicator))
 		indicator_location++;
 	if (indicator_location == 3)
@@ -106,7 +106,7 @@ t_push_swap_triangle_maker *triangle_maker)
 {
 	t_push_swap_size4_formula_hash		hash;
 
-	hash = hash_size4_triangle(instructor, triangle_maker);
+	hash = hash_size4_triangle(triangle_maker);
 	return (rotate_to_get_to_size4_formula(instructor, triangle_maker, hash) \
-		|| size4_from_hash(instructor, triangle_maker, hash));
+		|| size4_from_hash(instructor, hash));
 }
