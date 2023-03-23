@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 21:48:44 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/24 18:15:14 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 15:07:08 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@ static int	ft_isdigit(int c)
 
 static int	parse_negative_digits(const char **str, int *result)
 {
+	int	has_digits;
+
+	has_digits = EXIT_FAILURE;
 	while (**str && ft_isdigit(**str))
 	{
+		has_digits = EXIT_SUCCESS;
 		if (*result >= (INT_MIN + (**str - '0')) / 10)
 		{
 			*result = *result * 10 - (**str - '0');
@@ -34,13 +38,17 @@ static int	parse_negative_digits(const char **str, int *result)
 	{
 		return (EXIT_FAILURE);
 	}
-	return (EXIT_SUCCESS);
+	return (has_digits);
 }
 
 static int	parse_positive_digits(const char **str, int *result)
 {
+	int	has_digits;
+
+	has_digits = EXIT_FAILURE;
 	while (**str && ft_isdigit(**str))
 	{
+		has_digits = EXIT_SUCCESS;
 		if (*result <= (INT_MAX - (**str - '0')) / 10)
 		{
 			*result = *result * 10 + (**str - '0');
@@ -53,7 +61,7 @@ static int	parse_positive_digits(const char **str, int *result)
 	{
 		return (EXIT_FAILURE);
 	}
-	return (EXIT_SUCCESS);
+	return (has_digits);
 }
 
 int	parse_number(const char **str, int *result)
