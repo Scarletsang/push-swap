@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 21:48:44 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 15:07:08 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 23:55:54 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ static int	ft_isdigit(int c)
 	return (c > 47 && c < 58);
 }
 
-static int	parse_negative_digits(const char **str, int *result)
+static int	parse_negative_digits(const char **str, int *result, \
+int has_digits)
 {
-	int	has_digits;
-
-	has_digits = EXIT_FAILURE;
 	while (**str && ft_isdigit(**str))
 	{
 		has_digits = EXIT_SUCCESS;
@@ -41,11 +39,9 @@ static int	parse_negative_digits(const char **str, int *result)
 	return (has_digits);
 }
 
-static int	parse_positive_digits(const char **str, int *result)
+static int	parse_positive_digits(const char **str, int *result, \
+int has_digits)
 {
-	int	has_digits;
-
-	has_digits = EXIT_FAILURE;
 	while (**str && ft_isdigit(**str))
 	{
 		has_digits = EXIT_SUCCESS;
@@ -67,16 +63,21 @@ static int	parse_positive_digits(const char **str, int *result)
 int	parse_number(const char **str, int *result)
 {
 	int	positive;
+	int	has_digits;
 
 	*result = 0;
 	positive = 1;
-	if (**str == '-')
-		positive = 0;
-	if (**str == '-' || **str == '+')
+	has_digits = EXIT_SUCCESS;
+	if ((**str == '-') || (**str == '+'))
+	{
+		has_digits = EXIT_FAILURE;
+		if (**str == '-')
+			positive = 0;
 		(*str)++;
+	}
 	if (!positive)
 	{
-		return (parse_negative_digits(str, result));
+		return (parse_negative_digits(str, result, has_digits));
 	}
-	return (parse_positive_digits(str, result));
+	return (parse_positive_digits(str, result, has_digits));
 }
