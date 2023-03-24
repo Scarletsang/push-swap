@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 21:36:44 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 14:28:36 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 15:17:29 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,8 @@ t_push_swap_error_code	merge_triangles_till_sorted(t_push_swap_sorter *sorter)
 		merge_triangles_planner(&sorter->planner);
 		i++;
 	}
+	if (sorter->two_stacks.stack_b.size != 0)
+		return (add_instructions_n_times(&sorter->instructor, PA, \
+			sorter->two_stacks.stack_b.size));
 	return (SUCCESS);
 }
