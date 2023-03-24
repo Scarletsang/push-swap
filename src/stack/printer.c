@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:33:21 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/13 21:44:05 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 17:19:30 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	print_two_stacks(t_push_swap_2stacks *two_stacks)
 	print_stack_elements(&two_stacks->stack_a);
 	ft_printf("%-10s: ", "stack b");
 	print_stack_elements(&two_stacks->stack_b);
+	ft_printf("\n");
 }
