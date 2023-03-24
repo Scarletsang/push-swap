@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:02:07 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 18:58:53 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 21:57:45 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int indexed_stack[EMULATION_STACK_SIZE], t_push_swap_stack_bound index)
 	current = triangle_maker->emulation.stack_a.elements[index];
 	i = 0;
 	indexed_stack[index] = 0;
-	if (triangle_maker->triangle_shape == DESCENDING_TRIANGLE)
+	if (triangle_maker->triangle_shape == &descending_triangle)
 	{
 		while (i < triangle_maker->emulation.stack_a.size)
 		{

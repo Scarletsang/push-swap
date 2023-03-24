@@ -43,7 +43,9 @@ TRIANGLE_MAKER_SRC:= \
 	sorter/triangle_maker/emulation_priority_mover.c \
 	sorter/triangle_maker/emulation_priority_moving_helper.c
 SORTER_SRC:= \
-	sorter/sorter.c
+	sorter/sorter.c \
+	sorter/merger.c \
+	sorter/merge_logic.c
 SRC:= \
 	main.c \
 	is_sorted.c

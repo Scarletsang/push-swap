@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 18:12:59 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 00:57:48 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,6 @@ typedef struct s_push_swap_triangles_planner
 	unsigned int		triangles_size_delta;
 }				t_push_swap_triangles_planner;
 
-unsigned int				get_total_triangles(\
-unsigned int total_elements);
-
-unsigned int				get_triangle_dimension(\
-unsigned int total_triangles);
-
-unsigned int				get_important_triangles_before(\
-unsigned int triangle_index, unsigned int layer);
-
 int							init_triangles_planner(\
 t_push_swap_triangles_planner *maker, unsigned int total_elements);
 
@@ -61,8 +52,38 @@ t_push_swap_triangles_planner *maker);
 void						merge_triangles_planner(\
 t_push_swap_triangles_planner *maker);
 
-t_push_swap_triangle_shape	get_triangle_shape(\
-unsigned int triangle_index, unsigned int total_triangles);
+//////////////////////////////////////////
+////////     triangle getters     ////////
+//////////////////////////////////////////
+
+unsigned int				get_total_triangles(\
+unsigned int total_elements);
+
+unsigned int				get_triangle_dimension(\
+unsigned int total_triangles);
+
+unsigned int				get_important_triangles_before(\
+unsigned int triangle_index, unsigned int layer);
+
+////////////////////////////////////////
+////////     triangle shape     ////////
+////////////////////////////////////////
+
+typedef unsigned int	(*t_push_swap_triangle_shape)(int element_a, int element_b);
+
+unsigned int				ascending_triangle(int element_a, int element_b);
+
+unsigned int				descending_triangle(int element_a, int element_b);
+
+t_push_swap_triangle_shape	switch_triangle_shape(\
+t_push_swap_triangle_shape triangle_shape);
+
+t_push_swap_triangle_shape	get_triangle_shape(unsigned int triangle_index, \
+unsigned int total_triangles, const unsigned int triangle_dimension);
+
+////////////////////////////////
+////////     printer    ////////
+////////////////////////////////
 
 int							print_all_triangles_merge(\
 unsigned int total_elements);

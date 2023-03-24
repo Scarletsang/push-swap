@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:38:05 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 15:14:40 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 02:03:38 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ t_push_swap_triangle_maker *triangle_maker)
 
 	last_triangle_index = sorter->planner.total_triangles - 1;
 	prepare_emulation(triangle_maker, \
-		sorter->planner.triangles[last_triangle_index], get_triangle_shape(\
-			last_triangle_index, sorter->planner.total_triangles));
+		sorter->planner.triangles[last_triangle_index], \
+			switch_triangle_shape(get_triangle_shape(\
+				last_triangle_index, sorter->planner.total_triangles, \
+				sorter->planner.triangle_dimension)));
 	emulate_two_stacks(triangle_maker, &sorter->two_stacks);
 	if (triangle_maker->triangle_size == 6)
 		swap_emulation_lowest_priority(triangle_maker);
@@ -62,7 +64,8 @@ t_push_swap_triangle_maker *triangle_maker)
 	{
 		prepare_emulation(triangle_maker, \
 			sorter->planner.triangles[triangle_index], get_triangle_shape(\
-				triangle_index, sorter->planner.total_triangles));
+				triangle_index, sorter->planner.total_triangles, \
+				sorter->planner.triangle_dimension));
 		emulate_two_stacks(triangle_maker, &sorter->two_stacks);
 		if (create_triangle_on_stack_b(emulation_instructor, triangle_maker))
 			return (FAILURE);

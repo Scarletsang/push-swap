@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:53:40 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 13:24:18 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 01:31:55 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,22 @@ t_push_swap_instruction *instruction_arr)
 	while (i < (unsigned int) instruction_arr[0])
 	{
 		if (add_instruction(instructor, instruction_arr[i + 1]))
+			return (FAILURE);
+		i++;
+	}
+	return (SUCCESS);
+}
+
+t_push_swap_error_code	add_instructions_n_times(\
+t_push_swap_instructor *instructor, \
+t_push_swap_instruction instruction, unsigned int n)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (add_instruction(instructor, instruction))
 			return (FAILURE);
 		i++;
 	}

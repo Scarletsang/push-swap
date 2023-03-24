@@ -6,35 +6,62 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:38:20 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 16:45:18 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 00:31:48 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter.h"
 
-void	push_one_third_of_triangles_to(t_push_swap_sorter *sorter, \
-t_push_swap_stack_indicator to)
+void	swap_merge_stack(t_push_swap_merger *merger)
 {
-	unsigned int			amount_of_elements_to_push;
-	unsigned int			index;
+	t_push_swap_stack	*tmp;
 
-	index = (sorter->planner.total_triangles / 3) - 2;
-	amount_of_elements_to_push = 0;
-	while (index > 0)
-	{
-		amount_of_elements_to_push += sorter->planner.triangles[index--];
-	}
-	amount_of_elements_to_push += sorter->planner.triangles[index];
-	if (to == STACK_A)
-		return (add_instructions_n_times(&sorter->instructor, PA, \
-			amount_of_elements_to_push));
-	return (add_instructions_n_times(&sorter->instructor, PB, \
-		amount_of_elements_to_push));
+	tmp = merger->destination_stack;
+	merger->destination_stack = merger->source_stack;
+	merger->source_stack = tmp;
 }
 
-t_push_swap_error_code	merge_one_triangle(t_push_swap_sorter *sorter, \
-t_push_swap_triangle_size size, t_push_swap_triangle_shape shape, \
-t_push_swap_stack_indicator to)
+int	get_merge_target(t_push_swap_merger *merger, \
+t_push_swap_merge_target target)
 {
-	
+	if (target == TRIANGLE_AT_DESTINATION)
+		return (get_element_by_index(merger->destination_stack, -1));
+	if (target == TRIANGLE_AT_SOURCE_REAR)
+		return (get_element_by_index(merger->source_stack, -1));
+	return (get_element_by_index(merger->source_stack, 0));
+}
+
+t_push_swap_merge_target	get_first_nonempty_merge_target(\
+t_push_swap_merger *merger)
+{
+	t_push_swap_merge_target	merge_target;
+
+	merge_target = TRIANGLE_AT_DESTINATION;
+	while (merge_target < 3)
+	{
+		if (merger->triangle_sizes[merge_target] > 0)
+			return (merge_target);
+		merge_target++;
+	}
+	return (UNKNOWN_MERGE_TARGET);
+}
+
+void	prepare_merging(t_push_swap_merger *merger, \
+t_push_swap_triangles_planner *planner)
+{
+	unsigned int last_triangle_index;
+
+	last_triangle_index = planner->total_triangles - 1;
+	merger->triangle_sizes[TRIANGLE_AT_DESTINATION] = \
+		planner->triangles[last_triangle_index];
+	merger->triangle_sizes[TRIANGLE_AT_SOURCE_FRONT] = \
+		planner->triangles[last_triangle_index - (planner->total_triangles / 3)];
+	merger->triangle_sizes[TRIANGLE_AT_SOURCE_REAR] = \
+		planner->triangles[0];
+}
+
+void	init_merger(t_push_swap_sorter *sorter)
+{
+	sorter->merger.destination_stack = &sorter->two_stacks.stack_a;
+	sorter->merger.source_stack = &sorter->two_stacks.stack_b;
 }

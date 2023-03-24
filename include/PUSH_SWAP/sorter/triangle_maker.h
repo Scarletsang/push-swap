@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 18:59:09 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 21:58:21 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define TRIANGLE_MAKER_H
 
 # include "PUSH_SWAP/sorter/instructor.h"
+# include "PUSH_SWAP/sorter/triangle_planner.h"
 
 # define EMULATION_STACK_SIZE 6
 

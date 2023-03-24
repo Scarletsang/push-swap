@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 20:08:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 13:24:22 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/23 22:41:27 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,6 @@ typedef enum e_push_swap_triangle_size
 	TRIANGLE_SIZE_6 = 6
 }				t_push_swap_triangle_size;
 
-typedef enum e_push_swap_triangle_shape
-{
-	ASCENDING_TRIANGLE,
-	DESCENDING_TRIANGLE
-}			t_push_swap_triangle_shape;
-
 typedef struct s_push_swap_instruction_list
 {
 	t_push_swap_instruction				instruction;
@@ -66,9 +60,9 @@ typedef struct s_push_swap_instructor
 	int								automatic_execute;
 }				t_push_swap_instructor;
 
-////////////////////////////////////////////
+////////////////////////////////////////////////
 ////////     instructor manipulator     ////////
-////////////////////////////////////////////
+////////////////////////////////////////////////
 
 t_push_swap_error_code	add_instruction(t_push_swap_instructor *instructor, \
 t_push_swap_instruction instruction);
@@ -76,6 +70,10 @@ t_push_swap_instruction instruction);
 t_push_swap_error_code	add_multiple_instructions(\
 t_push_swap_instructor *instructor, \
 t_push_swap_instruction *instruction_arr);
+
+t_push_swap_error_code	add_instructions_n_times(\
+t_push_swap_instructor *instructor, \
+t_push_swap_instruction instruction, unsigned int n);
 
 t_push_swap_instruction	get_inverse_instruction(\
 t_push_swap_instruction instruction);
@@ -89,9 +87,9 @@ t_push_swap_instruction instruction);
 void					execute_unexecuted_instructions(\
 t_push_swap_instructor *instructor);
 
-////////////////////////////////
+////////////////////////////////////
 ////////     instructor     ////////
-////////////////////////////////
+////////////////////////////////////
 
 void					free_instruction_list(\
 t_push_swap_instruction_list *instruction);
