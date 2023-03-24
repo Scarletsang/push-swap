@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 00:57:48 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 14:30:07 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,12 @@ unsigned int triangle_index, unsigned int layer);
 ////////     triangle shape     ////////
 ////////////////////////////////////////
 
-typedef unsigned int	(*t_push_swap_triangle_shape)(int element_a, int element_b);
+typedef int					(*t_push_swap_triangle_shape)(int element_a, \
+int element_b);
 
-unsigned int				ascending_triangle(int element_a, int element_b);
+int							ascending_triangle(int element_a, int element_b);
 
-unsigned int				descending_triangle(int element_a, int element_b);
+int							descending_triangle(int element_a, int element_b);
 
 t_push_swap_triangle_shape	switch_triangle_shape(\
 t_push_swap_triangle_shape triangle_shape);

@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:38:20 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 00:31:48 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 14:28:16 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,18 @@ t_push_swap_merger *merger)
 }
 
 void	prepare_merging(t_push_swap_merger *merger, \
-t_push_swap_triangles_planner *planner)
+t_push_swap_triangles_planner *planner, unsigned int triangle_index)
 {
-	unsigned int last_triangle_index;
+	unsigned int	last_triangle_index;
 
-	last_triangle_index = planner->total_triangles - 1;
+	last_triangle_index = planner->total_triangles - 1 - triangle_index;
 	merger->triangle_sizes[TRIANGLE_AT_DESTINATION] = \
 		planner->triangles[last_triangle_index];
 	merger->triangle_sizes[TRIANGLE_AT_SOURCE_FRONT] = \
-		planner->triangles[last_triangle_index - (planner->total_triangles / 3)];
+		planner->triangles[last_triangle_index - \
+		(planner->total_triangles / 3)];
 	merger->triangle_sizes[TRIANGLE_AT_SOURCE_REAR] = \
-		planner->triangles[0];
+		planner->triangles[triangle_index];
 }
 
 void	init_merger(t_push_swap_sorter *sorter)

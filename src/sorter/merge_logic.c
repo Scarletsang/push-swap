@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 21:36:44 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 02:04:23 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 14:28:36 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,16 @@ t_push_swap_triangle_shape shape)
 	int							current_element;
 
 	compare_target = get_first_nonempty_merge_target(&sorter->merger);
+	merge_target = compare_target;
+	priority_element = get_merge_target(&sorter->merger, compare_target);
 	while (compare_target < 3)
 	{
-		if (sorter->merger.triangle_sizes[compare_target] != 0)
+		current_element = get_merge_target(&sorter->merger, compare_target);
+		if ((sorter->merger.triangle_sizes[compare_target] != 0) && \
+			(shape(current_element, priority_element)))
 		{
-			current_element = get_merge_target(&sorter->merger, compare_target);
-			if (shape(current_element, priority_element))
-			{
-				merge_target = compare_target;
-				priority_element = current_element;
-			}
+			priority_element = current_element;
+			merge_target = compare_target;
 		}
 		compare_target++;
 	}
@@ -87,16 +87,16 @@ static t_push_swap_error_code	merge(t_push_swap_sorter *sorter)
 	unsigned int				new_total_triangles;
 	unsigned int				triangle_index;
 
-	prepare_merging(&sorter->merger, &sorter->planner);
 	new_total_triangles = sorter->planner.total_triangles / 3;
 	triangle_index = 0;
 	while (triangle_index < new_total_triangles)
 	{
-		while (get_first_nonempty_merge_target(&sorter->merger) != UNKNOWN_MERGE_TARGET)
+		prepare_merging(&sorter->merger, &sorter->planner, triangle_index);
+		while (get_first_nonempty_merge_target(&sorter->merger) != \
+			UNKNOWN_MERGE_TARGET)
 		{
 			if (merge_one_element(sorter, get_triangle_shape(triangle_index, \
-				sorter->planner.total_triangles, \
-				sorter->planner.triangle_dimension)))
+				new_total_triangles, sorter->planner.triangle_dimension)))
 				return (FAILURE);
 		}
 		triangle_index++;
@@ -110,7 +110,6 @@ t_push_swap_error_code	merge_triangles_till_sorted(t_push_swap_sorter *sorter)
 
 	i = 0;
 	sorter->instructor.automatic_execute = 1;
-	execute_unexecuted_instructions(&sorter->instructor);
 	while (i < sorter->planner.triangle_dimension)
 	{
 		if (push_one_third_of_triangles(sorter) || merge(sorter))

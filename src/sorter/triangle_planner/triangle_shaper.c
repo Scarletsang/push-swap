@@ -6,18 +6,18 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 21:06:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 00:57:38 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 04:48:13 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/triangle_planner.h"
 
-unsigned int	ascending_triangle(int element_a, int element_b)
+int	ascending_triangle(int element_a, int element_b)
 {
 	return (element_a > element_b);
 }
 
-unsigned int	descending_triangle(int element_a, int element_b)
+int	descending_triangle(int element_a, int element_b)
 {
 	return (element_a < element_b);
 }
