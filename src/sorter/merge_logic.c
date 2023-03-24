@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 21:36:44 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 15:17:29 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 19:19:50 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_push_swap_triangle_shape shape)
 	{
 		current_element = get_merge_target(&sorter->merger, compare_target);
 		if ((sorter->merger.triangle_sizes[compare_target] != 0) && \
-			(shape(current_element, priority_element)))
+			(shape(priority_element, current_element)))
 		{
 			priority_element = current_element;
 			merge_target = compare_target;
@@ -86,17 +86,19 @@ static t_push_swap_error_code	merge(t_push_swap_sorter *sorter)
 {
 	unsigned int				new_total_triangles;
 	unsigned int				triangle_index;
+	t_push_swap_triangle_shape	triangle_shape;
 
 	new_total_triangles = sorter->planner.total_triangles / 3;
 	triangle_index = 0;
 	while (triangle_index < new_total_triangles)
 	{
 		prepare_merging(&sorter->merger, &sorter->planner, triangle_index);
+		triangle_shape = get_triangle_shape(triangle_index, \
+			new_total_triangles, sorter->planner.triangle_dimension);
 		while (get_first_nonempty_merge_target(&sorter->merger) != \
 			UNKNOWN_MERGE_TARGET)
 		{
-			if (merge_one_element(sorter, get_triangle_shape(triangle_index, \
-				new_total_triangles, sorter->planner.triangle_dimension)))
+			if (merge_one_element(sorter, triangle_shape))
 				return (FAILURE);
 		}
 		triangle_index++;
