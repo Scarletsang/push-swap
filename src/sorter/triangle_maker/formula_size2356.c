@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:31:09 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 14:25:00 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 17:39:13 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ t_push_swap_triangle_maker *triangle_maker)
 		if (add_instruction(instructor, RRA))
 			return (FAILURE);
 	}
-	if (get_element_by_index(&triangle_maker->emulation.stack_a, 0) > \
-		get_element_by_index(&triangle_maker->emulation.stack_a, 1))
-		return (add_instruction(instructor, SA));
-	return (SUCCESS);
+	return (size2(instructor, triangle_maker));
 }
 
 t_push_swap_error_code	size5_or_6(t_push_swap_instructor *instructor, \

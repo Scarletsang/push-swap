@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:34:35 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 18:59:38 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 18:54:43 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,6 @@ t_push_swap_emulation_priority_location forced_search)
 {
 	if (priority_amount == 0)
 	{
-		if (get_element_by_index(&triangle_maker->emulation.stack_b, 0) > \
-			get_element_by_index(&triangle_maker->emulation.stack_b, 1))
-			return (emulate_instruction(instructor, triangle_maker, SB));
 		return (SUCCESS);
 	}
 	if (get_emulation_priority_by_index(-1, triangle_maker) == \
@@ -105,5 +102,5 @@ t_push_swap_emulation_priority_location forced_search)
 		return (forced_search_at_rear(instructor, triangle_maker, \
 			priority_amount));
 	return (move_priority_elements(instructor, triangle_maker, priority_amount, \
-		get_priority_location(triangle_maker, priority_amount)));
+		get_priority_location(triangle_maker, triangle_maker->highest_priority)));
 }
