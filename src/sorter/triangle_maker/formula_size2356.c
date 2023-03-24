@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:31:09 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 17:39:13 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 22:10:24 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ t_push_swap_triangle_maker *triangle_maker)
 
 	piroity_size = triangle_maker->triangle_size - 4;
 	triangle_maker->highest_priority = LOWEST_PRIORITY;
-	move_priority_elements(instructor, triangle_maker, piroity_size, \
-		UNKNOWN_PRIORITY_LOCATION);
+	move_priority_elements(instructor, triangle_maker, piroity_size);
 	if (size4(instructor, triangle_maker))
 		return (FAILURE);
 	if (piroity_size == 2)

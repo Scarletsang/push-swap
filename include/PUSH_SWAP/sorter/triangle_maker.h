@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 21:58:21 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 22:09:55 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,7 @@ t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker, 
 t_push_swap_instruction instruction);
 
 t_push_swap_error_code			move_priority_elements(\
-t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker, \
-unsigned int priority_amount, \
-t_push_swap_emulation_priority_location forced_search);
+t_push_swap_instructor *instructor, \
+t_push_swap_triangle_maker *triangle_maker, unsigned int priority_amount);
 
 #endif
