@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 21:06:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 04:48:13 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/24 17:36:30 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	ascending_triangle(int element_a, int element_b)
 {
-	return (element_a > element_b);
+	return (element_a < element_b);
 }
 
 int	descending_triangle(int element_a, int element_b)
 {
-	return (element_a < element_b);
+	return (element_a > element_b);
 }
 
 t_push_swap_triangle_shape	switch_triangle_shape(\
