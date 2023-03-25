@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 21:34:59 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/27 23:56:04 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/26 00:09:57 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	manipulate_stacks_from_fd(t_push_swap_2stacks *two_stacks, int fd)
 {
 	char	*str;
 
-	print_two_stacks(two_stacks);
 	str = get_next_line(fd);
 	while (str)
 	{
@@ -40,7 +39,6 @@ int	manipulate_stacks_from_fd(t_push_swap_2stacks *two_stacks, int fd)
 			free(str);
 			return (EXIT_FAILURE);
 		}
-		print_two_stacks(two_stacks);
 		free(str);
 		str = get_next_line(fd);
 	}
