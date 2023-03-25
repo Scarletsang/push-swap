@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 01:56:32 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/25 18:03:23 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	main(int argc, const char **argv)
 	init_merger(&sorter);
 	if (merge_triangles_till_sorted(&sorter))
 		return (free_program(&sorter));
+	optmize_instructions(&sorter.instructor);
 	print_instructions(&sorter.instructor);
 	free_program(&sorter);
 	return (EXIT_SUCCESS);

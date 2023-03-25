@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 22:51:36 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/25 00:32:51 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/25 17:25:04 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ typedef struct s_push_swap_instruction_striker
 	unsigned int					amount_of_consecutive_inverse_hits;
 }				t_push_swap_instruction_striker;
 
+void	optmize_instructions(t_push_swap_instructor *instructor);
 
 #endif
