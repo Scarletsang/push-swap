@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 20:08:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 22:41:27 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/25 19:41:00 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ typedef enum e_push_swap_instruction
 	SB = -3,
 	PA = 0,
 	RA = 1,
-	RB = 2,
-	RR = 3,
-	RRR = 4,
-	RRB = 5,
+	RR = 2,
+	RB = 3,
+	RRB = 4,
+	RRR = 5,
 	RRA = 6,
 	PB = 7
 }			t_push_swap_instruction;

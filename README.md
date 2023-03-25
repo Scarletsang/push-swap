@@ -98,3 +98,29 @@ def create_triangle stackA, stackB, front_size, rear_size, triangle_size
         else
             rear1(stackA, stackB)
 ```
+
+```c
+typedef enum e_push_swap_instruction
+{
+	SA = -1,
+	SS = -2,
+	SB = -3,
+	PA = 0,
+	RA = 1,
+	RR = 2,
+	RB = 3,
+	RRB = 4,
+	RRR = 5,
+	RRA = 6,
+	PB = 7
+}			t_push_swap_instruction;
+```
+
+SA SB = SS
+(-1 -3) -2
+RA RB = RR
+(1 3)   2 
+RRA RRB = RRR
+(6  4)    5 
+
+-2 0 2 5 7

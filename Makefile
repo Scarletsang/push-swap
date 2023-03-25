@@ -47,7 +47,9 @@ SORTER_SRC:= \
 	sorter/merger.c \
 	sorter/merge_logic.c
 OPTIMIZER_SRC:= \
-	optimizer/optimizer.c
+	optimizer/optimizer.c \
+	optimizer/striker.c \
+	optimizer/combiner.c
 SRC:= \
 	main.c \
 	is_sorted.c
