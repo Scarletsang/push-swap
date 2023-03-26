@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 21:06:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 17:36:30 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/26 18:55:39 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ t_push_swap_triangle_shape triangle_shape)
 	return (&ascending_triangle);
 }
 
-t_push_swap_triangle_shape	get_triangle_shape(unsigned int triangle_index, \
-unsigned int total_triangles, const unsigned int triangle_dimension)
+t_push_swap_triangle_shape	calculate_triangle_shape(\
+unsigned int triangle_index, unsigned int total_triangles, \
+const unsigned int triangle_dimension)
 {
 	t_push_swap_triangle_shape	triangle_shape;
 	unsigned int				triangles_amount;

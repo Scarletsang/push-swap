@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 16:53:02 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/26 19:21:33 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int	free_program(t_push_swap_sorter *sorter)
 {
 	free_two_stacks(&sorter->two_stacks);
-	free(sorter->planner.triangles);
+	free(sorter->planner.triangles_size);
 	free_instruction_list(sorter->instructor.cost);
 	return (EXIT_FAILURE);
 }

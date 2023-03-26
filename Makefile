@@ -31,7 +31,8 @@ INSTRUCTOR_SRC:=\
 TRIANGLE_PLANNER_SRC:= \
 	sorter/triangle_planner/triangles_planner.c \
 	sorter/triangle_planner/triangles_getter.c \
-	sorter/triangle_planner/triangle_shaper.c \
+	sorter/triangle_planner/calculate_triangle_shape.c \
+	sorter/triangle_planner/calculate_triangle_size.c \
 	sorter/triangle_planner/triangles_calculator.c \
 	sorter/triangle_planner/printer.c
 TRIANGLE_MAKER_SRC:= \

@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:28:17 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 16:51:47 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/26 19:21:33 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	print_triangles(t_push_swap_triangles_planner *planner)
 	index = 0;
 	while (index < planner->total_triangles)
 	{
-		if (get_triangle_shape(index, planner->total_triangles, \
+		if (calculate_triangle_shape(index, planner->total_triangles, \
 			planner->triangle_dimension) == &descending_triangle)
 			ft_printf("D");
 		else
 			ft_printf("A");
-		ft_printf("(%u) ", planner->triangles[index]);
+		ft_printf("(%u) ", planner->triangles_size[index]);
 		if ((index + 1) % 3 == 0)
 			ft_printf("  ");
 		if ((index + 1) % 9 == 0)
@@ -55,6 +55,6 @@ int	print_all_triangles_merge(unsigned int total_elements)
 		triangle_dimension--;
 	}
 	print_triangles(&planner);
-	free(planner.triangles);
+	free(planner.triangles_size);
 	return (EXIT_SUCCESS);
 }

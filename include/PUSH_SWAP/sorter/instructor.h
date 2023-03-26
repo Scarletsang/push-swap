@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 20:08:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 17:44:23 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/26 18:41:30 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,14 @@ t_push_swap_instructor *from);
 t_push_swap_error_code	init_instructor(t_push_swap_instructor *instructor, \
 t_push_swap_2stacks *two_stacks);
 
-////////////////////////////////////////////////
-////////     instructor manipulator     ////////
-////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+////////     instructor action interface     ////////
+/////////////////////////////////////////////////////
+
+/**
+ * Instructor, as previously mentioned, is capable of add instructions, and
+ * execute them on the two stacks. The following functions are the interface.
+*/
 
 t_push_swap_error_code	add_instruction(t_push_swap_instructor *instructor, \
 t_push_swap_instruction instruction);
