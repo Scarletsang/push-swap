@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:09:01 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/28 15:02:09 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/26 15:34:06 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	swap(t_push_swap_stack *stack)
 	{
 		return (EXIT_SUCCESS);
 	}
-	first_element = dequeue(stack);
-	second_element = dequeue(stack);
+	first_element = dequeue_from_front(stack);
+	second_element = dequeue_from_front(stack);
 	enqueue(stack, first_element);
 	enqueue(stack, second_element);
 	return (EXIT_SUCCESS);
@@ -34,7 +34,7 @@ int	push(t_push_swap_stack *dest, t_push_swap_stack *src)
 	{
 		return (EXIT_SUCCESS);
 	}
-	enqueue(dest, dequeue(src));
+	enqueue(dest, dequeue_from_front(src));
 	return (EXIT_SUCCESS);
 }
 
@@ -44,7 +44,7 @@ int	rotate(t_push_swap_stack *stack)
 	{
 		return (EXIT_SUCCESS);
 	}
-	enqueue_to_back(stack, dequeue(stack));
+	enqueue_to_back(stack, dequeue_from_front(stack));
 	return (EXIT_SUCCESS);
 }
 
@@ -54,6 +54,6 @@ int	reverse_rotate(t_push_swap_stack *stack)
 	{
 		return (EXIT_SUCCESS);
 	}
-	enqueue(stack, dequeue_from_back(stack));
+	enqueue(stack, dequeue(stack));
 	return (EXIT_SUCCESS);
 }

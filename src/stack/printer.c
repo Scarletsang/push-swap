@@ -6,11 +6,12 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:33:21 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 17:19:30 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/26 16:14:16 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/stack.h"
+#include "FT_PRINTF/ft_printf.h"
 
 void	print_stack_elements(t_push_swap_stack *stack)
 {

@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 22:30:05 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/25 19:59:45 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/26 16:28:35 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ignore_space(const char **str)
 	}
 }
 
-static int	has_duplicates(t_push_swap_parser *parser, int value)
+static int	has_duplicates(t_push_swap_cli_parser *parser, int value)
 {
 	t_push_swap_parser_collector	*collector;
 
@@ -36,7 +36,7 @@ static int	has_duplicates(t_push_swap_parser *parser, int value)
 	return (0);
 }
 
-static int	parse_numbers(const char *str, t_push_swap_parser *parser)
+static int	parse_numbers(const char *str, t_push_swap_cli_parser *parser)
 {
 	int	value;
 
@@ -55,8 +55,8 @@ static int	parse_numbers(const char *str, t_push_swap_parser *parser)
 	return (EXIT_SUCCESS);
 }
 
-t_push_swap_parser	*parse_from_cli(t_push_swap_parser *parser, int argc, \
-const char **argv)
+t_push_swap_cli_parser	*parse_from_cli(t_push_swap_cli_parser *parser, \
+int argc, const char **argv)
 {
 	int	i;
 
@@ -83,7 +83,7 @@ const char **argv)
 	return (parser);
 }
 
-int	*to_array(t_push_swap_parser *parser, size_t *size)
+int	*to_array(t_push_swap_cli_parser *parser, unsigned int *size)
 {
 	int								*array;
 	int								i;

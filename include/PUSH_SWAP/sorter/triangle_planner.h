@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 14:30:07 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/26 16:48:57 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 # define TRIANGLE_PLANNER_H
 
 # include "PUSH_SWAP/sorter/instructor.h"
+
+typedef enum e_push_swap_triangle_size
+{
+	TRIANGLE_SIZE_2 = 2,
+	TRIANGLE_SIZE_3 = 3,
+	TRIANGLE_SIZE_4 = 4,
+	TRIANGLE_SIZE_5 = 5,
+	TRIANGLE_SIZE_6 = 6
+}				t_push_swap_triangle_size;
 
 typedef enum e_push_swap_triangle_fill_mode
 {

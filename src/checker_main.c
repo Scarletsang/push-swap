@@ -6,22 +6,12 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 20:05:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/02 21:54:08 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/26 16:08:10 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/checker.h"
-
-int	init_program(t_push_swap_2stacks *two_stacks, int argc, \
-const char **argv)
-{
-	t_push_swap_parser	parser;
-	size_t				size;
-	int					*elements;
-
-	elements = to_array(parse_from_cli(&parser, argc, argv), &size);
-	return (!elements || init_two_stacks(two_stacks, size, elements));
-}
+#include "PUSH_SWAP/push_swap.h"
 
 int	main(int argc, const char **argv)
 {

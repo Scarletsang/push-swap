@@ -6,11 +6,12 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:28:17 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 16:05:04 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/26 16:51:47 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/triangle_planner.h"
+#include "FT_PRINTF/ft_printf.h"
 
 void	print_triangles(t_push_swap_triangles_planner *planner)
 {

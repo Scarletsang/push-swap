@@ -6,11 +6,13 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/25 18:03:23 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/26 16:53:02 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/push_swap.h"
+#include "PUSH_SWAP/sorter.h"
+#include "PUSH_SWAP/optimizer.h"
 
 int	free_program(t_push_swap_sorter *sorter)
 {
@@ -18,17 +20,6 @@ int	free_program(t_push_swap_sorter *sorter)
 	free(sorter->planner.triangles);
 	free_instruction_list(sorter->instructor.cost);
 	return (EXIT_FAILURE);
-}
-
-int	init_program(t_push_swap_2stacks *two_stacks, int argc, \
-const char **argv)
-{
-	t_push_swap_parser	parser;
-	size_t				size;
-	int					*elements;
-
-	elements = to_array(parse_from_cli(&parser, argc, argv), &size);
-	return (!elements || init_two_stacks(two_stacks, size, elements));
 }
 
 int	main(int argc, const char **argv)

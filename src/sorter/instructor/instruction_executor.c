@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:53:40 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/21 23:15:44 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/26 17:41:28 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,6 @@ t_push_swap_instruction instruction)
 		push(&two_stacks->stack_b, &two_stacks->stack_a);
 	else
 		execute_rotate_instruction(two_stacks, instruction);
-}
-
-t_push_swap_instruction	get_inverse_instruction(\
-t_push_swap_instruction instruction)
-{
-	if (instruction < 0)
-		return (instruction);
-	return (PB - instruction);
 }
 
 void	edit_last_instruction(t_push_swap_instructor *instructor, \

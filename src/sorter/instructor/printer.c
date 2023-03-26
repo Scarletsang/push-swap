@@ -6,11 +6,12 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 22:14:16 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/22 03:53:31 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/26 16:24:29 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/instructor.h"
+#include "FT_PRINTF/ft_printf.h"
 
 void	print_instruction(t_push_swap_instruction instruction)
 {

@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 04:33:48 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 04:08:44 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/26 17:41:11 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,6 @@ t_push_swap_instructor *from)
 		from->cost->next = NULL;
 		from->last_instruction = from->cost;
 		from->last_executed_instruction = from->cost;
-	}
-}
-
-void	free_instruction_list(t_push_swap_instruction_list *instruction)
-{
-	t_push_swap_instruction_list	*tmp;
-
-	while (instruction)
-	{
-		tmp = instruction;
-		instruction = instruction->next;
-		free(tmp);
 	}
 }
 
