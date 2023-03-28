@@ -14,6 +14,8 @@ The project aims to generate the shortest sequence of instructions that sorts el
 - pa: pushes the first element of stack A to the starts of stack B
 - pb: pushes the first element of stack B to the starts of stack A
 
+All elements first starts in stack A, and they have to be sorted in ascending order in stack A eventually.
+
 ## Compilation
 
 ```bash
@@ -54,3 +56,14 @@ It can be used like this in general:
 ```bash
 NUMBERS="1 3 2 -10 13 99"; ./push_swap $NUMBERS | ./checker $NUMBERS
 ```
+
+## Implementation
+
+The idea is to create a certain number of small sorted elements from stack A to stack B. Each small sorted elements are named as a "triangle", because depending on the need, the elements are either sorted in ascending or descending order. Then push one third of the triangles back to stack A, and begin merging the triangles to make bigger triangles at the start of stack A. In big number of elements, this process will be repeated serveral times until it left one big ascending triangle in stack A or descending triangle in stack B. Then the job is done. For the case where the triangle is descended in stack B, the program simply needs to push all the elements from stack B to stack A to finish the job.
+
+This idea of merging comes from this guide: [Triangle merge sort](https://80000coding.oopy.io/402024b2-13ba-447a-ac0f-0eeaf91f0e5f#402024b2-13ba-447a-ac0f-0eeaf91f0e5f). However there are a lot of details I have to fill in by myself in order to make it work. I needed to create 4 different algorithms before I can merge like in this guide:
+
+1. An algorithm to calculate triangle shape
+2. An algorithm to calculate triangle sizes
+3. An algorithm to create triangles from stack A to stack B
+3. An algorithm to create trangle on stack A (used for small numbers of elements and the creation of the last triangle)
