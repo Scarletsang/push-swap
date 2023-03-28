@@ -24,7 +24,7 @@ ${NAME}: ${OBJS}
 	@ar -rcs ${NAME} ${OBJS} && echo "Compilation of ${NAME} successful"
 
 %.o: %.c
-	@${CC} ${CFLAGS} -c $< -o $@
+	@${CC} ${CFLAGS} -iquote include -c $< -o $@
 
 clean:
 	@rm -f ${OBJS}

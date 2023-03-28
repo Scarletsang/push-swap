@@ -6,11 +6,12 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 22:09:04 by htsang            #+#    #+#             */
-/*   Updated: 2022/11/21 19:49:16 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 19:29:58 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "GET_NEXT_LINE/get_next_line.h"
+#include "internal_get_next_line.h"
 
 static size_t	find_line_end(char *str)
 {
