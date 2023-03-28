@@ -6,24 +6,49 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:16:10 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/13 21:02:14 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:13:17 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/stack.h"
 
-void	free_two_stacks(t_push_swap_2stacks *two_stacks)
+int	two_stacks_is_sorted(t_push_swap_2stacks *two_stacks)
+{
+	int				last_element_value;
+	int				current_element_value;
+	unsigned int	i;
+
+	if (two_stacks->stack_b.size != 0)
+	{
+		return (0);
+	}
+	i = 0;
+	last_element_value = stack_get_element_by_index(&two_stacks->stack_a, i);
+	while (++i < two_stacks->stack_a.size)
+	{
+		current_element_value = stack_get_element_by_index(\
+			&two_stacks->stack_a, i);
+		if (last_element_value > current_element_value)
+		{
+			return (0);
+		}
+		last_element_value = current_element_value;
+	}
+	return (1);
+}
+
+void	two_stacks_free(t_push_swap_2stacks *two_stacks)
 {
 	free(two_stacks->stack_a.elements);
 	free(two_stacks->stack_b.elements);
 }
 
-int	init_two_stacks(t_push_swap_2stacks *two_stacks, \
+int	two_stacks_init(t_push_swap_2stacks *two_stacks, \
 unsigned int elements_size, int *stack_a_elements)
 {
-	init_stack_from_array(&two_stacks->stack_a, elements_size, \
+	stack_init_from_array(&two_stacks->stack_a, elements_size, \
 		stack_a_elements);
-	if (init_empty_stack(&two_stacks->stack_b, elements_size))
+	if (stack_init_empty(&two_stacks->stack_b, elements_size))
 	{
 		return (EXIT_FAILURE);
 	}

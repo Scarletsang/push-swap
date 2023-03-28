@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 20:08:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/25 19:41:00 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:32:22 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,27 @@
 
 # include "PUSH_SWAP/stack.h"
 
+/**
+ * @brief This type encapsulate the possibility that the function can fail.
+ * Since element in the stack has the type of int, this type avoid confusion by
+ * distingushing failure of malloc() and the value of a stack element.
+ * Furthermore, when a function returns this type, it means the function might
+ * add instruction to the instructor, thus having the possibility to fail
+ * during malloc(). In other words, a function with this return type might adds
+ * instruction, while one that does not is only responsible for computation.
+ */
 typedef enum e_push_swap_error_code
 {
 	SUCCESS = 0,
 	FAILURE = 1
 }				t_push_swap_error_code;
 
+/**
+ * @brief Enum representing all valid instructions. The value of each enum is
+ * carefully designed to ease the proccess of undoing instructions or optimizing
+ * instructions. See @ref instruction_get_inverse() for more details. Also see
+ * the optimizer module that utilizes the value of each enum.
+ */
 typedef enum e_push_swap_instruction
 {
 	SA = -1,
@@ -36,21 +51,51 @@ typedef enum e_push_swap_instruction
 	PB = 7
 }			t_push_swap_instruction;
 
-typedef enum e_push_swap_triangle_size
-{
-	TRIANGLE_SIZE_2 = 2,
-	TRIANGLE_SIZE_3 = 3,
-	TRIANGLE_SIZE_4 = 4,
-	TRIANGLE_SIZE_5 = 5,
-	TRIANGLE_SIZE_6 = 6
-}				t_push_swap_triangle_size;
+/**
+ * @brief Returns the inverse instruction of the given instruction.For example,
+ * PA is the inverse of PB, RA is that of RRA, etc. However, the swap
+ * instructions are their own inverse, e.g. SA is the inverse of SA,
+ * SS is the inverse of SS. Therfore, the enum of the swap instructions are
+ * made negative, so that it can be programmatically distingushed from the
+ * other instructions.
+ * @param instruction the instruction to be inverted
+ * @return the inverted instruction
+ */
+t_push_swap_instruction	instruction_get_inverse(\
+t_push_swap_instruction instruction);
 
+///////////////////////////////////////////////////
+////////     instruction list interface    ////////
+///////////////////////////////////////////////////
+
+/**
+ * @brief Represents a sequence of instructions.
+ */
 typedef struct s_push_swap_instruction_list
 {
 	t_push_swap_instruction				instruction;
 	struct s_push_swap_instruction_list	*next;
 }				t_push_swap_instruction_list;
 
+void					instruction_list_free_all(\
+t_push_swap_instruction_list *instruction);
+
+/////////////////////////////////////////////
+////////     instructor interface    ////////
+/////////////////////////////////////////////
+
+/**
+ * @brief Instructor not only holds the start and end of one instruction list,
+ * it is also capable of executing the instruction list on the two stacks. The
+ * start of the instruction list always store the total length of the linked
+ * list, which represents how costly does the instruction list is.
+ * 
+ * For the convinience of the triangle maker, the instructor always need to 
+ * execute the instruction immediately after it has been added to the list,
+ * an option to automatically execute instruction is provided. When that option
+ * is disabled, the instruction list will only executes on demand. Therefore,
+ * there is one extra pointer pointing to the last executed instruction.
+ */
 typedef struct s_push_swap_instructor
 {
 	t_push_swap_instruction_list	*cost;
@@ -60,55 +105,50 @@ typedef struct s_push_swap_instructor
 	int								automatic_execute;
 }				t_push_swap_instructor;
 
-////////////////////////////////////////////////
-////////     instructor manipulator     ////////
-////////////////////////////////////////////////
+void					instructor_increase_cost_by(\
+t_push_swap_instructor *instructor, int cost);
 
-t_push_swap_error_code	add_instruction(t_push_swap_instructor *instructor, \
+int						instructor_get_cost(t_push_swap_instructor *instructor);
+
+void					instructor_concat(t_push_swap_instructor *to, \
+t_push_swap_instructor *from);
+
+t_push_swap_error_code	instructor_init(t_push_swap_instructor *instructor, \
+t_push_swap_2stacks *two_stacks);
+
+/////////////////////////////////////////////////////
+////////     instructor action interface     ////////
+/////////////////////////////////////////////////////
+
+/**
+ * Instructor, as previously mentioned, is capable of add instructions, and
+ * execute them on the two stacks. The following functions are the interface.
+*/
+
+t_push_swap_error_code	instructor_add(t_push_swap_instructor *instructor, \
 t_push_swap_instruction instruction);
 
-t_push_swap_error_code	add_multiple_instructions(\
+t_push_swap_error_code	instructor_add_multiple(\
 t_push_swap_instructor *instructor, \
 t_push_swap_instruction *instruction_arr);
 
-t_push_swap_error_code	add_instructions_n_times(\
+t_push_swap_error_code	instructor_add_n_times(\
 t_push_swap_instructor *instructor, \
 t_push_swap_instruction instruction, unsigned int n);
 
-t_push_swap_instruction	get_inverse_instruction(\
-t_push_swap_instruction instruction);
-
-void					edit_last_instruction(\
+void					instructor_edit_last(\
 t_push_swap_instructor *instructor, t_push_swap_instruction instruction);
 
-void					execute_instruction(t_push_swap_2stacks *two_stacks, \
+void					instructor_execute(t_push_swap_2stacks *two_stacks, \
 t_push_swap_instruction instruction);
 
-void					execute_unexecuted_instructions(\
+void					instructor_execute_unexecuted(\
 t_push_swap_instructor *instructor);
 
-////////////////////////////////////
-////////     instructor     ////////
-////////////////////////////////////
+/////////////////////////////////////////////
+////////     Instruction printer     ////////
+/////////////////////////////////////////////
 
-void					free_instruction_list(\
-t_push_swap_instruction_list *instruction);
-
-void					increase_cost_by(t_push_swap_instructor *instructor, \
-int cost);
-
-int						get_cost(t_push_swap_instructor *instructor);
-
-void					concat_instructor(t_push_swap_instructor *to, \
-t_push_swap_instructor *from);
-
-t_push_swap_error_code	init_instructor(t_push_swap_instructor *instructor, \
-t_push_swap_2stacks *two_stacks);
-
-/////////////////////////////////
-////////     printer     ////////
-/////////////////////////////////
-
-void					print_instructions(t_push_swap_instructor *instructor);
+void					instructor_print(t_push_swap_instructor *instructor);
 
 #endif

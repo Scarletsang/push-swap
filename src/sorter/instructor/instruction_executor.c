@@ -6,13 +6,13 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 19:53:40 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/21 23:15:44 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:30:15 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/instructor.h"
 
-static void	execute_rotate_instruction(t_push_swap_2stacks *two_stacks, \
+static void	instructor_execute_rotate(t_push_swap_2stacks *two_stacks, \
 t_push_swap_instruction instruction)
 {
 	if (instruction == RA)
@@ -35,7 +35,7 @@ t_push_swap_instruction instruction)
 	}
 }
 
-void	execute_instruction(t_push_swap_2stacks *two_stacks, \
+void	instructor_execute(t_push_swap_2stacks *two_stacks, \
 t_push_swap_instruction instruction)
 {
 	if (instruction == SA)
@@ -52,39 +52,31 @@ t_push_swap_instruction instruction)
 	else if (instruction == PB)
 		push(&two_stacks->stack_b, &two_stacks->stack_a);
 	else
-		execute_rotate_instruction(two_stacks, instruction);
+		instructor_execute_rotate(two_stacks, instruction);
 }
 
-t_push_swap_instruction	get_inverse_instruction(\
-t_push_swap_instruction instruction)
-{
-	if (instruction < 0)
-		return (instruction);
-	return (PB - instruction);
-}
-
-void	edit_last_instruction(t_push_swap_instructor *instructor, \
+void	instructor_edit_last(t_push_swap_instructor *instructor, \
 t_push_swap_instruction instruction)
 {
 	if (instructor->last_instruction == instructor->last_executed_instruction)
 	{
-		execute_instruction(instructor->two_stacks, \
-			get_inverse_instruction(instructor->last_instruction->instruction));
+		instructor_execute(instructor->two_stacks, \
+			instruction_get_inverse(instructor->last_instruction->instruction));
 		instructor->last_instruction->instruction = instruction;
-		execute_instruction(instructor->two_stacks, instruction);
+		instructor_execute(instructor->two_stacks, instruction);
 		return ;
 	}
 	instructor->last_instruction->instruction = instruction;
 }
 
-void	execute_unexecuted_instructions(t_push_swap_instructor *instructor)
+void	instructor_execute_unexecuted(t_push_swap_instructor *instructor)
 {
 	t_push_swap_instruction_list	*instruction_node;
 
 	instruction_node = instructor->last_executed_instruction->next;
 	while (instruction_node)
 	{
-		execute_instruction(instructor->two_stacks, \
+		instructor_execute(instructor->two_stacks, \
 			instruction_node->instruction);
 		instructor->last_executed_instruction = instruction_node;
 		instruction_node = instructor->last_executed_instruction->next;

@@ -23,6 +23,7 @@ STACK_SRC:= \
 	stack/operations.c \
 	stack/printer.c
 INSTRUCTOR_SRC:=\
+	sorter/instructor/instruction.c \
 	sorter/instructor/instructor.c \
 	sorter/instructor/instruction_adder.c \
 	sorter/instructor/instruction_executor.c \
@@ -30,30 +31,32 @@ INSTRUCTOR_SRC:=\
 TRIANGLE_PLANNER_SRC:= \
 	sorter/triangle_planner/triangles_planner.c \
 	sorter/triangle_planner/triangles_getter.c \
-	sorter/triangle_planner/triangle_shaper.c \
+	sorter/triangle_planner/calculate_triangle_shape.c \
+	sorter/triangle_planner/calculate_triangle_size.c \
 	sorter/triangle_planner/triangles_calculator.c \
 	sorter/triangle_planner/printer.c
 TRIANGLE_MAKER_SRC:= \
 	sorter/triangle_maker/triangle_maker.c \
-	sorter/triangle_maker/formula.c \
-	sorter/triangle_maker/formula_size4.c \
-	sorter/triangle_maker/formula_size2356.c \
-	sorter/triangle_maker/emulation.c \
-	sorter/triangle_maker/emulated_instruction_executor.c \
-	sorter/triangle_maker/emulation_priority_mover.c \
-	sorter/triangle_maker/emulation_priority_moving_helper.c
+	sorter/triangle_maker/stack_a_formula_size4.c \
+	sorter/triangle_maker/stack_a_formula_size2356.c \
+	sorter/triangle_maker/emulation.c
+EMULATOR_SRC:= \
+	sorter/triangle_maker/emulator/emulator.c \
+	sorter/triangle_maker/emulator/emulated_instructor.c \
+	sorter/triangle_maker/emulator/stack_b_formula.c \
+	sorter/triangle_maker/emulator/priority_elements_mover.c
 SORTER_SRC:= \
 	sorter/sorter.c \
 	sorter/merger.c \
-	sorter/merge_logic.c
+	sorter/sorter_merge.c
 OPTIMIZER_SRC:= \
 	optimizer/optimizer.c \
 	optimizer/striker.c \
 	optimizer/combiner.c
 SRC:= \
 	main.c \
-	is_sorted.c
-OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${INSTRUCTOR_SRC:.c=.o} ${TRIANGLE_PLANNER_SRC:.c=.o} ${TRIANGLE_MAKER_SRC:.c=.o} ${SORTER_SRC:.c=.o} ${OPTIMIZER_SRC:.c=.o} ${SRC:.c=.o}}
+	shared.c
+OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${INSTRUCTOR_SRC:.c=.o} ${TRIANGLE_PLANNER_SRC:.c=.o} ${TRIANGLE_MAKER_SRC:.c=.o} ${EMULATOR_SRC:.c=.o} ${SORTER_SRC:.c=.o} ${OPTIMIZER_SRC:.c=.o} ${SRC:.c=.o}}
 PRINTF:=lib/ft_printf/libftprintf.a
 INCLUDE:= \
 	include \
@@ -78,7 +81,7 @@ CHECKER_NAME:=checker
 GET_NEXT_LINE:=lib/get_next_line/get_next_line.a
 CHECKER_SRC:= \
 	checker_main.c \
-	is_sorted.c \
+	shared.c \
 	checker/parse_operation.c \
 	checker/stack_manipulator.c
 CHECKER_OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${CHECKER_SRC:.c=.o}}

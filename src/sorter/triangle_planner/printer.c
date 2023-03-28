@@ -6,25 +6,27 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:28:17 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 16:05:04 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:59:02 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/triangle_planner.h"
+#include "FT_PRINTF/ft_printf.h"
 
-void	print_triangles(t_push_swap_triangles_planner *planner)
+void	triangles_planner_print(t_push_swap_triangles_planner *planner)
 {
 	unsigned int	index;
 
 	index = 0;
 	while (index < planner->total_triangles)
 	{
-		if (get_triangle_shape(index, planner->total_triangles, \
-			planner->triangle_dimension) == &descending_triangle)
+		if (triangles_planner_calculate_triangle_shape(index, \
+			planner->total_triangles, planner->merge_dimension) \
+				== &triangle_shape_descending)
 			ft_printf("D");
 		else
 			ft_printf("A");
-		ft_printf("(%u) ", planner->triangles[index]);
+		ft_printf("(%u) ", planner->triangles_size[index]);
 		if ((index + 1) % 3 == 0)
 			ft_printf("  ");
 		if ((index + 1) % 9 == 0)
@@ -34,26 +36,4 @@ void	print_triangles(t_push_swap_triangles_planner *planner)
 		index++;
 	}
 	ft_printf("\n===================\n");
-}
-
-int	print_all_triangles_merge(unsigned int total_elements)
-{
-	t_push_swap_triangles_planner		planner;
-	unsigned int						triangle_dimension;
-
-	if (init_triangles_planner(&planner, total_elements))
-	{
-		return (EXIT_FAILURE);
-	}
-	precalculate_all_triangles_size(&planner);
-	triangle_dimension = planner.triangle_dimension;
-	while (triangle_dimension > 0)
-	{
-		print_triangles(&planner);
-		merge_triangles_planner(&planner);
-		triangle_dimension--;
-	}
-	print_triangles(&planner);
-	free(planner.triangles);
-	return (EXIT_SUCCESS);
 }
