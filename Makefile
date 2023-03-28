@@ -47,7 +47,7 @@ TRIANGLE_MAKER_SRC:= \
 SORTER_SRC:= \
 	sorter/sorter.c \
 	sorter/merger.c \
-	sorter/merge_logic.c
+	sorter/sorter_merge.c
 OPTIMIZER_SRC:= \
 	optimizer/optimizer.c \
 	optimizer/striker.c \
