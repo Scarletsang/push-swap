@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:38:05 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 05:37:06 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:57:49 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ t_push_swap_triangle_maker *triangle_maker)
 	t_push_swap_triangle_shape	triangle_shape;
 
 	last_triangle_index = sorter->planner.total_triangles - 1;
-	triangle_shape = calculate_triangle_shape(\
+	triangle_shape = triangles_planner_calculate_triangle_shape(\
 		last_triangle_index, sorter->planner.total_triangles, \
 			sorter->planner.merge_dimension);
 	if (sorter->planner.merge_dimension > 0)
-		triangle_shape = switch_triangle_shape(triangle_shape);
+		triangle_shape = triangle_shape_switch(triangle_shape);
 	prepare_emulation(triangle_maker, \
 		sorter->planner.triangles_size[last_triangle_index], triangle_shape);
 	emulate_two_stacks(triangle_maker, &sorter->two_stacks);
@@ -54,7 +54,7 @@ t_push_swap_triangle_maker *triangle_maker)
 	{
 		prepare_emulation(triangle_maker, \
 			sorter->planner.triangles_size[triangle_index], \
-			calculate_triangle_shape(\
+			triangles_planner_calculate_triangle_shape(\
 				triangle_index, sorter->planner.total_triangles, \
 				sorter->planner.merge_dimension));
 		emulate_two_stacks(triangle_maker, &sorter->two_stacks);

@@ -6,13 +6,13 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 03:50:53 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 02:07:33 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:48:47 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/triangle_planner.h"
 
-void	merge_triangles_planner(t_push_swap_triangles_planner *planner)
+void	triangles_planner_merge(t_push_swap_triangles_planner *planner)
 {
 	unsigned int	new_total_triangles;
 	unsigned int	triangle_index;
@@ -34,7 +34,7 @@ void	merge_triangles_planner(t_push_swap_triangles_planner *planner)
 	planner->triangles_size_delta *= 3;
 }
 
-int	init_triangles_planner(t_push_swap_triangles_planner *planner, \
+int	triangles_planner_init(t_push_swap_triangles_planner *planner, \
 unsigned int total_elements)
 {
 	*((unsigned int *) &planner->total_elements) = total_elements;
@@ -43,9 +43,10 @@ unsigned int total_elements)
 	{
 		return (EXIT_FAILURE);
 	}
-	planner->total_triangles = get_total_triangles(total_elements);
+	planner->total_triangles = \
+		triangles_planner_get_total_triangles(total_elements);
 	*((unsigned int *) &planner->merge_dimension) = \
-		get_triangle_dimension(planner->total_triangles);
+		triangles_planner_get_merge_dimension(planner->total_triangles);
 	planner->mininum_triangle_size = 2;
 	planner->triangles_size_delta = 4;
 	return (EXIT_SUCCESS);

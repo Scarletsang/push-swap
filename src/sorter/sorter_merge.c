@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 21:36:44 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 05:42:57 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:58:34 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,9 @@ t_push_swap_sorter *sorter)
 	while (triangle_index < new_total_triangles)
 	{
 		merger_update(&sorter->merger, &sorter->planner, triangle_index);
-		triangle_shape = calculate_triangle_shape(triangle_index, \
-			new_total_triangles, sorter->planner.merge_dimension);
+		triangle_shape = triangles_planner_calculate_triangle_shape(\
+			triangle_index, new_total_triangles, \
+			sorter->planner.merge_dimension);
 		while (merger_get_first_nonempty_merge_target(&sorter->merger) != \
 			UNKNOWN_MERGE_TARGET)
 		{
@@ -121,7 +122,7 @@ t_push_swap_sorter *sorter)
 			sorter_merge_triangles(sorter))
 			return (FAILURE);
 		merger_swap_stacks(&sorter->merger);
-		merge_triangles_planner(&sorter->planner);
+		triangles_planner_merge(&sorter->planner);
 		i++;
 	}
 	if (sorter->two_stacks.stack_b.size != 0)

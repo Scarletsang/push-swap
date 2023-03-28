@@ -6,14 +6,15 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:36:45 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 19:04:14 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:52:19 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/triangle_planner.h"
 
-static void	fill_unimportant_evenly(t_push_swap_triangles_planner *planner, \
-t_push_swap_triangles_size_calculator *calculator)
+static void	fill_unimportant_evenly(\
+t_push_swap_triangles_size_calculator *calculator, \
+t_push_swap_triangles_planner *planner)
 {
 	unsigned int	unimportant_triangles_total_size;
 	unsigned int	total_unimportant_triangles;
@@ -30,8 +31,8 @@ t_push_swap_triangles_size_calculator *calculator)
 }
 
 static t_push_swap_triangle_fill_mode	calculate_fill_mode(\
-t_push_swap_triangles_planner *planner, \
-t_push_swap_triangles_size_calculator *calculator)
+t_push_swap_triangles_size_calculator *calculator, \
+t_push_swap_triangles_planner *planner)
 {
 	unsigned int	minimum_triangles_size;
 
@@ -54,15 +55,17 @@ t_push_swap_triangles_size_calculator *calculator)
 				planner->triangles_size_delta + planner->mininum_triangle_size;
 		return (FILL_IMPORTANT_FIRST);
 	}
-	fill_unimportant_evenly(planner, calculator);
+	fill_unimportant_evenly(calculator, planner);
 	return (FILL_UNIMPORTANT_EVENLY);
 }
 
-int	init_triangles_size_calculator(t_push_swap_triangles_planner *planner, \
-t_push_swap_triangles_size_calculator *calculator)
+int	triangles_size_calculator_init(\
+t_push_swap_triangles_size_calculator *calculator, \
+t_push_swap_triangles_planner *planner)
 {
-	calculator->total_important_triangles = get_important_triangles_before(\
-		planner->total_triangles - 1, 3);
-	calculator->fill_mode = calculate_fill_mode(planner, calculator);
+	calculator->total_important_triangles = \
+		triangles_plannerget_important_triangles_before_index(\
+			planner->total_triangles - 1, 3);
+	calculator->fill_mode = calculate_fill_mode(calculator, planner);
 	return (EXIT_SUCCESS);
 }

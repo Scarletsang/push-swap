@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 02:08:43 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 06:00:20 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,24 @@ typedef struct s_push_swap_triangles_planner
 	unsigned int		triangles_size_delta;
 }				t_push_swap_triangles_planner;
 
-int							init_triangles_planner(\
+int							triangles_planner_init(\
 t_push_swap_triangles_planner *maker, unsigned int total_elements);
 
-void						merge_triangles_planner(\
+void						triangles_planner_merge(\
 t_push_swap_triangles_planner *maker);
 
 /////////////////////////////////////////////////////////////
 ////////     triangle planner's internal getters     ////////
 /////////////////////////////////////////////////////////////
 
-unsigned int				get_total_triangles(\
+unsigned int				triangles_planner_get_total_triangles(\
 unsigned int total_elements);
 
-unsigned int				get_triangle_dimension(\
+unsigned int				triangles_planner_get_merge_dimension(\
 unsigned int total_triangles);
 
-unsigned int				get_important_triangles_before(\
+unsigned int				\
+triangles_plannerget_important_triangles_before_index(\
 unsigned int triangle_index, unsigned int layer);
 
 ///////////////////////////////////////////////////////
@@ -77,11 +78,11 @@ typedef struct s_push_swap_triangles_size_calculator
 	unsigned int					first_partially_filled_triangle;
 }				t_push_swap_triangles_size_calculator;
 
-int							init_triangles_size_calculator(\
-t_push_swap_triangles_planner *maker, \
-t_push_swap_triangles_size_calculator *calculator);
+int							triangles_size_calculator_init(\
+t_push_swap_triangles_size_calculator *calculator, \
+t_push_swap_triangles_planner *planner);
 
-void						precalculate_all_triangles_size(\
+void						triangles_planner_calculate_triangles_sizes(\
 t_push_swap_triangles_planner *maker);
 
 //////////////////////////////////////////////////
@@ -99,14 +100,16 @@ t_push_swap_triangles_planner *maker);
 typedef int					(*t_push_swap_triangle_shape)(int element_a, \
 int element_b);
 
-int							ascending_triangle(int element_a, int element_b);
+int							triangle_shape_ascending(int element_a, \
+int element_b);
 
-int							descending_triangle(int element_a, int element_b);
+int							triangle_shape_descending(int element_a, \
+int element_b);
 
-t_push_swap_triangle_shape	switch_triangle_shape(\
+t_push_swap_triangle_shape	triangle_shape_switch(\
 t_push_swap_triangle_shape triangle_shape);
 
-t_push_swap_triangle_shape	calculate_triangle_shape(\
+t_push_swap_triangle_shape	triangles_planner_calculate_triangle_shape(\
 unsigned int triangle_index, unsigned int total_triangles, \
 const unsigned int merge_dimension);
 
@@ -114,7 +117,7 @@ const unsigned int merge_dimension);
 ////////     Triangles size and shape printer    ////////
 /////////////////////////////////////////////////////////
 
-void						print_triangles(\
+void						triangles_planner_print(\
 t_push_swap_triangles_planner *planner);
 
 #endif
