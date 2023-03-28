@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 07:34:54 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 07:37:42 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 08:31:09 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_push_swap_instruction *instruction_arr);
 void							emulated_instructor_edit_last(\
 t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor, \
 t_push_swap_instruction instruction);
-
 
 /////////////////////////////////////////
 ////////     stack_b formula     ////////
@@ -108,6 +107,5 @@ t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor);
 t_push_swap_error_code			emulator_move_priority_elements(\
 t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor, \
 unsigned int priority_amount);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 07:44:02 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 08:31:01 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef enum e_push_swap_emulation_priority
 	UNKNOWN_PRIORITY
 }				t_push_swap_emulation_priority;
 
-struct s_push_swap_triangle_maker;
+struct										s_push_swap_triangle_maker;
 typedef t_push_swap_error_code				(*t_push_swap_formula)(\
 struct s_push_swap_triangle_maker *triangle_maker, \
 t_push_swap_instructor *instructor);
