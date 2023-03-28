@@ -67,3 +67,5 @@ This idea of merging comes from this guide: [Triangle merge sort](https://80000c
 2. An algorithm to calculate triangle sizes
 3. An algorithm to create triangles from stack A to stack B
 3. An algorithm to create trangle on stack A (used for small numbers of elements and the creation of the last triangle)
+
+![Architecture of push swap](docs/push_swap_diagram.jpg)
