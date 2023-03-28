@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:09:35 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/27 21:45:51 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:31:08 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ t_push_swap_triangle_maker *triangle_maker)
 	{
 		if (move_priority_elements(instructor, triangle_maker, 2))
 			return (FAILURE);
-		if (get_element_by_index(&triangle_maker->emulation.stack_b, 0) > \
-			get_element_by_index(&triangle_maker->emulation.stack_b, 1))
+		if (stack_get_element_by_index(&triangle_maker->emulation.stack_b, 0) > \
+			stack_get_element_by_index(&triangle_maker->emulation.stack_b, 1))
 		{
-			if (add_instruction(instructor, SB))
+			if (instructor_add(instructor, SB))
 				return (FAILURE);
 		}
 		triangle_maker->highest_priority--;
@@ -73,11 +73,11 @@ t_push_swap_triangle_shape triangle_shape)
 t_push_swap_error_code	init_triangle_maker(t_push_swap_instructor *instructor, \
 t_push_swap_triangle_maker *triangle_maker)
 {
-	if (init_empty_stack(&triangle_maker->emulation.stack_a, \
+	if (stack_init_empty(&triangle_maker->emulation.stack_a, \
 		EMULATION_STACK_SIZE) || \
-		init_empty_stack(&triangle_maker->emulation.stack_b, \
+		stack_init_empty(&triangle_maker->emulation.stack_b, \
 		EMULATION_STACK_SIZE) || \
-		init_instructor(instructor, &triangle_maker->emulation))
+		instructor_init(instructor, &triangle_maker->emulation))
 		return (FAILURE);
 	triangle_maker->priority_location = UNKNOWN_PRIORITY_LOCATION;
 	instructor->automatic_execute = 1;

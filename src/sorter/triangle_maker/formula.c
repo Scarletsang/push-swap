@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:56:33 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 12:01:46 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 04:57:07 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_push_swap_error_code	front2(t_push_swap_instructor *instructor, \
 t_push_swap_triangle_maker *triangle_maker)
 {
 	triangle_maker->last_formula_executed = &front2;
-	if (get_element_by_index(&triangle_maker->emulation.stack_a, 0) < \
-		get_element_by_index(&triangle_maker->emulation.stack_a, 1))
+	if (stack_get_element_by_index(&triangle_maker->emulation.stack_a, 0) < \
+		stack_get_element_by_index(&triangle_maker->emulation.stack_a, 1))
 	{
 		if (instructor->last_instruction->instruction == SB)
 		{
@@ -36,8 +36,8 @@ t_push_swap_error_code	front1rear1(t_push_swap_instructor *instructor, \
 t_push_swap_triangle_maker *triangle_maker)
 {
 	triangle_maker->last_formula_executed = &front1rear1;
-	if (get_element_by_index(&triangle_maker->emulation.stack_a, 0) > \
-		get_element_by_index(&triangle_maker->emulation.stack_a, -1))
+	if (stack_get_element_by_index(&triangle_maker->emulation.stack_a, 0) > \
+		stack_get_element_by_index(&triangle_maker->emulation.stack_a, -1))
 	{
 		return (emulate_formula_instructions(instructor, triangle_maker, \
 			(t_push_swap_instruction[4]){3, PB, RRA, PB}));
@@ -50,8 +50,8 @@ t_push_swap_error_code	rear1(t_push_swap_instructor *instructor, \
 t_push_swap_triangle_maker *triangle_maker)
 {
 	if ((triangle_maker->last_formula_executed == &rear1) && \
-		(get_element_by_index(&triangle_maker->emulation.stack_a, -1) > \
-		get_element_by_index(&triangle_maker->emulation.stack_b, 0)))
+		(stack_get_element_by_index(&triangle_maker->emulation.stack_a, -1) > \
+		stack_get_element_by_index(&triangle_maker->emulation.stack_b, 0)))
 	{
 		triangle_maker->last_formula_executed = NULL;
 		edit_last_emulated_instruction(instructor, triangle_maker, RRA);

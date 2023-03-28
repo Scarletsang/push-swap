@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 20:08:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 16:22:59 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:26:34 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
  * string is invalid, return EXIT_FAILURE.
 */
 
-int	parse_swap(t_push_swap_2stacks *two_stacks, char **str);
+int	checker_parse_swap(t_push_swap_2stacks *two_stacks, char **str);
 
-int	parse_push(t_push_swap_2stacks *two_stacks, char **str);
+int	checker_parse_push(t_push_swap_2stacks *two_stacks, char **str);
 
-int	parse_rotate(t_push_swap_2stacks *two_stacks, char **str);
+int	checker_parse_rotate(t_push_swap_2stacks *two_stacks, char **str);
 
 ///////////////////////////////////////////
 ////////        The checker        ////////
@@ -44,6 +44,6 @@ int	parse_rotate(t_push_swap_2stacks *two_stacks, char **str);
  * @param fd The file descriptor to take core operations from.
  * @return EXIT_SUCCESS if the inputs are all valid. EXIT_FAILURE otherwise.
  */
-int	manipulate_stacks_from_fd(t_push_swap_2stacks *two_stacks, int fd);
+int	checker_manipulate_stacks_from_fd(t_push_swap_2stacks *two_stacks, int fd);
 
 #endif

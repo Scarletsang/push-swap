@@ -6,13 +6,13 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 21:47:36 by htsang            #+#    #+#             */
-/*   Updated: 2023/02/23 22:07:29 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:15:05 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/parser.h"
 
-void	clean_collectors(t_push_swap_parser_collector *head)
+void	collector_free_all(t_push_swap_parser_collector *head)
 {
 	t_push_swap_parser_collector	*next;
 
@@ -24,7 +24,7 @@ void	clean_collectors(t_push_swap_parser_collector *head)
 	}
 }
 
-t_push_swap_parser_collector	*new_collector(int value)
+t_push_swap_parser_collector	*collector_create(int value)
 {
 	t_push_swap_parser_collector	*collector;
 

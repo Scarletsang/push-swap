@@ -6,18 +6,18 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 04:33:48 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 17:41:11 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:31:29 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/instructor.h"
 
-void	concat_instructor(t_push_swap_instructor *to, \
+void	instructor_concat(t_push_swap_instructor *to, \
 t_push_swap_instructor *from)
 {
 	if (from->last_instruction != from->cost)
 	{
-		increase_cost_by(to, get_cost(from));
+		instructor_increase_cost_by(to, instructor_get_cost(from));
 		to->last_instruction->next = from->cost->next;
 		to->last_instruction = from->last_instruction;
 		from->cost->instruction = 0;
@@ -27,17 +27,18 @@ t_push_swap_instructor *from)
 	}
 }
 
-void	increase_cost_by(t_push_swap_instructor *instructor, int cost)
+void	instructor_increase_cost_by(\
+t_push_swap_instructor *instructor, int cost)
 {
 	instructor->cost->instruction += cost;
 }
 
-int	get_cost(t_push_swap_instructor *instructor)
+int	instructor_get_cost(t_push_swap_instructor *instructor)
 {
 	return (instructor->cost->instruction);
 }
 
-t_push_swap_error_code	init_instructor(t_push_swap_instructor *instructor, \
+t_push_swap_error_code	instructor_init(t_push_swap_instructor *instructor, \
 t_push_swap_2stacks *two_stacks)
 {
 	instructor->cost = malloc(sizeof(t_push_swap_instruction_list));

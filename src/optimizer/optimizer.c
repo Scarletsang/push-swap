@@ -6,13 +6,13 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 19:54:04 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/25 23:36:30 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:30:49 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/optimizer.h"
 
-void	optmize_instructions(t_push_swap_instructor *instructor)
+void	optimizer_optmize_instructions(t_push_swap_instructor *instructor)
 {
 	t_push_swap_instruction_list		*optimizer;
 	t_push_swap_instruction_striker		striker;
@@ -21,18 +21,18 @@ void	optmize_instructions(t_push_swap_instructor *instructor)
 	optimizer = instructor->cost;
 	while (optimizer)
 	{
-		if (strike_down_instructions(&striker, optimizer) \
+		if (optimizer_strike_down_instructions(&striker, optimizer) \
 			== OPTIMIZE_POSSIBLE)
 		{
-			increase_cost_by(instructor, -2 * \
+			instructor_increase_cost_by(instructor, -2 * \
 				striker.amount_of_consecutive_hits);
 			optimizer = instructor->cost;
 			continue ;
 		}
-		if (combine_instructions(&combiner, optimizer) \
+		if (optimizer_combine_instructions(&combiner, optimizer) \
 			== OPTIMIZE_POSSIBLE)
 		{
-			increase_cost_by(instructor, -1);
+			instructor_increase_cost_by(instructor, -1);
 			optimizer = instructor->cost;
 			continue ;
 		}

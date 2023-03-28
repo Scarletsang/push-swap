@@ -6,13 +6,13 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:36:17 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/13 21:20:59 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 04:57:07 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/stack.h"
 
-void	move_stack_bound_forwards(t_push_swap_stack_bound *bound, \
+void	stack_bound_move_forwards(t_push_swap_stack_bound *bound, \
 unsigned int max_stack_size)
 {
 	if ((*bound + 1) == max_stack_size)
@@ -25,7 +25,7 @@ unsigned int max_stack_size)
 	}
 }
 
-void	move_stack_bound_backwards(t_push_swap_stack_bound *bound, \
+void	stack_bound_move_backwards(t_push_swap_stack_bound *bound, \
 unsigned int max_stack_size)
 {
 	if (*bound == 0)
@@ -38,7 +38,7 @@ unsigned int max_stack_size)
 	}
 }
 
-int	get_element_by_index(t_push_swap_stack *stack, int index)
+int	stack_get_element_by_index(t_push_swap_stack *stack, int index)
 {
 	if (index < 0)
 	{
@@ -48,7 +48,7 @@ int	get_element_by_index(t_push_swap_stack *stack, int index)
 	return (stack->elements[(stack->front + index) % stack->max_size]);
 }
 
-void	init_stack_from_array(t_push_swap_stack *stack, \
+void	stack_init_from_array(t_push_swap_stack *stack, \
 unsigned int elements_size, int *elements)
 {
 	stack->max_size = elements_size;
@@ -58,7 +58,7 @@ unsigned int elements_size, int *elements)
 	stack->rear = elements_size - 1;
 }
 
-int	init_empty_stack(t_push_swap_stack *stack, unsigned int max_stack_size)
+int	stack_init_empty(t_push_swap_stack *stack, unsigned int max_stack_size)
 {
 	stack->max_size = max_stack_size;
 	stack->elements = malloc(sizeof(int) * max_stack_size);

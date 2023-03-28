@@ -6,14 +6,14 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 22:14:16 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 16:24:29 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:32:23 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/instructor.h"
 #include "FT_PRINTF/ft_printf.h"
 
-void	print_instruction(t_push_swap_instruction instruction)
+void	instruction_print(t_push_swap_instruction instruction)
 {
 	if (instruction == SA)
 		ft_printf("sa");
@@ -39,14 +39,14 @@ void	print_instruction(t_push_swap_instruction instruction)
 		ft_printf("rrr");
 }
 
-void	print_instructions(t_push_swap_instructor *instructor)
+void	instructor_print(t_push_swap_instructor *instructor)
 {
 	t_push_swap_instruction_list	*instructions;
 
 	instructions = instructor->cost->next;
 	while (instructions)
 	{
-		print_instruction(instructions->instruction);
+		instruction_print(instructions->instruction);
 		ft_printf("\n");
 		instructions = instructions->next;
 	}

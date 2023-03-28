@@ -6,13 +6,21 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:38:05 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 02:07:33 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:37:06 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter.h"
 
-t_push_swap_error_code	create_last_triangle_on_stack_a(\
+int	sorter_free(t_push_swap_sorter *sorter)
+{
+	two_stacks_free(&sorter->two_stacks);
+	free(sorter->planner.triangles_size);
+	instruction_list_free_all(sorter->instructor.cost);
+	return (EXIT_FAILURE);
+}
+
+t_push_swap_error_code	sorter_create_last_triangle_on_stack_a(\
 t_push_swap_sorter *sorter, t_push_swap_instructor	*emulation_instructor, \
 t_push_swap_triangle_maker *triangle_maker)
 {
@@ -30,12 +38,12 @@ t_push_swap_triangle_maker *triangle_maker)
 	emulate_two_stacks(triangle_maker, &sorter->two_stacks);
 	if (create_triangle_on_stack_a(emulation_instructor, triangle_maker))
 		return (FAILURE);
-	concat_instructor(&sorter->instructor, emulation_instructor);
-	execute_unexecuted_instructions(&sorter->instructor);
+	instructor_concat(&sorter->instructor, emulation_instructor);
+	instructor_execute_unexecuted(&sorter->instructor);
 	return (SUCCESS);
 }
 
-t_push_swap_error_code	create_all_triangles_on_stack_b(\
+t_push_swap_error_code	sorter_create_all_triangles_on_stack_b(\
 t_push_swap_sorter *sorter, t_push_swap_instructor	*emulation_instructor, \
 t_push_swap_triangle_maker *triangle_maker)
 {
@@ -52,30 +60,30 @@ t_push_swap_triangle_maker *triangle_maker)
 		emulate_two_stacks(triangle_maker, &sorter->two_stacks);
 		if (create_triangle_on_stack_b(emulation_instructor, triangle_maker))
 			return (FAILURE);
-		concat_instructor(&sorter->instructor, emulation_instructor);
-		execute_unexecuted_instructions(&sorter->instructor);
+		instructor_concat(&sorter->instructor, emulation_instructor);
+		instructor_execute_unexecuted(&sorter->instructor);
 		triangle_index++;
 	}
 	return (SUCCESS);
 }
 
-t_push_swap_error_code	create_all_triangles(t_push_swap_sorter *sorter)
+t_push_swap_error_code	sorter_create_all_triangles(t_push_swap_sorter *sorter)
 {
 	t_push_swap_instructor		emulation_instructor;
 	t_push_swap_triangle_maker	triangle_maker;
 
 	if (init_triangle_maker(&emulation_instructor, &triangle_maker))
 		return (FAILURE);
-	if (create_all_triangles_on_stack_b(sorter, &emulation_instructor, \
+	if (sorter_create_all_triangles_on_stack_b(sorter, &emulation_instructor, \
 			&triangle_maker) || \
-		create_last_triangle_on_stack_a(sorter, &emulation_instructor, \
+		sorter_create_last_triangle_on_stack_a(sorter, &emulation_instructor, \
 			&triangle_maker))
 	{
-		free_instruction_list(emulation_instructor.cost);
-		free_two_stacks(&triangle_maker.emulation);
+		instruction_list_free_all(emulation_instructor.cost);
+		two_stacks_free(&triangle_maker.emulation);
 		return (FAILURE);
 	}
 	free(emulation_instructor.cost);
-	free_two_stacks(&triangle_maker.emulation);
+	two_stacks_free(&triangle_maker.emulation);
 	return (SUCCESS);
 }

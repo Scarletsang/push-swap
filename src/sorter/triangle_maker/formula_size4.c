@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 10:05:38 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 01:30:52 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:28:59 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ t_push_swap_triangle_maker *triangle_maker)
 	int								next;
 
 	i = 0;
-	current = get_element_by_index(&triangle_maker->emulation.stack_a, i) - \
-		(triangle_maker->triangle_size - TRIANGLE_SIZE_4);
+	current = stack_get_element_by_index(&triangle_maker->emulation.stack_a, i) \
+		- (triangle_maker->triangle_size - TRIANGLE_SIZE_4);
 	hash = 0;
 	while (i < 4)
 	{
-		next = get_element_by_index(&triangle_maker->emulation.stack_a, \
+		next = stack_get_element_by_index(&triangle_maker->emulation.stack_a, \
 			(i + 1) % 4) - (triangle_maker->triangle_size - TRIANGLE_SIZE_4);
 		if (current == 2)
 			hash += ((current - 6) * (current - next));
@@ -56,17 +56,17 @@ t_push_swap_instructor *instructor, t_push_swap_size4_formula_hash hash)
 	if (hash == HASH_0123)
 		return (SUCCESS);
 	if (hash == HASH_1023)
-		return (add_instruction(instructor, SA));
+		return (instructor_add(instructor, SA));
 	if (hash == HASH_2130)
-		return (add_multiple_instructions(instructor, \
+		return (instructor_add_multiple(instructor, \
 			(t_push_swap_instruction[3]){2, SA, RRA}));
 	if (hash == HASH_2031)
-		return (add_multiple_instructions(instructor, \
+		return (instructor_add_multiple(instructor, \
 			(t_push_swap_instruction[4]){3, SA, RRA, SA}));
 	if (hash == HASH_3201)
-		return (add_multiple_instructions(instructor, \
+		return (instructor_add_multiple(instructor, \
 			(t_push_swap_instruction[4]){3, SA, RRA, RRA}));
-	return (add_multiple_instructions(instructor, \
+	return (instructor_add_multiple(instructor, \
 		(t_push_swap_instruction[5]){4, SA, RRA, RRA, SA}));
 }
 
@@ -79,23 +79,23 @@ t_push_swap_size4_formula_hash hash)
 
 	start = get_start_from_hash(hash, triangle_maker->triangle_size);
 	start_location = 0;
-	while ((start_location < 4) && ((unsigned int) get_element_by_index(\
+	while ((start_location < 4) && ((unsigned int) stack_get_element_by_index(\
 		&triangle_maker->emulation.stack_a, start_location) != start))
 		start_location++;
 	if (start_location == 3)
 	{
-		if (add_instruction(instructor, RRA))
+		if (instructor_add(instructor, RRA))
 			return (FAILURE);
 	}
 	else if (start_location == 2)
 	{
-		if (add_multiple_instructions(instructor, \
+		if (instructor_add_multiple(instructor, \
 			(t_push_swap_instruction[3]){2, RA, RA}))
 			return (FAILURE);
 	}
 	else if (start_location == 1)
 	{
-		if (add_instruction(instructor, RA))
+		if (instructor_add(instructor, RA))
 			return (FAILURE);
 	}
 	return (SUCCESS);

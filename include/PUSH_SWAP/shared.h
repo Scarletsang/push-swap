@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 20:08:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 02:23:11 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:13:26 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,6 @@
 */
 
 /**
- * @brief Check if the two stacks are sorted. It is only sorted if elements
- * are arranged in ascending order in stack_a and stack_b is empty.
- * @param two_stacks The two stacks
- * @return 1 if it is sorted, otherwise 0
- */
-int	is_sorted(t_push_swap_2stacks *two_stacks);
-
-/**
  * @brief Parse input from command line arguments, and store it in the two
  * stacks.
  * @param two_stacks The two stacks
@@ -42,7 +34,7 @@ int	is_sorted(t_push_swap_2stacks *two_stacks);
  * @param argv argv from main()
  * @return 0 if nothing failed. 1 if parse fails, or any malloc() call fails.
  */
-int	init_program(t_push_swap_2stacks *two_stacks, int argc, \
+int	two_stacks_init_from_cli(t_push_swap_2stacks *two_stacks, int argc, \
 const char **argv);
 
 #endif

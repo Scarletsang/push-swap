@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:27:14 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 16:51:08 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:23:54 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ typedef struct s_push_swap_parser_collector
 	struct s_push_swap_parser_collector	*next;
 }				t_push_swap_parser_collector;
 
-t_push_swap_parser_collector	*new_collector(int value);
+t_push_swap_parser_collector	*collector_create(int value);
 
-void							clean_collectors(\
+void							collector_free_all(\
 t_push_swap_parser_collector *head);
 
 ///////////////////////////////////////////////
@@ -49,16 +49,17 @@ typedef struct s_push_swap_cli_parser
 	t_push_swap_parser_collector	*last;
 }				t_push_swap_cli_parser;
 
-int								init_push_swap_parser(\
+int								cli_parser_init(\
 t_push_swap_cli_parser *parser);
 
-int								add_collector(t_push_swap_cli_parser *parser, \
-int value);
+int								cli_parser_add_collector(\
+t_push_swap_cli_parser *parser, int value);
 
-int								parse_number(const char **str, int *result);
+int								cli_parser_parse_number(\
+const char **str, int *result);
 
-t_push_swap_cli_parser			*parse_from_cli(t_push_swap_cli_parser *parser, \
-int argc, const char **argv);
+t_push_swap_cli_parser			*cli_parser_parse_from_cli(\
+t_push_swap_cli_parser *parser, int argc, const char **argv);
 
 /**
  * @brief Convert the collectors to an array.
@@ -68,7 +69,7 @@ int argc, const char **argv);
  * of the array.
  * @return An interger array containing the parsed integers.
  */
-int								*to_array(t_push_swap_cli_parser *parser, \
-unsigned int *size);
+int								*cli_parser_to_array(\
+t_push_swap_cli_parser *parser, unsigned int *size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 22:51:36 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 02:15:36 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 05:22:13 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_push_swap_instruction_striker
 	unsigned int					amount_of_consecutive_inverse_hits;
 }				t_push_swap_instruction_striker;
 
-t_push_swap_optimize_possible	strike_down_instructions(\
+t_push_swap_optimize_possible	optimizer_strike_down_instructions(\
 t_push_swap_instruction_striker *striker, \
 t_push_swap_instruction_list *instruction_list);
 
@@ -60,7 +60,7 @@ typedef struct s_push_swap_instruction_combiner
 	t_push_swap_instruction	into;
 }				t_push_swap_instruction_combiner;
 
-t_push_swap_optimize_possible	combine_instructions(\
+t_push_swap_optimize_possible	optimizer_combine_instructions(\
 t_push_swap_instruction_combiner *combiner, \
 t_push_swap_instruction_list *instruction_list);
 
@@ -68,7 +68,7 @@ t_push_swap_instruction_list *instruction_list);
 ////////    The optimizer    ////////
 /////////////////////////////////////
 
-void							optmize_instructions(\
+void							optimizer_optmize_instructions(\
 t_push_swap_instructor *instructor);
 
 #endif

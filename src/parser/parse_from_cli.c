@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 22:30:05 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 16:28:35 by htsang           ###   ########.fr       */
+/*   Created: 2023/03/28 05:16:39 by htsang            #+#    #+#             */
+/*   Updated: 2023/03/28 05:21:04 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/parser.h"
 
-static void	ignore_space(const char **str)
+static void	cli_parser_ignore_space(const char **str)
 {
 	while (**str == ' ')
 	{
@@ -20,7 +20,7 @@ static void	ignore_space(const char **str)
 	}
 }
 
-static int	has_duplicates(t_push_swap_cli_parser *parser, int value)
+static int	cli_parser_has_duplicates(t_push_swap_cli_parser *parser, int value)
 {
 	t_push_swap_parser_collector	*collector;
 
@@ -36,18 +36,20 @@ static int	has_duplicates(t_push_swap_cli_parser *parser, int value)
 	return (0);
 }
 
-static int	parse_numbers(const char *str, t_push_swap_cli_parser *parser)
+static int	cli_parser_parse_numbers(const char *str, \
+t_push_swap_cli_parser *parser)
 {
 	int	value;
 
 	while (*str)
 	{
-		ignore_space(&str);
-		if (parse_number(&str, &value) || has_duplicates(parser, value))
+		cli_parser_ignore_space(&str);
+		if (cli_parser_parse_number(&str, &value) || \
+			cli_parser_has_duplicates(parser, value))
 		{
 			return (EXIT_FAILURE);
 		}
-		if (add_collector(parser, value))
+		if (cli_parser_add_collector(parser, value))
 		{
 			return (EXIT_FAILURE);
 		}
@@ -55,22 +57,22 @@ static int	parse_numbers(const char *str, t_push_swap_cli_parser *parser)
 	return (EXIT_SUCCESS);
 }
 
-t_push_swap_cli_parser	*parse_from_cli(t_push_swap_cli_parser *parser, \
-int argc, const char **argv)
+t_push_swap_cli_parser	*cli_parser_parse_from_cli(\
+t_push_swap_cli_parser *parser, int argc, const char **argv)
 {
 	int	i;
 
-	if (init_push_swap_parser(parser))
+	if (cli_parser_init(parser))
 	{
 		return (NULL);
 	}
 	i = 1;
 	while (i < argc)
 	{
-		ignore_space(&argv[i]);
-		if (parse_numbers(argv[i], parser))
+		cli_parser_ignore_space(&argv[i]);
+		if (cli_parser_parse_numbers(argv[i], parser))
 		{
-			clean_collectors(parser->length);
+			collector_free_all(parser->length);
 			return (NULL);
 		}
 		i++;
@@ -83,7 +85,7 @@ int argc, const char **argv)
 	return (parser);
 }
 
-int	*to_array(t_push_swap_cli_parser *parser, unsigned int *size)
+int	*cli_parser_to_array(t_push_swap_cli_parser *parser, unsigned int *size)
 {
 	int								*array;
 	int								i;
@@ -97,7 +99,7 @@ int	*to_array(t_push_swap_cli_parser *parser, unsigned int *size)
 	array = malloc(sizeof(int) * *size);
 	if (!array)
 	{
-		clean_collectors(parser->length);
+		collector_free_all(parser->length);
 		return (NULL);
 	}
 	i = 0;
@@ -107,6 +109,6 @@ int	*to_array(t_push_swap_cli_parser *parser, unsigned int *size)
 		array[i++] = collector->value;
 		collector = collector->next;
 	}
-	clean_collectors(parser->length);
+	collector_free_all(parser->length);
 	return (array);
 }
