@@ -6,11 +6,12 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:31:09 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 06:51:49 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 07:38:51 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/triangle_maker.h"
+#include "PUSH_SWAP/sorter/triangle_maker/emulator.h"
 
 t_push_swap_error_code	triangle_maker_formula_size2(\
 t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor)

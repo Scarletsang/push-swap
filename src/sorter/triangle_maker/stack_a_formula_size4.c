@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   formula_size4.c                                    :+:      :+:    :+:   */
+/*   stack_a_formula_size4.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 10:05:38 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 06:30:58 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 07:54:10 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_push_swap_size4_formula_hash hash)
 	t_push_swap_size4_formula_start	start;
 	unsigned int					start_location;
 
-	start = size4_formula_hash_to_formula_start(hash) - \
+	start = size4_formula_hash_to_formula_start(hash) + \
 		(triangle_maker->triangle_size - TRIANGLE_SIZE_4);
 	start_location = 0;
 	while ((start_location < 4) && ((unsigned int) stack_get_element_by_index(\

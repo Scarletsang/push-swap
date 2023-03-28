@@ -6,11 +6,12 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:09:35 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 07:05:07 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 07:39:10 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/triangle_maker.h"
+#include "PUSH_SWAP/sorter/triangle_maker/emulator.h"
 
 t_push_swap_error_code	triangle_maker_create_triangle_on_stack_a(\
 t_push_swap_triangle_maker *triangle_maker, \
@@ -43,9 +44,9 @@ t_push_swap_instructor *instructor)
 	}
 	if ((triangle_maker->triangle_size % 2) == 0)
 	{
-		return (triangle_maker_formula_last2(triangle_maker, instructor));
+		return (emulator_formula_last2(triangle_maker, instructor));
 	}
-	return (triangle_maker_formula_last1(triangle_maker, instructor));
+	return (emulator_formula_last1(triangle_maker, instructor));
 }
 
 void	triangle_maker_update(t_push_swap_triangle_maker *triangle_maker, \
@@ -66,7 +67,7 @@ t_push_swap_triangle_shape triangle_shape)
 	triangle_maker->emulated_stack_a_front_size = triangle_size;
 	triangle_maker->priority_location = UNKNOWN_PRIORITY_LOCATION;
 	triangle_maker->highest_priority = \
-		emulator_get_priority_by_value(triangle_maker, \
+		emulator_get_priority_of_value(triangle_maker, \
 			triangle_size - 1);
 	triangle_maker->last_formula_executed = NULL;
 }

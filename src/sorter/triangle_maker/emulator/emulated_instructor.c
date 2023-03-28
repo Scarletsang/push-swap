@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   emulated_instruction_executor.c                    :+:      :+:    :+:   */
+/*   emulated_instructor.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:58:36 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 07:11:34 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 07:38:08 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PUSH_SWAP/sorter/triangle_maker.h"
+#include "PUSH_SWAP/sorter/triangle_maker/emulator.h"
 
 static void	emulator_update_stack_front_and_rear_size(\
 t_push_swap_triangle_maker *triangle_maker, t_push_swap_instruction instruction)

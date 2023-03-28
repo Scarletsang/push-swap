@@ -37,13 +37,14 @@ TRIANGLE_PLANNER_SRC:= \
 	sorter/triangle_planner/printer.c
 TRIANGLE_MAKER_SRC:= \
 	sorter/triangle_maker/triangle_maker.c \
-	sorter/triangle_maker/formula.c \
-	sorter/triangle_maker/formula_size4.c \
-	sorter/triangle_maker/formula_size2356.c \
-	sorter/triangle_maker/emulation.c \
-	sorter/triangle_maker/emulated_instruction_executor.c \
-	sorter/triangle_maker/emulation_priority_mover.c \
-	sorter/triangle_maker/emulation_priority_moving_helper.c
+	sorter/triangle_maker/stack_a_formula_size4.c \
+	sorter/triangle_maker/stack_a_formula_size2356.c \
+	sorter/triangle_maker/emulation.c
+EMULATOR_SRC:= \
+	sorter/triangle_maker/emulator/emulator.c \
+	sorter/triangle_maker/emulator/emulated_instructor.c \
+	sorter/triangle_maker/emulator/stack_b_formula.c \
+	sorter/triangle_maker/emulator/priority_elements_mover.c
 SORTER_SRC:= \
 	sorter/sorter.c \
 	sorter/merger.c \
@@ -55,7 +56,7 @@ OPTIMIZER_SRC:= \
 SRC:= \
 	main.c \
 	shared.c
-OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${INSTRUCTOR_SRC:.c=.o} ${TRIANGLE_PLANNER_SRC:.c=.o} ${TRIANGLE_MAKER_SRC:.c=.o} ${SORTER_SRC:.c=.o} ${OPTIMIZER_SRC:.c=.o} ${SRC:.c=.o}}
+OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${INSTRUCTOR_SRC:.c=.o} ${TRIANGLE_PLANNER_SRC:.c=.o} ${TRIANGLE_MAKER_SRC:.c=.o} ${EMULATOR_SRC:.c=.o} ${SORTER_SRC:.c=.o} ${OPTIMIZER_SRC:.c=.o} ${SRC:.c=.o}}
 PRINTF:=lib/ft_printf/libftprintf.a
 INCLUDE:= \
 	include \
