@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 05:16:39 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 05:21:04 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/29 01:14:42 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ t_push_swap_cli_parser *parser)
 {
 	int	value;
 
+	if (*str)
+		cli_parser_ignore_space(&str);
 	while (*str)
 	{
-		cli_parser_ignore_space(&str);
 		if (cli_parser_parse_number(&str, &value) || \
 			cli_parser_has_duplicates(parser, value))
 		{
@@ -53,6 +54,7 @@ t_push_swap_cli_parser *parser)
 		{
 			return (EXIT_FAILURE);
 		}
+		cli_parser_ignore_space(&str);
 	}
 	return (EXIT_SUCCESS);
 }
