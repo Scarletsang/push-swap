@@ -1,126 +1,56 @@
 # PUSH SWAP
 
-## Creating triangles
+The project aims to generate the shortest sequence of instructions that sorts elements using two stacks. The instructions are as follows:
 
-These are the formula used for to push priority elements to stackB:
+- sa: swap the order of first 2 elements on stack A
+- sb: swap the order of first 2 elements on stack B
+- ss: executes sa and sb at the same time
+- ra: rotate the first element of stack A to the end of stack A
+- rb: rotate the first element of stack B to the end of stack B
+- rr: executes ra and rb at the same time
+- rra: rotate the last element of stack A up the start of stack A
+- rrb: rotate the last element of stack B up the start of stack B
+- rrr: executes rra and rrb at the same time
+- pa: pushes the first element of stack A to the starts of stack B
+- pb: pushes the first element of stack B to the starts of stack A
 
-```ruby
-# Cost: 2 - 3
-def front2 stackA, stackB
-    if last_instruction == SB
-        if stackA[0] < stackA[1] :
-            edit_last_cmd(SS)
-        add_cmd(PB, PB)
-        return
-    add_cmd(PB, PB)
-    if stackA[0] < stackA[1] :
-        add_cmd(SB)
+## Compilation
 
-# Cost: 3
-def front1rear1 stackA, stackB
-    if stackA[0] > stackA[-1]
-        add_cmd(PB, RRA)
-    else
-        add_cmd(RRA, PB)
-    add_cmd(PB)
-
-# Cost: 2
-def rear1 stackA, stackB
-    if last_formula == rear1
-        edit_last_cmd(RRA)
-        add_cmd(PB, PB)
-    else
-        add_cmd(RRA, PB)
+```bash
+git submodule update --init
+make && make clean && make bonus
 ```
 
-This is the actual algorithm to create triangle:
+This will compile the push_swap executable as well as the checker executable.
 
-```ruby
+## Usage
 
-def has_priority_in_front index, front_size, priority_group
-    if index >= front_size
-        return BACK
-    if get_group(stackA[index]) == priority_group
-        return FRONT
-    return has_priority_in_front(index + 1, front_size, priority_group)
+All of the following is valid inputs. The rule is simply as long as you pass in non-repeating numbers.
 
-def move_priority front_size, rear_size, priority_group, group_size, forced_lookup, last_instruction
-    if group_size == 0
-        return
-    # Checks if rear has priority
-    if get_group(stackA[-1]) == priority_group
-        if get_group(stackA[0]) == priority_group
-            front1rear1(stackA, stackB)
-            return 
-        rear1(stackA, stackB)
-        return move_priority(front_size, rear_size - 1, priority_group, group_size - 1, UNDEFINED, &rear1)
-    # Checks if the front has priority
-    if get_group(stackA[0]) == priority_group
-        if get_group(stackA[1]) == priority_group
-            front2(stackA, stackB)
-            return
-        add_cmd(PB)
-        return move_priority(front_size - 1, rear_size, priority_group, group_size - 1, UNDEFINED, last_instruction)
-    # Front lookup
-    if forced_lookup == FRONT
-        if get_group(stackA[1]) == priority_group && \
-           priority_group_is_decreasing_after(stackA, 2, get_group(stackA[0]), front_size - 2)
-                add_cmd(SA)
-                return move_priority(front_size, rear_size, priority_group, group_size, FRONT, last_instruction)
-        add_cmd(RA)
-        return move_priority(front_size - 1, rear_size + 1, priroity_group, group_size, FRONT, last_instruction)
-    # Back lookup
-    if forced_lookup == BACK
-        add_cmd(RRA)
-        return move_priority(front_size + 1, rear_size - 1, priority_group, group_size, BACK, last_instruction)
-    return move_priority(front_size, rear_size, priority_group, group_size, \
-        has_priority_in_front(0, front_size, priority_group), last_instruction)
-
-# The variables stackA, stackB, front_size and rear_size are always passed by reference and not by value.
-# However, priority is passed by value
-# For future me, note that in the C code, move_biggest_group actually change the triangle_size, so keep in mind that the original value of the triangle_size has to be saved in the C code.
-def create_triangle stackA, stackB, front_size, rear_size, triangle_size
-    priority_group = get_group(triangle_size - 1)
-    while priority_group > 0
-        move_priority(stackA, stackB, front_size, rear_size, priority_group)
-        priority_group--
-    if triangle_size % 2 == 0
-        if rear_size == 0
-            size2size2(stackA)
-        elsif rear_size == -1
-            front1rear1(stackA, stackB)
-        else
-            rear1(stackA, stackB)
-            rear1(stackA, stackB)
-    else
-        if rear_size == 0
-            add_cmd(PB)
-        else
-            rear1(stackA, stackB)
+```bash
+./push_swap 1 3 2 -10 13 99
+./push_swap "1 3 2 -10 13 99"
+./push_swap "1 3 2" -10 "13 99"
 ```
 
-```c
-typedef enum e_push_swap_instruction
-{
-	SA = -1,
-	SS = -2,
-	SB = -3,
-	PA = 0,
-	RA = 1,
-	RR = 2,
-	RB = 3,
-	RRB = 4,
-	RRR = 5,
-	RRA = 6,
-	PB = 7
-}			t_push_swap_instruction;
+Then it will generate instructions like this:
+
+```
+pb
+ra
+ra
+pb
+ra
+ra
+ss
+pa
+pa
 ```
 
-SA SB = SS
-(-1 -3) -2
-RA RB = RR
-(1 3)   2 
-RRA RRB = RRR
-(6  4)    5 
+The checker is used to check whether the instruction generated is correct.
 
--2 0 2 5 7
+It can be used like this in general:
+
+```bash
+NUMBERS="1 3 2 -10 13 99"; ./push_swap $NUMBERS | ./checker $NUMBERS
+```
