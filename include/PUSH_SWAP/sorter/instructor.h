@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 20:08:19 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 18:41:30 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 02:16:35 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,12 @@ typedef enum e_push_swap_instruction
 }			t_push_swap_instruction;
 
 /**
- * @brief Returns the inverse instruction of the given instruction. For example,
- * PA is the inverse of PB, RA is that of RRA, etc. However, the swap instructions
- * are their own inverse, i.e. SA is the inverse of SA, SS is the inverse of SS.
- * Therfore, the enum of the swap instructions are made negative, so that it can
- * be programmatically distingushed from the other instructions.
+ * @brief Returns the inverse instruction of the given instruction.For example,
+ * PA is the inverse of PB, RA is that of RRA, etc. However, the swap
+ * instructions are their own inverse, e.g. SA is the inverse of SA,
+ * SS is the inverse of SS. Therfore, the enum of the swap instructions are
+ * made negative, so that it can be programmatically distingushed from the
+ * other instructions.
  * @param instruction the instruction to be inverted
  * @return the inverted instruction
  */
@@ -67,6 +68,9 @@ t_push_swap_instruction instruction);
 ////////     instruction list interface    ////////
 ///////////////////////////////////////////////////
 
+/**
+ * @brief Represents a sequence of instructions.
+ */
 typedef struct s_push_swap_instruction_list
 {
 	t_push_swap_instruction				instruction;
@@ -83,8 +87,8 @@ t_push_swap_instruction_list *instruction);
 /**
  * @brief Instructor not only holds the start and end of one instruction list,
  * it is also capable of executing the instruction list on the two stacks. The
- * start of the instruction list always store the total length of the linked list,
- * which represents how costly does the instruction list is.
+ * start of the instruction list always store the total length of the linked
+ * list, which represents how costly does the instruction list is.
  * 
  * For the convinience of the triangle maker, the instructor always need to 
  * execute the instruction immediately after it has been added to the list,

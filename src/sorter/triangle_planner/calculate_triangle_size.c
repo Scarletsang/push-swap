@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 03:50:53 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 19:21:33 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 02:07:33 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_push_swap_triangles_size_calculator *calculator)
 		if ((triangle_index % 3) != 1)
 			return (planner->mininum_triangle_size);
 		triangle_order = get_triangle_order(triangle_index, \
-			planner->triangle_dimension);
+			planner->merge_dimension);
 		if (triangle_order < calculator->first_partially_filled_triangle)
 			return (planner->mininum_triangle_size + \
 				planner->triangles_size_delta);
@@ -61,7 +61,7 @@ t_push_swap_triangles_size_calculator *calculator)
 	if ((triangle_index % 3) == 1)
 		return (planner->mininum_triangle_size + planner->triangles_size_delta);
 	triangle_order = get_triangle_order(triangle_index, \
-		planner->triangle_dimension);
+		planner->merge_dimension);
 	triangle_order -= (planner->total_triangles / 3);
 	if (triangle_order < calculator->first_partially_filled_triangle)
 		return (calculator->target_triangle_size + 1);

@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 21:13:20 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 02:08:43 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,16 @@
  * 
  * All Triangles' size are precalculated and stored in an array called
  * triangles_size. The size of the array is total_triangles. 
+ * 
+ * Merge_dimension is the number of times merge needs to happen in order
+ * to merge all triangles into one single sorted big triangle.
  */
 typedef struct s_push_swap_triangles_planner
 {
 	unsigned int		*triangles_size;
 	const unsigned int	total_elements;
 	unsigned int		total_triangles;
-	const unsigned int	triangle_dimension;
+	const unsigned int	merge_dimension;
 	unsigned int		mininum_triangle_size;
 	unsigned int		triangles_size_delta;
 }				t_push_swap_triangles_planner;
@@ -55,9 +58,9 @@ unsigned int total_triangles);
 unsigned int				get_important_triangles_before(\
 unsigned int triangle_index, unsigned int layer);
 
-//////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 ////////     Calculate triangles_size size     ////////
-//////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 
 typedef enum e_push_swap_triangle_fill_mode
 {
@@ -85,6 +88,14 @@ t_push_swap_triangles_planner *maker);
 ////////     Calculate triangle shape     ////////
 //////////////////////////////////////////////////
 
+/**
+ * @brief The sorted elements on stack_b can either be ascending or
+ * descending. This is the type to represents this distinction. The type
+ * is implemented as a function pointer, so that not only one can use
+ * the function pointer address to represents the triangle shape, one can
+ * also run the function to make comparision between the value of the
+ * elements.
+ */
 typedef int					(*t_push_swap_triangle_shape)(int element_a, \
 int element_b);
 
@@ -95,15 +106,13 @@ int							descending_triangle(int element_a, int element_b);
 t_push_swap_triangle_shape	switch_triangle_shape(\
 t_push_swap_triangle_shape triangle_shape);
 
-t_push_swap_triangle_shape	calculate_triangle_shape(unsigned int triangle_index, \
-unsigned int total_triangles, const unsigned int triangle_dimension);
+t_push_swap_triangle_shape	calculate_triangle_shape(\
+unsigned int triangle_index, unsigned int total_triangles, \
+const unsigned int merge_dimension);
 
 /////////////////////////////////////////////////////////
 ////////     Triangles size and shape printer    ////////
 /////////////////////////////////////////////////////////
-
-int							print_all_triangles_merge(\
-unsigned int total_elements);
 
 void						print_triangles(\
 t_push_swap_triangles_planner *planner);

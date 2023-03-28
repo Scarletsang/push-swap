@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 10:05:38 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/23 16:21:07 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 01:30:52 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_push_swap_triangle_maker *triangle_maker)
 	return (hash);
 }
 
-static t_push_swap_size4_formula_indicator	get_indicator_from_hash(\
+static t_push_swap_size4_formula_start	get_start_from_hash(\
 t_push_swap_size4_formula_hash hash, t_push_swap_triangle_size triangle_size)
 {
 	if (hash == HASH_0123)
@@ -74,26 +74,26 @@ static t_push_swap_error_code	rotate_to_get_to_size4_formula(\
 t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker, \
 t_push_swap_size4_formula_hash hash)
 {
-	t_push_swap_size4_formula_indicator	indicator;
-	unsigned int						indicator_location;
+	t_push_swap_size4_formula_start	start;
+	unsigned int					start_location;
 
-	indicator = get_indicator_from_hash(hash, triangle_maker->triangle_size);
-	indicator_location = 0;
-	while ((indicator_location < 4) && ((unsigned int) get_element_by_index(\
-		&triangle_maker->emulation.stack_a, indicator_location) != indicator))
-		indicator_location++;
-	if (indicator_location == 3)
+	start = get_start_from_hash(hash, triangle_maker->triangle_size);
+	start_location = 0;
+	while ((start_location < 4) && ((unsigned int) get_element_by_index(\
+		&triangle_maker->emulation.stack_a, start_location) != start))
+		start_location++;
+	if (start_location == 3)
 	{
 		if (add_instruction(instructor, RRA))
 			return (FAILURE);
 	}
-	else if (indicator_location == 2)
+	else if (start_location == 2)
 	{
 		if (add_multiple_instructions(instructor, \
 			(t_push_swap_instruction[3]){2, RA, RA}))
 			return (FAILURE);
 	}
-	else if (indicator_location == 1)
+	else if (start_location == 1)
 	{
 		if (add_instruction(instructor, RA))
 			return (FAILURE);

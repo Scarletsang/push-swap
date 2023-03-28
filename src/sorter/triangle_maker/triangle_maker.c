@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:09:35 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/24 22:10:11 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/27 21:45:51 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ void	prepare_emulation(t_push_swap_triangle_maker *triangle_maker, \
 t_push_swap_triangle_size triangle_size, \
 t_push_swap_triangle_shape triangle_shape)
 {
-	triangle_maker->triangle_size = triangle_size;
-	triangle_maker->triangle_shape = triangle_shape;
+	*(t_push_swap_triangle_size *) &triangle_maker->triangle_size = \
+		triangle_size;
+	*(t_push_swap_triangle_shape *) &triangle_maker->triangle_shape = \
+		triangle_shape;
 	triangle_maker->emulation.stack_a.size = 0;
 	triangle_maker->emulation.stack_a.front = 0;
 	triangle_maker->emulation.stack_a.rear = 0;

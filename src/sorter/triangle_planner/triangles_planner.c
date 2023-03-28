@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 03:50:53 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 19:21:33 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 02:07:33 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ unsigned int total_elements)
 		return (EXIT_FAILURE);
 	}
 	planner->total_triangles = get_total_triangles(total_elements);
-	*((unsigned int *) &planner->triangle_dimension) = \
+	*((unsigned int *) &planner->merge_dimension) = \
 		get_triangle_dimension(planner->total_triangles);
 	planner->mininum_triangle_size = 2;
 	planner->triangles_size_delta = 4;

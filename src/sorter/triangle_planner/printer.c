@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:28:17 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 19:21:33 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 02:07:33 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_triangles(t_push_swap_triangles_planner *planner)
 	while (index < planner->total_triangles)
 	{
 		if (calculate_triangle_shape(index, planner->total_triangles, \
-			planner->triangle_dimension) == &descending_triangle)
+			planner->merge_dimension) == &descending_triangle)
 			ft_printf("D");
 		else
 			ft_printf("A");
@@ -35,26 +35,4 @@ void	print_triangles(t_push_swap_triangles_planner *planner)
 		index++;
 	}
 	ft_printf("\n===================\n");
-}
-
-int	print_all_triangles_merge(unsigned int total_elements)
-{
-	t_push_swap_triangles_planner		planner;
-	unsigned int						triangle_dimension;
-
-	if (init_triangles_planner(&planner, total_elements))
-	{
-		return (EXIT_FAILURE);
-	}
-	precalculate_all_triangles_size(&planner);
-	triangle_dimension = planner.triangle_dimension;
-	while (triangle_dimension > 0)
-	{
-		print_triangles(&planner);
-		merge_triangles_planner(&planner);
-		triangle_dimension--;
-	}
-	print_triangles(&planner);
-	free(planner.triangles_size);
-	return (EXIT_SUCCESS);
 }

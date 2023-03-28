@@ -6,11 +6,11 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 19:21:33 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 02:18:01 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PUSH_SWAP/push_swap.h"
+#include "PUSH_SWAP/shared.h"
 #include "PUSH_SWAP/sorter.h"
 #include "PUSH_SWAP/optimizer.h"
 
@@ -42,7 +42,7 @@ int	main(int argc, const char **argv)
 	precalculate_all_triangles_size(&sorter.planner);
 	if (create_all_triangles(&sorter))
 		return (free_program(&sorter));
-	init_merger(&sorter);
+	init_merger(&sorter.merger, &sorter.two_stacks);
 	if (merge_triangles_till_sorted(&sorter))
 		return (free_program(&sorter));
 	optmize_instructions(&sorter.instructor);

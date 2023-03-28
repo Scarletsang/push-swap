@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:38:20 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/26 19:21:33 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/27 21:04:01 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ t_push_swap_triangles_planner *planner, unsigned int triangle_index)
 		planner->triangles_size[triangle_index];
 }
 
-void	init_merger(t_push_swap_sorter *sorter)
+void	init_merger(t_push_swap_merger *merger, \
+t_push_swap_2stacks *two_stacks)
 {
-	sorter->merger.destination_stack = &sorter->two_stacks.stack_a;
-	sorter->merger.source_stack = &sorter->two_stacks.stack_b;
+	merger->destination_stack = &two_stacks->stack_a;
+	merger->source_stack = &two_stacks->stack_b;
 }
