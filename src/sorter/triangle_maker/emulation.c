@@ -6,13 +6,14 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:02:07 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 04:59:28 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 07:04:20 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/triangle_maker.h"
 
-static void	index_element(t_push_swap_triangle_maker *triangle_maker, \
+static void	triangle_maker_index_element(\
+t_push_swap_triangle_maker *triangle_maker, \
 int indexed_stack[EMULATION_STACK_SIZE], t_push_swap_stack_bound index)
 {
 	unsigned int			i;
@@ -29,7 +30,8 @@ int indexed_stack[EMULATION_STACK_SIZE], t_push_swap_stack_bound index)
 	}
 }
 
-static void	index_emulation_stack_a(t_push_swap_triangle_maker *triangle_maker)
+static void	triangle_maker_index_emulated_stack_a(\
+t_push_swap_triangle_maker *triangle_maker)
 {
 	t_push_swap_stack_bound	front;
 	unsigned int			i;
@@ -38,10 +40,10 @@ static void	index_emulation_stack_a(t_push_swap_triangle_maker *triangle_maker)
 	front = triangle_maker->emulation.stack_a.front;
 	while (front != triangle_maker->emulation.stack_a.rear)
 	{
-		index_element(triangle_maker, indexed_stack, front);
+		triangle_maker_index_element(triangle_maker, indexed_stack, front);
 		stack_bound_move_forwards(&front, EMULATION_STACK_SIZE);
 	}
-	index_element(triangle_maker, indexed_stack, front);
+	triangle_maker_index_element(triangle_maker, indexed_stack, front);
 	i = 0;
 	while (i < EMULATION_STACK_SIZE)
 	{
@@ -50,8 +52,8 @@ static void	index_emulation_stack_a(t_push_swap_triangle_maker *triangle_maker)
 	}
 }
 
-t_push_swap_emulation_priority	get_emulation_priority_by_value(\
-int indexed_value, t_push_swap_triangle_maker *triangle_maker)
+t_push_swap_emulation_priority	emulator_get_priority_by_value(\
+t_push_swap_triangle_maker *triangle_maker, int indexed_value)
 {
 	if ((triangle_maker->triangle_size % 2) == 1)
 	{
@@ -60,8 +62,8 @@ int indexed_value, t_push_swap_triangle_maker *triangle_maker)
 	return (indexed_value / 2);
 }
 
-t_push_swap_emulation_priority	get_emulation_priority_by_index(int index, \
-t_push_swap_triangle_maker *triangle_maker)
+t_push_swap_emulation_priority	emulator_get_priority_by_index(\
+t_push_swap_triangle_maker *triangle_maker, int index)
 {
 	if ((index < 0) && \
 		(-index > (int) triangle_maker->emulated_stack_a_rear_size))
@@ -69,13 +71,13 @@ t_push_swap_triangle_maker *triangle_maker)
 	if ((index >= 0) && \
 		(index >= (int) triangle_maker->emulated_stack_a_front_size))
 		return (UNKNOWN_PRIORITY);
-	return (get_emulation_priority_by_value(\
+	return (emulator_get_priority_by_value(triangle_maker, \
 		stack_get_element_by_index(&triangle_maker->emulation.stack_a, \
-			index), triangle_maker));
+			index)));
 }
 
-void	emulate_two_stacks(t_push_swap_triangle_maker *triangle_maker, \
-t_push_swap_2stacks *two_stacks)
+void	triangle_maker_emulate_two_stacks(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_2stacks *two_stacks)
 {
 	unsigned int	stack_a_rear_size;
 	unsigned int	stack_a_front_size;
@@ -96,5 +98,5 @@ t_push_swap_2stacks *two_stacks)
 				stack_a_front_size - 1));
 		stack_a_front_size--;
 	}
-	index_emulation_stack_a(triangle_maker);
+	triangle_maker_index_emulated_stack_a(triangle_maker);
 }

@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:38:05 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 05:57:49 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 06:40:49 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ t_push_swap_triangle_maker *triangle_maker)
 			sorter->planner.merge_dimension);
 	if (sorter->planner.merge_dimension > 0)
 		triangle_shape = triangle_shape_switch(triangle_shape);
-	prepare_emulation(triangle_maker, \
+	triangle_maker_update(triangle_maker, \
 		sorter->planner.triangles_size[last_triangle_index], triangle_shape);
-	emulate_two_stacks(triangle_maker, &sorter->two_stacks);
-	if (create_triangle_on_stack_a(emulation_instructor, triangle_maker))
+	triangle_maker_emulate_two_stacks(triangle_maker, &sorter->two_stacks);
+	if (triangle_maker_create_triangle_on_stack_a(triangle_maker, \
+		emulation_instructor))
 		return (FAILURE);
 	instructor_concat(&sorter->instructor, emulation_instructor);
 	instructor_execute_unexecuted(&sorter->instructor);
@@ -52,13 +53,14 @@ t_push_swap_triangle_maker *triangle_maker)
 	triangle_index = 0;
 	while (triangle_index < (sorter->planner.total_triangles - 1))
 	{
-		prepare_emulation(triangle_maker, \
+		triangle_maker_update(triangle_maker, \
 			sorter->planner.triangles_size[triangle_index], \
 			triangles_planner_calculate_triangle_shape(\
 				triangle_index, sorter->planner.total_triangles, \
 				sorter->planner.merge_dimension));
-		emulate_two_stacks(triangle_maker, &sorter->two_stacks);
-		if (create_triangle_on_stack_b(emulation_instructor, triangle_maker))
+		triangle_maker_emulate_two_stacks(triangle_maker, &sorter->two_stacks);
+		if (triangle_maker_create_triangle_on_stack_b(triangle_maker, \
+			emulation_instructor))
 			return (FAILURE);
 		instructor_concat(&sorter->instructor, emulation_instructor);
 		instructor_execute_unexecuted(&sorter->instructor);
@@ -72,7 +74,7 @@ t_push_swap_error_code	sorter_create_all_triangles(t_push_swap_sorter *sorter)
 	t_push_swap_instructor		emulation_instructor;
 	t_push_swap_triangle_maker	triangle_maker;
 
-	if (init_triangle_maker(&emulation_instructor, &triangle_maker))
+	if (triangle_maker_init(&emulation_instructor, &triangle_maker))
 		return (FAILURE);
 	if (sorter_create_all_triangles_on_stack_b(sorter, &emulation_instructor, \
 			&triangle_maker) || \

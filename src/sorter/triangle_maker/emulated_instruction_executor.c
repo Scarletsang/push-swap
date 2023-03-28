@@ -6,15 +6,14 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 19:58:36 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 05:30:15 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 07:11:34 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PUSH_SWAP/sorter/triangle_maker.h"
 
-static void	update_emulation_stack_front_and_rear_size(\
-t_push_swap_triangle_maker *triangle_maker, \
-t_push_swap_instruction instruction)
+static void	emulator_update_stack_front_and_rear_size(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instruction instruction)
 {
 	if (instruction == RA)
 	{
@@ -32,18 +31,18 @@ t_push_swap_instruction instruction)
 	}
 }
 
-t_push_swap_error_code	emulate_instruction(\
-t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker, \
+t_push_swap_error_code	emulated_instructor_add(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor, \
 t_push_swap_instruction instruction)
 {
 	triangle_maker->last_formula_executed = NULL;
-	update_emulation_stack_front_and_rear_size(triangle_maker, \
+	emulator_update_stack_front_and_rear_size(triangle_maker, \
 		instruction);
 	return (instructor_add(instructor, instruction));
 }
 
-t_push_swap_error_code	emulate_formula_instructions(\
-t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker, \
+t_push_swap_error_code	emulated_instructor_add_formula(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor, \
 t_push_swap_instruction *instruction_arr)
 {
 	unsigned int	i;
@@ -51,7 +50,7 @@ t_push_swap_instruction *instruction_arr)
 	i = 0;
 	while (i < (unsigned int) instruction_arr[0])
 	{
-		update_emulation_stack_front_and_rear_size(triangle_maker, \
+		emulator_update_stack_front_and_rear_size(triangle_maker, \
 			instruction_arr[i + 1]);
 		if (instructor_add(instructor, instruction_arr[i + 1]))
 			return (FAILURE);
@@ -60,22 +59,23 @@ t_push_swap_instruction *instruction_arr)
 	return (SUCCESS);
 }
 
-t_push_swap_error_code	emulate_multiple_instructions(\
-t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker, \
+t_push_swap_error_code	emulated_instructor_add_multiple(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor, \
 t_push_swap_instruction *instruction_arr)
 {
 	triangle_maker->last_formula_executed = NULL;
-	return (emulate_formula_instructions(instructor, triangle_maker, \
+	return (emulated_instructor_add_formula(triangle_maker, instructor, \
 		instruction_arr));
 }
 
-void	edit_last_emulated_instruction(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker, t_push_swap_instruction instruction)
+void	emulated_instructor_edit_last(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor, \
+t_push_swap_instruction instruction)
 {
-	update_emulation_stack_front_and_rear_size(triangle_maker, \
+	emulator_update_stack_front_and_rear_size(triangle_maker, \
 			instruction_get_inverse(\
 				instructor->last_executed_instruction->instruction));
-	update_emulation_stack_front_and_rear_size(triangle_maker, \
+	emulator_update_stack_front_and_rear_size(triangle_maker, \
 			instruction);
 	instructor_edit_last(instructor, instruction);
 }

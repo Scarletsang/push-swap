@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:27:41 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 02:26:22 by htsang           ###   ########.fr       */
+/*   Updated: 2023/03/28 07:09:24 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@
  * 
  * To ease the process of comparing the values of those elements during
  * sorting, the values are mapped to a range of 0 to 5. This kind of indexing
- * is executed when the function @ref emulate_two_stacks is called.
- * To comprehend sorting both in ascending and descending order,
+ * is executed when the function @ref triangle_maker_emulate_two_stacks is
+ * called. To comprehend sorting both in ascending and descending order,
  * instead of thinking about indexing as just mapping down the values to an
  * easiest range of number to process, triangle maker indexed the values
  * according to which element has a higher priority to be sorted first.
@@ -69,14 +69,14 @@ typedef enum e_push_swap_emulation_priority
 	UNKNOWN_PRIORITY
 }				t_push_swap_emulation_priority;
 
-void							emulate_two_stacks(\
+void							triangle_maker_emulate_two_stacks(\
 t_push_swap_triangle_maker *triangle_maker, t_push_swap_2stacks *two_stacks);
 
-t_push_swap_emulation_priority	get_emulation_priority_by_value(\
-int indexed_value, t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_emulation_priority	emulator_get_priority_by_value(\
+t_push_swap_triangle_maker *triangle_maker, int indexed_value);
 
-t_push_swap_emulation_priority	get_emulation_priority_by_index(int index, \
-t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_emulation_priority	emulator_get_priority_by_index(\
+t_push_swap_triangle_maker *triangle_maker, int index);
 
 //////////////////////////////////////////////////////////////////////
 ////////     Triangle maker's instructor action interface     ////////
@@ -90,20 +90,20 @@ t_push_swap_triangle_maker *triangle_maker);
  * why this interface is necessary.
 */
 
-t_push_swap_error_code			emulate_instruction(\
-t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker, \
+t_push_swap_error_code			emulated_instructor_add(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor, \
 t_push_swap_instruction instruction);
 
-t_push_swap_error_code			emulate_formula_instructions(\
-t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker, \
+t_push_swap_error_code			emulated_instructor_add_formula(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor, \
 t_push_swap_instruction *instruction_arr);
 
-t_push_swap_error_code			emulate_multiple_instructions(\
-t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker, \
+t_push_swap_error_code			emulated_instructor_add_multiple(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor, \
 t_push_swap_instruction *instruction_arr);
 
-void							edit_last_emulated_instruction(\
-t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker, \
+void							emulated_instructor_edit_last(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor, \
 t_push_swap_instruction instruction);
 
 /////////////////////////////////////////
@@ -149,19 +149,19 @@ typedef enum e_push_swap_size4_formula_start
 }				t_push_swap_size4_formula_start;
 
 typedef t_push_swap_error_code				(*t_push_swap_formula)(\
-t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor);
 
-t_push_swap_error_code			size2(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_error_code			triangle_maker_formula_size2(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor);
 
-t_push_swap_error_code			size3(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_error_code			triangle_maker_formula_size3(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor);
 
-t_push_swap_error_code			size4(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_error_code			triangle_maker_formula_size4(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor);
 
-t_push_swap_error_code			size5_or_6(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_error_code			triangle_maker_formula_size5_or_6(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor);
 
 /////////////////////////////////////////
 ////////     stack_b formula     ////////
@@ -173,20 +173,20 @@ t_push_swap_triangle_maker *triangle_maker);
  * elements from stack_a to stack_b.
 */
 
-t_push_swap_error_code			front2(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_error_code			triangle_maker_formula_front2(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor);
 
-t_push_swap_error_code			front1rear1(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_error_code			triangle_maker_formula_front1rear1(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor);
 
-t_push_swap_error_code			rear1(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_error_code			triangle_maker_formula_rear1(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor);
 
-t_push_swap_error_code			last2(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_error_code			triangle_maker_formula_last2(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor);
 
-t_push_swap_error_code			last1(t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_error_code			triangle_maker_formula_last1(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor);
 
 /////////////////////////////////////////
 //////    The triangle maker    /////////
@@ -224,26 +224,26 @@ struct s_push_swap_triangle_maker
 	t_push_swap_formula						last_formula_executed;
 };
 
-t_push_swap_error_code			init_triangle_maker(\
+t_push_swap_error_code			triangle_maker_init(\
 t_push_swap_instructor *instructor, t_push_swap_triangle_maker *triangle_maker);
 
-t_push_swap_error_code			create_triangle_on_stack_a(\
-t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_error_code			triangle_maker_create_triangle_on_stack_a(\
+t_push_swap_triangle_maker *triangle_maker, \
+t_push_swap_instructor *instructor);
 
-t_push_swap_error_code			create_triangle_on_stack_b(\
-t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker);
+t_push_swap_error_code			triangle_maker_create_triangle_on_stack_b(\
+t_push_swap_triangle_maker *triangle_maker, \
+t_push_swap_instructor *instructor);
 
 /**
  * @brief Reset all triangle_maker's states to emulate a new set of elements.
- * It is therefore used before @ref emulate_two_stacks().
+ * It is therefore used before @ref triangle_maker_emulate_two_stacks().
  * @param triangle_maker the triangle maker
  * @param triangle_size the number of elements to sort
  * @param triangle_shape sort the elements in ascending or descending order
  * in stack_b
  */
-void							prepare_emulation(\
+void							triangle_maker_update(\
 t_push_swap_triangle_maker *triangle_maker, \
 t_push_swap_triangle_size triangle_size, \
 t_push_swap_triangle_shape triangle_shape);
@@ -262,8 +262,8 @@ t_push_swap_triangle_shape triangle_shape);
  * place, which is index 1. Next, the algorithm will determine whether the
  * element at index 0 should be displaced by ra or sa. For the implementation
  * of this part, please check the function
- * @ref priority_decreases_after_index_2(). Let's rewind a bit, what if there
- * is no priority at the front of stack_a? Then the priroity element must
+ * @ref emulator_is_priority_decrease_after_sa(). Let's rewind a bit, what if
+ * there is no priority at the front of stack_a? Then the priroity element must
  * locate in the rear, the algorithm just need to simply rra until the priority
  * is at the rear, and it can be pushed to stack_b by simplying applying
  * rra pb.
@@ -273,8 +273,8 @@ t_push_swap_triangle_shape triangle_shape);
  * @param priority_amount number of priority elements to sort
  * @return @ref t_push_swap_error_code
  */
-t_push_swap_error_code			move_priority_elements(\
-t_push_swap_instructor *instructor, \
-t_push_swap_triangle_maker *triangle_maker, unsigned int priority_amount);
+t_push_swap_error_code			emulator_move_priority_elements(\
+t_push_swap_triangle_maker *triangle_maker, t_push_swap_instructor *instructor, \
+unsigned int priority_amount);
 
 #endif
