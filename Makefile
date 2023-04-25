@@ -1,7 +1,3 @@
-################################
-######     Push swap     #######
-################################
-
 NAME:=push_swap
 
 CC:=cc
@@ -56,22 +52,22 @@ OPTIMIZER_SRC:= \
 SRC:= \
 	main.c \
 	shared.c
-OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${INSTRUCTOR_SRC:.c=.o} ${TRIANGLE_PLANNER_SRC:.c=.o} ${TRIANGLE_MAKER_SRC:.c=.o} ${EMULATOR_SRC:.c=.o} ${SORTER_SRC:.c=.o} ${OPTIMIZER_SRC:.c=.o} ${SRC:.c=.o}}
+OBJS_DIR:=obj
+SRCS_DIR:=src
+OBJS:=$(addprefix $(OBJS_DIR)/,$(subst /,\#,$(PARSER_SRC:.c=.o) $(STACK_SRC:.c=.o) $(INSTRUCTOR_SRC:.c=.o) $(TRIANGLE_PLANNER_SRC:.c=.o) $(TRIANGLE_MAKER_SRC:.c=.o) $(EMULATOR_SRC:.c=.o) $(SORTER_SRC:.c=.o) $(OPTIMIZER_SRC:.c=.o) $(SRC:.c=.o)))
 PRINTF:=lib/ft_printf/libftprintf.a
 INCLUDE:= \
 	include \
 	lib/ft_printf/include
 
-all: ${NAME}
+################################
+######     Push swap     #######
+################################
 
-${NAME}: ${PRINTF} ${OBJS}
-	@${CC} ${PRINTF} ${OBJS} -o ${NAME} ${LDFLAGS} && echo "Compilation of ${NAME} successful"
+all: $(NAME)
 
-%.o: %.c
-	@${CC} ${CFLAGS} ${addprefix -I ,${INCLUDE}} -c $< -o $@
-
-${PRINTF}:
-	@make ${if ${FSANITIZE},FSANITIZE=yes,} -C lib/ft_printf/
+$(NAME): $(PRINTF) $(OBJS_DIR) $(OBJS)
+	@$(CC) $(PRINTF) $(OBJS) -o $(NAME) $(LDFLAGS) && echo "Compilation of $(NAME) successful"
 
 ##############################
 ######     Checker     #######
@@ -84,14 +80,32 @@ CHECKER_SRC:= \
 	shared.c \
 	checker/parse_operation.c \
 	checker/stack_manipulator.c
-CHECKER_OBJS:=${addprefix src/,${PARSER_SRC:.c=.o} ${STACK_SRC:.c=.o} ${CHECKER_SRC:.c=.o}}
+CHECKER_OBJS:=$(addprefix $(OBJS_DIR)/,$(subst /,\#,$(PARSER_SRC:.c=.o) $(STACK_SRC:.c=.o) $(CHECKER_SRC:.c=.o)))
 
 bonus: INCLUDE+= lib/get_next_line/include
-bonus: clean ${PRINTF} ${GET_NEXT_LINE} ${CHECKER_OBJS}
-	@${CC} ${PRINTF} ${GET_NEXT_LINE} ${CHECKER_OBJS} -o ${CHECKER_NAME} ${LDFLAGS} && echo "Compilation of ${CHECKER_NAME} successful"
+bonus: $(PRINTF) $(GET_NEXT_LINE) $(OBJS_DIR) $(CHECKER_OBJS)
+	@$(CC) $(PRINTF) $(GET_NEXT_LINE) $(CHECKER_OBJS) -o $(CHECKER_NAME) $(LDFLAGS) && echo "Compilation of $(CHECKER_NAME) successful"
 
-${GET_NEXT_LINE}:
-	@make ${if ${FSANITIZE},FSANITIZE=yes,} -C lib/get_next_line/
+##########################################
+######     Library compilation     #######
+##########################################
+
+$(PRINTF):
+	@make $(if $(FSANITIZE),FSANITIZE=yes,) -C lib/ft_printf/
+
+$(GET_NEXT_LINE):
+	@make $(if $(FSANITIZE),FSANITIZE=yes,) -C lib/get_next_line/
+
+#########################################
+######     Object compilation     #######
+#########################################
+
+.SECONDEXPANSION:
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/$$(subst \#,/,$$*).c
+	@$(CC) $(CFLAGS) $(addprefix -iquote ,$(INCLUDE)) -c $< -o $@
+
+$(OBJS_DIR):
+	@mkdir -p $(OBJS_DIR)
 
 ###############################
 ######     Cleaning     #######
@@ -100,14 +114,15 @@ ${GET_NEXT_LINE}:
 clean:
 	@make clean -C lib/ft_printf/
 	@make clean -C lib/get_next_line/
-	@rm -f ${OBJS}
-	@rm -f ${CHECKER_OBJS}
+	@rm -f $(OBJS)
+	@rm -f $(CHECKER_OBJS)
 
 fclean: clean
-	@rm -f ${PRINTF}
-	@rm -f ${GET_NEXT_LINE}
-	@rm -f ${NAME}
-	@rm -f ${CHECKER_NAME}
+	@rm -f $(PRINTF)
+	@rm -f $(GET_NEXT_LINE)
+	@rm -rf $(OBJS_DIR)
+	@rm -f $(NAME)
+	@rm -f $(CHECKER_NAME)
 
 re: fclean all
 
