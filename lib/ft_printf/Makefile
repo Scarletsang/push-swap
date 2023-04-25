@@ -1,58 +1,89 @@
-NAME=libftprintf.a
-LIBFT_SRC= \
+################################
+######     Variables     #######
+################################
+
+NAME:=libftprintf.a
+CC:=cc
+CFLAGS= -Wall -Wextra -Werror
+ifdef FSANITIZE
+	CFLAGS+= -g3 -fsanitize=address
+endif
+
+###################################
+######     Source files     #######
+###################################
+
+LIBFT_SRC:= \
 	libft/ft_strchr.c \
 	libft/ft_strlen.c \
 	libft/ft_ptrlen.c \
 	libft/ft_numlen.c \
 	libft/ft_isdigit.c \
 	libft/ft_isupper.c
-PRINTERS_SRC= \
+PRINTERS_SRC:= \
 	printers/cs.c \
 	printers/diu.c \
 	printers/xXp.c \
 	printers/prefix.c \
 	printers/printer.c
-PARSERS_SRC= \
+PARSERS_SRC:= \
 	parsers/parsers.c \
 	parsers/calc_numlen.c \
 	parsers/calc_strlen.c \
 	parsers/calc_states.c \
 	parsers/peek.c \
 	parsers/utils.c
-MAIN_SRC= \
+MAIN_SRC:= \
 	ft_printf.c \
 	logic.c \
 	sequencers.c \
 	substitution_printer.c
-LIBFT_OBJS=${LIBFT_SRC:.c=.o}
-PRINTERS_OBJS=${PRINTERS_SRC:.c=.o}
-PARSERS_OBJS=${PARSERS_SRC:.c=.o}
-MAIN_OBJS=${MAIN_SRC:.c=.o}
-OBJS=${addprefix src/,${LIBFT_OBJS} ${PRINTERS_OBJS} ${PARSERS_OBJS} ${MAIN_OBJS}}
-CC=cc
-CFLAGS= -Wall -Wextra -Werror
-ifdef FSANITIZE
-	CFLAGS+= -g3 -fsanitize=address
-endif
+SRC:=$(LIBFT_SRC) $(PRINTERS_SRC) $(PARSERS_SRC) $(MAIN_SRC)
 
-all: ${NAME}
+###########################################
+######     Object name reformat     #######
+###########################################
 
-${NAME}: ${OBJS}
-	@ar -rcs ${NAME} ${OBJS}
+SRC_DIR:=src
+OBJ_DIR:=obj
+OBJ:=$(addprefix $(OBJ_DIR)/,$(subst /,@,$(SRC:.c=.o)))
 
-${MAIN_OBJS}: ${PARSERS_OBJS} ${PRINTERS_OBJS}
+################################
+######    Main rules     #######
+################################
 
-${PARSERS_OBJS}: ${LIBFT_OBJS}
+all:
+	@${MAKE} $(NAME) -j
 
-%.o: %.c
-	@${CC} ${CFLAGS} -c $< -o $@
+$(NAME): $(OBJ)
+	@ar -rcs $(NAME) $(OBJ)
+
+bonus: re
+
+#########################################
+######     Object compilation     #######
+#########################################
+
+.SECONDEXPANSION:
+$(OBJ_DIR)/%.o: $(SRC_DIR)/$$(subst @,/,$$*).c
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ): $(OBJ_DIR)
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+###############################
+######     Cleaning     #######
+###############################
 
 clean:
-	@rm -f ${OBJS}
+	@rm -f $(OBJ)
 
 fclean: clean
-	@rm -f ${NAME}
+	@rm -rf $(OBJ_DIR)
+	@rm -f $(NAME)
 
 re: fclean all
 
-bonus: re
+.PHONY: clean fclean re bonus
