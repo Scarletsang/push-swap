@@ -54,8 +54,9 @@ SRC:= \
 	shared.c
 OBJS_DIR:=obj
 SRCS_DIR:=src
-OBJS:=$(addprefix $(OBJS_DIR)/,$(subst /,\#,$(PARSER_SRC:.c=.o) $(STACK_SRC:.c=.o) $(INSTRUCTOR_SRC:.c=.o) $(TRIANGLE_PLANNER_SRC:.c=.o) $(TRIANGLE_MAKER_SRC:.c=.o) $(EMULATOR_SRC:.c=.o) $(SORTER_SRC:.c=.o) $(OPTIMIZER_SRC:.c=.o) $(SRC:.c=.o)))
+OBJS:=$(addprefix $(OBJS_DIR)/,$(subst /,@,$(PARSER_SRC:.c=.o) $(STACK_SRC:.c=.o) $(INSTRUCTOR_SRC:.c=.o) $(TRIANGLE_PLANNER_SRC:.c=.o) $(TRIANGLE_MAKER_SRC:.c=.o) $(EMULATOR_SRC:.c=.o) $(SORTER_SRC:.c=.o) $(OPTIMIZER_SRC:.c=.o) $(SRC:.c=.o)))
 PRINTF:=lib/ft_printf/libftprintf.a
+LDFLAGS= -L lib/ft_printf -lftprintf
 INCLUDE:= \
 	include \
 	lib/ft_printf/include
@@ -64,10 +65,11 @@ INCLUDE:= \
 ######     Push swap     #######
 ################################
 
-all: $(NAME)
+all:
+	@${MAKE} $(NAME) -j
 
 $(NAME): $(PRINTF) $(OBJS_DIR) $(OBJS)
-	@$(CC) $(PRINTF) $(OBJS) -o $(NAME) $(LDFLAGS) && echo "Compilation of $(NAME) successful"
+	@$(CC) $(OBJS) -o $(NAME) $(LDFLAGS) && echo "Compilation of $(NAME) successful"
 
 ##############################
 ######     Checker     #######
@@ -80,28 +82,29 @@ CHECKER_SRC:= \
 	shared.c \
 	checker/parse_operation.c \
 	checker/stack_manipulator.c
-CHECKER_OBJS:=$(addprefix $(OBJS_DIR)/,$(subst /,\#,$(PARSER_SRC:.c=.o) $(STACK_SRC:.c=.o) $(CHECKER_SRC:.c=.o)))
+CHECKER_OBJS:=$(addprefix $(OBJS_DIR)/,$(subst /,@,$(PARSER_SRC:.c=.o) $(STACK_SRC:.c=.o) $(CHECKER_SRC:.c=.o)))
 
 bonus: INCLUDE+= lib/get_next_line/include
+bonus: LDFLAGS+= ${GET_NEXT_LINE}
 bonus: $(PRINTF) $(GET_NEXT_LINE) $(OBJS_DIR) $(CHECKER_OBJS)
-	@$(CC) $(PRINTF) $(GET_NEXT_LINE) $(CHECKER_OBJS) -o $(CHECKER_NAME) $(LDFLAGS) && echo "Compilation of $(CHECKER_NAME) successful"
+	@$(CC) $(CHECKER_OBJS) -o $(CHECKER_NAME) $(LDFLAGS) && echo "Compilation of $(CHECKER_NAME) successful"
 
 ##########################################
 ######     Library compilation     #######
 ##########################################
 
 $(PRINTF):
-	@make $(if $(FSANITIZE),FSANITIZE=yes,) -C lib/ft_printf/
+	@${MAKE} $(if $(FSANITIZE),FSANITIZE=yes,) -C lib/ft_printf/
 
 $(GET_NEXT_LINE):
-	@make $(if $(FSANITIZE),FSANITIZE=yes,) -C lib/get_next_line/
+	@${MAKE} $(if $(FSANITIZE),FSANITIZE=yes,) -C lib/get_next_line/
 
 #########################################
 ######     Object compilation     #######
 #########################################
 
 .SECONDEXPANSION:
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/$$(subst \#,/,$$*).c
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/$$(subst @,/,$$*).c
 	@$(CC) $(CFLAGS) $(addprefix -iquote ,$(INCLUDE)) -c $< -o $@
 
 $(OBJS_DIR):
@@ -112,8 +115,8 @@ $(OBJS_DIR):
 ###############################
 
 clean:
-	@make clean -C lib/ft_printf/
-	@make clean -C lib/get_next_line/
+	@${MAKE} clean -C lib/ft_printf/
+	@${MAKE} clean -C lib/get_next_line/
 	@rm -f $(OBJS)
 	@rm -f $(CHECKER_OBJS)
 
