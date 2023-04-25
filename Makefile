@@ -1,11 +1,23 @@
-NAME:=push_swap
+################################
+######     Variables     #######
+################################
 
+NAME:=push_swap
+CHECKER_NAME:=checker
 CC:=cc
 CFLAGS= -Wall -Wextra -Werror
 ifdef FSANITIZE
 	CFLAGS+= -g3 -fsanitize=address
 	LDFLAGS+= -g3 -fsanitize=address
 endif
+INCLUDE_DIR:= include
+
+###################################
+######     Source files     #######
+###################################
+
+# To add souce files, create a varaible for each folder, and then
+# contatenate them in the SRC variable like this:
 
 PARSER_SRC:= \
 	parser/parser.c \
@@ -49,45 +61,61 @@ OPTIMIZER_SRC:= \
 	optimizer/optimizer.c \
 	optimizer/striker.c \
 	optimizer/combiner.c
-SRC:= \
+MAIN_SRC:= \
 	main.c \
 	shared.c
-OBJS_DIR:=obj
-SRCS_DIR:=src
-OBJS:=$(addprefix $(OBJS_DIR)/,$(subst /,@,$(PARSER_SRC:.c=.o) $(STACK_SRC:.c=.o) $(INSTRUCTOR_SRC:.c=.o) $(TRIANGLE_PLANNER_SRC:.c=.o) $(TRIANGLE_MAKER_SRC:.c=.o) $(EMULATOR_SRC:.c=.o) $(SORTER_SRC:.c=.o) $(OPTIMIZER_SRC:.c=.o) $(SRC:.c=.o)))
-PRINTF:=lib/ft_printf/libftprintf.a
-LDFLAGS= -L lib/ft_printf -lftprintf
-INCLUDE:= \
-	include \
-	lib/ft_printf/include
+CHECKER_MAIN_SRC:= \
+	checker_main.c \
+	shared.c \
+	checker/parse_operation.c \
+	checker/stack_manipulator.c
+SRC:=$(PARSER_SRC) $(STACK_SRC) $(INSTRUCTOR_SRC) $(TRIANGLE_PLANNER_SRC) $(TRIANGLE_MAKER_SRC) $(EMULATOR_SRC) $(SORTER_SRC) $(OPTIMIZER_SRC) $(MAIN_SRC)
+CHECKER_SRC:=$(PARSER_SRC) $(STACK_SRC) $(CHECKER_MAIN_SRC)
+
+####################################
+######     Library files     #######
+####################################
+
+# To compile a library, store a variable for their library file and add a rule for it after the main rules
+PRINTF=lib/ft_printf/libftprintf.a
+GET_NEXT_LINE=lib/get_next_line/get_next_line.a
+
+# To add a library, add the library header file like this:
+INCLUDE_DIR+=lib/ft_printf/include
+
+# Then add the library to the linking process in one of the following ways:
+# LDFLAGS+= -Llib/LIBRARY_NAME -lLIBRARY_NAME
+# LDFLAGS+= lib/LIBRARY_NAME/libLIBRARY_NAME.a
+LDFLAGS+= -L lib/ft_printf -lftprintf
+
+###########################################
+######     Object name reformat     #######
+###########################################
+
+# This in effect makes all the object files to be compiled in the OBJ_DIR directory
+
+SRC_DIR:=src
+OBJ_DIR:=obj
+OBJ:=$(addprefix $(OBJ_DIR)/,$(subst /,@,$(SRC:.c=.o)))
 
 ################################
-######     Push swap     #######
+######    Main rules     #######
 ################################
 
 all:
 	@${MAKE} $(NAME) -j
 
-$(NAME): $(PRINTF) $(OBJS_DIR) $(OBJS)
-	@$(CC) $(OBJS) -o $(NAME) $(LDFLAGS) && echo "Compilation of $(NAME) successful"
+$(NAME): $(PRINTF) $(OBJ)
+	@$(CC) $(OBJ) -o $(NAME) $(LDFLAGS) && echo "Compilation of $(NAME) successful"
 
-##############################
-######     Checker     #######
-##############################
+bonus: $(CHECKER_NAME)
 
-CHECKER_NAME:=checker
-GET_NEXT_LINE:=lib/get_next_line/get_next_line.a
-CHECKER_SRC:= \
-	checker_main.c \
-	shared.c \
-	checker/parse_operation.c \
-	checker/stack_manipulator.c
-CHECKER_OBJS:=$(addprefix $(OBJS_DIR)/,$(subst /,@,$(PARSER_SRC:.c=.o) $(STACK_SRC:.c=.o) $(CHECKER_SRC:.c=.o)))
-
-bonus: INCLUDE+= lib/get_next_line/include
-bonus: LDFLAGS+= ${GET_NEXT_LINE}
-bonus: $(PRINTF) $(GET_NEXT_LINE) $(OBJS_DIR) $(CHECKER_OBJS)
-	@$(CC) $(CHECKER_OBJS) -o $(CHECKER_NAME) $(LDFLAGS) && echo "Compilation of $(CHECKER_NAME) successful"
+$(CHECKER_NAME): INCLUDE_DIR+= lib/get_next_line/include
+$(CHECKER_NAME): LDFLAGS+= ${GET_NEXT_LINE}
+$(CHECKER_NAME): OBJ:=$(addprefix $(OBJ_DIR)/,$(subst /,@,$(CHECKER_SRC:.c=.o)))
+.SECONDEXPANSION:
+$(CHECKER_NAME): $(PRINTF) $(GET_NEXT_LINE) $$(OBJ)
+	@$(CC) $(OBJ) -o $(CHECKER_NAME) $(LDFLAGS) && echo "Compilation of $(CHECKER_NAME) successful"
 
 ##########################################
 ######     Library compilation     #######
@@ -104,11 +132,13 @@ $(GET_NEXT_LINE):
 #########################################
 
 .SECONDEXPANSION:
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/$$(subst @,/,$$*).c
-	@$(CC) $(CFLAGS) $(addprefix -iquote ,$(INCLUDE)) -c $< -o $@
+$(OBJ_DIR)/%.o: $(SRC_DIR)/$$(subst @,/,$$*).c
+	@$(CC) $(CFLAGS) $(addprefix -iquote ,$(INCLUDE_DIR)) -c $< -o $@
 
-$(OBJS_DIR):
-	@mkdir -p $(OBJS_DIR)
+$(OBJ): $(OBJ_DIR)
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
 ###############################
 ######     Cleaning     #######
@@ -117,13 +147,13 @@ $(OBJS_DIR):
 clean:
 	@${MAKE} clean -C lib/ft_printf/
 	@${MAKE} clean -C lib/get_next_line/
-	@rm -f $(OBJS)
-	@rm -f $(CHECKER_OBJS)
+	@rm -f $(OBJ)
+	@rm -f $(CHECKER_OBJ)
 
 fclean: clean
 	@rm -f $(PRINTF)
 	@rm -f $(GET_NEXT_LINE)
-	@rm -rf $(OBJS_DIR)
+	@rm -rf $(OBJ_DIR)
 	@rm -f $(NAME)
 	@rm -f $(CHECKER_NAME)
 
