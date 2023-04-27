@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   two_stacks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: htsang <htsang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:16:10 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 05:13:17 by htsang           ###   ########.fr       */
+/*   Updated: 2023/04/27 15:18:45 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ int	two_stacks_is_sorted(t_push_swap_2stacks *two_stacks)
 
 void	two_stacks_free(t_push_swap_2stacks *two_stacks)
 {
-	free(two_stacks->stack_a.elements);
-	free(two_stacks->stack_b.elements);
+	if (two_stacks->stack_a.elements)
+		free(two_stacks->stack_a.elements);
+	if (two_stacks->stack_b.elements)
+		free(two_stacks->stack_b.elements);
 }
 
 int	two_stacks_init(t_push_swap_2stacks *two_stacks, \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sorter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: htsang <htsang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:38:05 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 06:40:49 by htsang           ###   ########.fr       */
+/*   Updated: 2023/04/27 15:18:31 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	sorter_free(t_push_swap_sorter *sorter)
 {
 	two_stacks_free(&sorter->two_stacks);
-	free(sorter->planner.triangles_size);
+	if (sorter->planner.triangles_size)
+		free(sorter->planner.triangles_size);
 	instruction_list_free_all(sorter->instructor.cost);
 	return (EXIT_FAILURE);
 }
