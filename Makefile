@@ -147,8 +147,7 @@ $(OBJ_DIR):
 clean:
 	@${MAKE} clean -C lib/ft_printf/
 	@${MAKE} clean -C lib/get_next_line/
-	@rm -f $(OBJ)
-	@rm -f $(CHECKER_OBJ)
+	@rm -f $(OBJ_DIR)/*.o
 
 fclean: clean
 	@rm -f $(PRINTF)
