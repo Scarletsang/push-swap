@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:38:05 by htsang            #+#    #+#             */
-/*   Updated: 2023/04/27 15:18:31 by htsang           ###   ########.fr       */
+/*   Updated: 2023/04/27 16:17:01 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ int	sorter_free(t_push_swap_sorter *sorter)
 		free(sorter->planner.triangles_size);
 	instruction_list_free_all(sorter->instructor.cost);
 	return (EXIT_FAILURE);
+}
+
+void	sorter_init(t_push_swap_sorter *sorter)
+{
+	sorter->two_stacks.stack_a.elements = NULL;
+	sorter->two_stacks.stack_b.elements = NULL;
+	sorter->planner.triangles_size = NULL;
+	sorter->instructor.cost = NULL;
 }
 
 t_push_swap_error_code	sorter_create_last_triangle_on_stack_a(\

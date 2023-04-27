@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sorter.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htsang <htsang@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: htsang <htsang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:47:26 by htsang            #+#    #+#             */
-/*   Updated: 2023/03/28 05:36:56 by htsang           ###   ########.fr       */
+/*   Updated: 2023/04/27 16:17:14 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,7 @@ t_push_swap_error_code		sorter_merge_triangles_till_sorted(\
 t_push_swap_sorter *sorter);
 
 int							sorter_free(t_push_swap_sorter *sorter);
+
+void						sorter_init(t_push_swap_sorter *sorter);
 
 #endif

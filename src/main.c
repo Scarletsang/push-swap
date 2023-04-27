@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 21:29:34 by htsang            #+#    #+#             */
-/*   Updated: 2023/04/27 15:21:15 by htsang           ###   ########.fr       */
+/*   Updated: 2023/04/27 16:17:19 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, const char **argv)
 
 	if (argc < 2)
 		return (EXIT_FAILURE);
+	sorter_init(&sorter);
 	if (two_stacks_init_from_cli(&sorter.two_stacks, argc, argv) || \
 		instructor_init(&sorter.instructor, &sorter.two_stacks) || \
 		triangles_planner_init(&sorter.planner, sorter.two_stacks.stack_a.size))

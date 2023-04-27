@@ -6,7 +6,7 @@
 /*   By: htsang <htsang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:16:10 by htsang            #+#    #+#             */
-/*   Updated: 2023/04/27 15:18:45 by htsang           ###   ########.fr       */
+/*   Updated: 2023/04/27 16:12:46 by htsang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ void	two_stacks_free(t_push_swap_2stacks *two_stacks)
 int	two_stacks_init(t_push_swap_2stacks *two_stacks, \
 unsigned int elements_size, int *stack_a_elements)
 {
+	if (!stack_a_elements)
+	{
+		return (EXIT_FAILURE);
+	}
 	stack_init_from_array(&two_stacks->stack_a, elements_size, \
 		stack_a_elements);
 	if (stack_init_empty(&two_stacks->stack_b, elements_size))
